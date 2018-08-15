@@ -32,6 +32,12 @@
                     <TextBlock Text="Mitarbeiterplannung" HorizontalAlignment="Center"/>
                 </Grid>
             </Button>
+            <Button   Width="250" Margin="5" Foreground="White" Command="{Binding BtnArbeitsplatz}">
+                <Grid Width="170">
+                    <materialDesign:PackIcon Kind="Worker" VerticalAlignment="Center"/>
+                    <TextBlock Text="Arbeitsplatz" HorizontalAlignment="Center"/>
+                </Grid>
+            </Button>
         </StackPanel>
 
         <!--===========Content controls==========-->
@@ -44,6 +50,10 @@
                 <DataTemplate DataType="{x:Type viewmodels:MitarbeiterVm}">
                     <views:MitarbeiterView>
                     </views:MitarbeiterView>
+                </DataTemplate>
+                <DataTemplate DataType="{x:Type viewmodels:ArbeitsplatzVm}">
+                    <views:ArbeitsplatzView>
+                    </views:ArbeitsplatzView>
                 </DataTemplate>
             </ContentControl.Resources>
         </ContentControl>
