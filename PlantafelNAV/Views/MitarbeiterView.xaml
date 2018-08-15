@@ -1,0 +1,73 @@
+﻿<UserControl x:Class="PlantafelNAV.Views.MitarbeiterView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:PlantafelNAV.Views"
+             xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+             mc:Ignorable="d" 
+             d:DesignHeight="1000" d:DesignWidth="1000" 
+             DataContext="{Binding Source={StaticResource Locator}, Path=Mitarbeiter}"
+             >
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="50"/>
+            <RowDefinition Height="50"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="50"/>
+            <RowDefinition Height="50"/>
+            <RowDefinition Height="50"/>
+        </Grid.RowDefinitions>
+
+        <!--Headers-->
+        <Label  Content="Mitarbeiterplannung" Grid.ColumnSpan="2" FontSize="15" FontWeight="Bold" VerticalAlignment="Center"/>
+        <Label Grid.Row="1" Content="Dynamics Nav Dev Team" HorizontalAlignment="Left" VerticalAlignment="Center" Height="34" FontSize="15"/>
+
+        <!--ListView mit Mitarbeiter info-->
+        <ListView Grid.Row="2" Margin="15,10,12,0" ItemsSource="{Binding Mitarbeiter}" SelectedItem="{Binding SelUser}">
+            <ListView.View>
+                <GridView>
+                    <GridViewColumn Header="Vorname" Width="150" DisplayMemberBinding="{Binding First_Name}" />
+                    <GridViewColumn Header="Nachname" Width="150" DisplayMemberBinding="{Binding Last_Name}" />
+                </GridView>
+            </ListView.View>
+        </ListView>
+
+        <!--======================Editing area==================-->
+        <!--Delete team member-->
+        <Button Grid.Row="3" Width="150" Margin="5" Foreground="White"  HorizontalAlignment="Right">
+            <Grid Width="110">
+                <materialDesign:PackIcon Kind="Delete" VerticalAlignment="Center"/>
+                <TextBlock Text="Löschen" HorizontalAlignment="Center"/>
+            </Grid>
+        </Button>
+
+        <Label Content="Teammitglied hinzufügen" Grid.Row="4" HorizontalAlignment="Left" VerticalAlignment="Center" FontSize="15"/>
+
+        <Grid Grid.Row="5">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+
+            <Label Content="Vorname:" HorizontalAlignment="Right" VerticalAlignment="Center" FontSize="15"/>
+            <TextBox  Grid.Column="1" Margin="5" TextWrapping="Wrap" Text="{Binding Vorname}" VerticalAlignment="Center" Width="120"/>
+
+            <Label Content="Nachname:" Grid.Column="2" HorizontalAlignment="Right" VerticalAlignment="Center" FontSize="15"/>
+            <TextBox  Grid.Column="3" Margin="5" TextWrapping="Wrap" Text="{Binding Nachname}" VerticalAlignment="Center" Width="120"/>
+            
+            <Button Grid.Column="4" Width="150" Margin="5" Foreground="White"  HorizontalAlignment="Right">
+                <Grid Width="110">
+                    <materialDesign:PackIcon Kind="ContentPaste" VerticalAlignment="Center"/>
+                    <TextBlock Text="Hinzufügen" HorizontalAlignment="Center"/>
+                </Grid>
+            </Button>
+        </Grid>
+     
+
+
+    </Grid>
+</UserControl>

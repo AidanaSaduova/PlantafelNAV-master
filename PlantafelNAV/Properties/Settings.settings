@@ -1,0 +1,12 @@
+﻿<?xml version='1.0' encoding='utf-8'?>
+<SettingsFile xmlns="http://schemas.microsoft.com/VisualStudio/2004/01/settings" CurrentProfile="(Default)" GeneratedClassNamespace="PlantafelNAV.Properties" GeneratedClassName="Settings">
+  <Profiles />
+  <Settings>
+    <Setting Name="PlantafelNAV_ws_mitarbeiterservice_ws_mitarbeiter_Service" Type="(Web Service URL)" Scope="Application">
+      <Value Profile="(Default)">http://win-nav16:7047/DynamicsNAV90/WS/Carpart%20GmbH/Page/ws_mitarbeiter</Value>
+    </Setting>
+    <Setting Name="PlantafelNAV_ws_production_service_2_WS_Production_Service" Type="(Web Service URL)" Scope="Application">
+      <Value Profile="(Default)">http://win-nav16:7047/DynamicsNAV90/WS/Carpart%20GmbH/Page/WS_Production</Value>
+    </Setting>
+  </Settings>
+</SettingsFile>
