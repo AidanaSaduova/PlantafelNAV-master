@@ -23,13 +23,13 @@ namespace PlantafelNAV.ViewModel
             get { return instance; }
         }*/
 
-       ObservableCollection<WS_Production> _production = new ObservableCollection<WS_Production>();
+        ObservableCollection<WS_Production> _production = new ObservableCollection<WS_Production>();
         private string messageBoxEntry;
         private DateTime prod_date;
 
-        public string MessageBoxEntry { get { return messageBoxEntry; } set { messageBoxEntry = value;  RaisePropertyChanged(); } }
+        public string MessageBoxEntry { get { return messageBoxEntry; } set { messageBoxEntry = value; RaisePropertyChanged(); } }
 
-  
+
 
         public DateTime Prod_date { get { return prod_date; } set { prod_date = value; Debug.WriteLine(prod_date.ToLongDateString()); } }
 
@@ -38,7 +38,7 @@ namespace PlantafelNAV.ViewModel
         public PlantafelVm()
         {
             ws_productionservice.UseDefaultCredentials = true;
-           
+
             Prod_date = DateTime.Now;
             loadProduction();
 
@@ -47,20 +47,20 @@ namespace PlantafelNAV.ViewModel
 
         public void loadProduction()
         {
-             Production.Clear();
-           
-             WS_Production[] list = ws_productionservice.ReadMultiple(null, null, 100);
+            Production.Clear();
 
-             foreach (WS_Production x in list)
-             {
-                 WS_Production tmp = new WS_Production();
-                 tmp.No = x.No;
+            WS_Production[] list = ws_productionservice.ReadMultiple(null, null, 100);
+
+            foreach (WS_Production x in list)
+            {
+                WS_Production tmp = new WS_Production();
+                tmp.No = x.No;
                 tmp.Starting_Date = x.Starting_Date;
                 tmp.Starting_Time = x.Starting_Time;
                 MessageBox.Show("Startdatum: " + tmp.Starting_Date + "; Startzeit: " + tmp.Starting_Time);
-                 Production.Add(tmp);
-             }
-           
+                Production.Add(tmp);
+            }
+
 
         }
     }

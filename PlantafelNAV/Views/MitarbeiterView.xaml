@@ -12,19 +12,19 @@
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="50"/>
-            <RowDefinition Height="50"/>
+            <!--<RowDefinition Height="50"/>-->
             <RowDefinition Height="*"/>
             <RowDefinition Height="50"/>
-            <RowDefinition Height="50"/>
-            <RowDefinition Height="50"/>
+            <!--<RowDefinition Height="50"/>-->
+            <RowDefinition Height="150"/>
         </Grid.RowDefinitions>
 
         <!--Headers-->
-        <Label  Content="Mitarbeiterplannung" Grid.ColumnSpan="2" FontSize="15" FontWeight="Bold" VerticalAlignment="Center"/>
-        <Label Grid.Row="1" Content="Dynamics Nav Dev Team" HorizontalAlignment="Left" VerticalAlignment="Center" Height="34" FontSize="15"/>
+        <Label  Content="Mitarbeiterplannung"  FontSize="15" FontWeight="Bold" VerticalAlignment="Center"/>
+        <!--<Label Grid.Row="1" Content="Dynamics Nav Dev Team" HorizontalAlignment="Left" VerticalAlignment="Center" Height="34" FontSize="15"/>-->
 
         <!--ListView mit Mitarbeiter info-->
-        <ListView Grid.Row="2" Margin="15,10,12,0" ItemsSource="{Binding Mitarbeiter}" SelectedItem="{Binding SelUser}">
+        <ListView Grid.Row="1" Margin="15,10,12,0" ItemsSource="{Binding Mitarbeiter}" SelectedItem="{Binding SelUser}">
             <ListView.View>
                 <GridView>
                     <GridViewColumn Header="Vorname" Width="150" DisplayMemberBinding="{Binding First_Name}" />
@@ -35,16 +35,16 @@
 
         <!--======================Editing area==================-->
         <!--Delete team member-->
-        <Button Grid.Row="3" Width="150" Margin="5" Foreground="White"  HorizontalAlignment="Right">
+        <Button Grid.Row="2" Width="150" Margin="5" Foreground="White"  HorizontalAlignment="Right">
             <Grid Width="110">
                 <materialDesign:PackIcon Kind="Delete" VerticalAlignment="Center"/>
                 <TextBlock Text="Löschen" HorizontalAlignment="Center"/>
             </Grid>
         </Button>
 
-        <Label Content="Teammitglied hinzufügen" Grid.Row="4" HorizontalAlignment="Left" VerticalAlignment="Center" FontSize="15"/>
+        <!--<Label Content="Teammitglied hinzufügen" Grid.Row="3" HorizontalAlignment="Left" VerticalAlignment="Center" FontSize="15"/>-->
 
-        <Grid Grid.Row="5">
+        <Grid Grid.Row="4">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="*"/>
                 <ColumnDefinition Width="*"/>
@@ -53,7 +53,8 @@
                 <ColumnDefinition Width="*"/>
             </Grid.ColumnDefinitions>
 
-            <Label Content="Vorname:" HorizontalAlignment="Right" VerticalAlignment="Center" FontSize="15"/>
+            <!--Edit team member-->
+                <Label Content="Vorname:" HorizontalAlignment="Right" VerticalAlignment="Center" FontSize="15"/>
             <TextBox  Grid.Column="1" Margin="5" TextWrapping="Wrap" Text="{Binding Vorname}" VerticalAlignment="Center" Width="120"/>
 
             <Label Content="Nachname:" Grid.Column="2" HorizontalAlignment="Right" VerticalAlignment="Center" FontSize="15"/>

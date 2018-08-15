@@ -12,7 +12,7 @@ namespace PlantafelNAV.ViewModel
     public class MitarbeiterVm:ViewModelBase
     {
         ws_mitarbeiter_Service ws_service_mb = new ws_mitarbeiter_Service();
-       
+
 
         ObservableCollection<ws_mitarbeiter> _mitarbeiter = new ObservableCollection<ws_mitarbeiter>();
         ws_mitarbeiter _selUser = new ws_mitarbeiter();
