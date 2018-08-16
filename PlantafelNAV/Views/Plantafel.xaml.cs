@@ -53,7 +53,7 @@ namespace PlantafelNAV.Views
             PlantafelNAV.ViewModel.PlantafelVm planVM = this.DataContext as PlantafelNAV.ViewModel.PlantafelVm;
             InitializeComponent();
 
-            
+
 
             //jetzt werden einmal die 4 timelines erzeugt
             t1.Setup(28800, 57600, 3600, 120);
@@ -74,7 +74,7 @@ namespace PlantafelNAV.Views
 
             //Produktaten laden
             planVM.loadProduction();
-            foreach(var x in planVM.Production)
+            foreach (var x in planVM.Production)
             {
                 TMElement tmp = new TMElement();
                 tmp.Id = x.No;
@@ -89,7 +89,7 @@ namespace PlantafelNAV.Views
 
             //Arbeitsplätze und Zeiten laden 
             planVM.loadArbeitsplatz();
-            
+
             //evtl nicht mehr vorhandene Aufträge aus Tabelle löschen
 
             //++++++++++++++++++++//
@@ -97,10 +97,10 @@ namespace PlantafelNAV.Views
             //jetzt für jede Produktionsplanung die entsprechenden Timelinelemente hinzufügen
             //dafür müssen zuerst aus unserer eigenen Tabelle alle verfügbaren Aufträge um die bereits vorhandenen Daten in der Tabelle ergänzt werden
 
-            foreach(TMElement x in Tmelements)
+            foreach (TMElement x in Tmelements)
             {
                 //einmal, falls vorhanden, tabelleneintrag holen und Auftrag ergänzen
-               if( planVM.getSpecAuftrag(x.Id) != null)
+                if (planVM.getSpecAuftrag(x.Id) != null)
                 {
                     //Jetzt magic
                     Debug.WriteLine("Auftrag drinnen");
@@ -133,15 +133,16 @@ namespace PlantafelNAV.Views
                     ApEnd1 = start.AddMinutes((double)ApDLFZ1);
                     //Überprüfen ob sich der zweite noch ausgeht//
                     tmp = ApEnd1.AddMinutes((double)ApDLFZ2);
-                    tmp1 = new DateTime(x.StartDate.Year, x.StartDate.Month, x.StartDate.Day, 16, 00,00);
+                    tmp1 = new DateTime(x.StartDate.Year, x.StartDate.Month, x.StartDate.Day, 16, 00, 00);
                     //geht sich noch an diesem Tag aus?
-                                     
+
                     if (tmp.CompareTo(tmp1) != 1)
                     {
-                         ApStart2 = ApEnd1;
-                         ApEnd2 = ApStart2.AddMinutes((double)ApDLFZ2);
+                        ApStart2 = ApEnd1;
+                        ApEnd2 = ApStart2.AddMinutes((double)ApDLFZ2);
                     }
-                    else {
+                    else
+                    {
                         DateTime nextDay = new DateTime(ApEnd1.Year, ApEnd1.Month, ApEnd1.Day, 08, 00, 00);
                         nextDay = nextDay.AddDays(1);
                         ApStart2 = nextDay;
@@ -187,21 +188,22 @@ namespace PlantafelNAV.Views
                     planVM.doUpdateProdNav(x.Id, ApEnd4);
                     //jetzt Elemente zur Timeline hinzufügen
                     ObservableCollection<TMElement> prods = planVM.getProdOfSpecDate(prod_date);
-                    foreach(TMElement h in prods){
+                    foreach (TMElement h in prods)
+                    {
                         Debug.WriteLine(h.Id + "_" + h.StartDate + "_" + h.EndDate);
                     }
                     // Hier gehts weiter mit dem Erzeugen der TimelineElements - bisheriges Problem das nur Auftragsnummer in Tabelle hineingeschrieben wird
                 }
             }
-            
 
 
-           /* TMElement test = planVM.test;
-            addTimelineEntry(t1, test.StartTime, test.EndTime, test.Id);
-            addTimelineEntry(t2, test.StartTime, test.EndTime, test.Id);
-            addTimelineEntry(t3, test.StartTime, test.EndTime, test.Id);
-            addTimelineEntry(t4, test.StartTime, test.EndTime, test.Id);
-            */
+
+            /* TMElement test = planVM.test;
+             addTimelineEntry(t1, test.StartTime, test.EndTime, test.Id);
+             addTimelineEntry(t2, test.StartTime, test.EndTime, test.Id);
+             addTimelineEntry(t3, test.StartTime, test.EndTime, test.Id);
+             addTimelineEntry(t4, test.StartTime, test.EndTime, test.Id);
+             */
 
             /*
             
@@ -235,38 +237,38 @@ namespace PlantafelNAV.Views
             tl.AddElement(Starttime, Duration, Id);
         }
 
-       /* public Timeline generateTimeline(int hostnumber)
-        {
-            //ACHTUNG: Bei Änderung ist zu beachten, dass die Länge eines Eintrages von Minuten abhängt, die anhand der Länge der Timeline (1000) in Pixel umgerechnet werden; Diese Umrechnung muss dann im TimeLineElement-File geändert werden
-            Timeline tl = new Timeline(1000, 80);
-            //Setupaufruf mit Startzeit 08:00, Endzeit 16:00, Stundenintervallen sowie 
-            tl.Setup(28800, 57600, 3600, 120);
-            switch (hostnumber)
-            {
-                case 1:
-                    host1.Children.Add(tl);
-                    break;
-                case 2:
-                    host2.Children.Add(tl);
-                    break;
-                case 3:
-                    host3.Children.Add(tl);
-                    break;
-                case 4:
-                    host4.Children.Add(tl);
-                    break;
-            }
+        /* public Timeline generateTimeline(int hostnumber)
+         {
+             //ACHTUNG: Bei Änderung ist zu beachten, dass die Länge eines Eintrages von Minuten abhängt, die anhand der Länge der Timeline (1000) in Pixel umgerechnet werden; Diese Umrechnung muss dann im TimeLineElement-File geändert werden
+             Timeline tl = new Timeline(1000, 80);
+             //Setupaufruf mit Startzeit 08:00, Endzeit 16:00, Stundenintervallen sowie 
+             tl.Setup(28800, 57600, 3600, 120);
+             switch (hostnumber)
+             {
+                 case 1:
+                     host1.Children.Add(tl);
+                     break;
+                 case 2:
+                     host2.Children.Add(tl);
+                     break;
+                 case 3:
+                     host3.Children.Add(tl);
+                     break;
+                 case 4:
+                     host4.Children.Add(tl);
+                     break;
+             }
 
-            return tl;
+             return tl;
 
-        }*/
+         }*/
 
         private void msgbox_TextChanged(object sender, TextChangedEventArgs e)
         {
 
         }
 
-        
+
 
     }
 }

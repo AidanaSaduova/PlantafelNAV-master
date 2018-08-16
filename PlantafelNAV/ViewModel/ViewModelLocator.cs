@@ -46,6 +46,7 @@ namespace PlantafelNAV.ViewModel
             SimpleIoc.Default.Register<MitarbeiterVm>(true);
             SimpleIoc.Default.Register<PlantafelVm>(true);
             SimpleIoc.Default.Register<ArbeitsplatzVm>(true);
+            SimpleIoc.Default.Register<ArbeitsplanVm>(true);
         }
 
         public MainViewModel Main
@@ -77,6 +78,13 @@ namespace PlantafelNAV.ViewModel
             get
             {
                 return ServiceLocator.Current.GetInstance<ArbeitsplatzVm>();
+            }
+        }
+        public ArbeitsplanVm Arbeitsplan
+        {
+            get
+            {
+                return ServiceLocator.Current.GetInstance<ArbeitsplanVm>();
             }
         }
 

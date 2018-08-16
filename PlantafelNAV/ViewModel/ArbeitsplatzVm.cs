@@ -17,7 +17,7 @@ namespace PlantafelNAV.ViewModel
         ObservableCollection<WS_Arbeitzplatz> _arbeitsplaetze = new ObservableCollection<WS_Arbeitzplatz>();
         WS_Arbeitzplatz _selitem = new WS_Arbeitzplatz();
         RelayCommand doUpdate;
- 
+
 
         public ArbeitsplatzVm()
         {

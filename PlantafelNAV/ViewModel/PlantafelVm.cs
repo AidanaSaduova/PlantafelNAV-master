@@ -138,26 +138,27 @@ namespace PlantafelNAV.ViewModel
             x.Start = start;
             x.Ende = end;
             x.Auftragsnr = Auftragsnummer;
-           
+
             ws_auftragnavservice.Create(ref x);
         }
 
         //alle aufträge eines bestimmten Datums holen
-        public ObservableCollection<TMElement> getProdOfSpecDate(DateTime date) {
+        public ObservableCollection<TMElement> getProdOfSpecDate(DateTime date)
+        {
 
             //der filter funktioniert leider nicht so wie ich das will -> also schleife
-           /* List<WS_Auf_Arb_Nav_Filter> filterArray = new List<WS_Auf_Arb_Nav_Filter>();
-            WS_Auf_Arb_Nav_Filter dateFilter = new WS_Auf_Arb_Nav_Filter();
-            dateFilter.Field = WS_Auf_Arb_Nav_Fields.AP1_Startdatum;
-            dateFilter.Criteria = date;
-            filterArray.Add(nameFilter);*/
+            /* List<WS_Auf_Arb_Nav_Filter> filterArray = new List<WS_Auf_Arb_Nav_Filter>();
+             WS_Auf_Arb_Nav_Filter dateFilter = new WS_Auf_Arb_Nav_Filter();
+             dateFilter.Field = WS_Auf_Arb_Nav_Fields.AP1_Startdatum;
+             dateFilter.Criteria = date;
+             filterArray.Add(nameFilter);*/
 
             WS_Auf_Arb_Nav[] list = ws_auftragnavservice.ReadMultiple(null, null, 100);
             ObservableCollection<TMElement> prods = new ObservableCollection<TMElement>();
-            foreach(WS_Auf_Arb_Nav x in list)
+            foreach (WS_Auf_Arb_Nav x in list)
             {
                 TMElement y = new TMElement();
-                if (x.AP1_Startdatum.Date == date) { y.Id = x.Auftragsnr; y.StartDate = x.AP1_Startdatum;y.EndDate = x.AP1_Enddatum;y.TimeLineNumber = 1; prods.Add(y); }
+                if (x.AP1_Startdatum.Date == date) { y.Id = x.Auftragsnr; y.StartDate = x.AP1_Startdatum; y.EndDate = x.AP1_Enddatum; y.TimeLineNumber = 1; prods.Add(y); }
                 else if (x.AP2_Startdatum.Date == date) { y.Id = x.Auftragsnr; y.StartDate = x.AP2_Startdatum; y.EndDate = x.AP2_Enddatum; y.TimeLineNumber = 2; prods.Add(y); }
                 else if (x.AP3_Startdatum.Date == date) { y.Id = x.Auftragsnr; y.StartDate = x.AP3_Startdatum; y.EndDate = x.AP3_Enddatum; y.TimeLineNumber = 3; prods.Add(y); }
                 else if (x.AP4_Startdatum.Date == date) { y.Id = x.Auftragsnr; y.StartDate = x.AP4_Startdatum; y.EndDate = x.AP4_Enddatum; y.TimeLineNumber = 4; prods.Add(y); }
@@ -170,11 +171,11 @@ namespace PlantafelNAV.ViewModel
         public WS_Auf_Arb_Nav getSpecAuftrag(string Auftragsnummer)
         {
             WS_Auf_Arb_Nav x = ws_auftragnavservice.Read(Auftragsnummer);
-            if(x != null)
+            if (x != null)
             {
                 return x;
             }
-            else { return null;  }
+            else { return null; }
         }
 
         public void loadArbeitsplatz()

@@ -20,22 +20,28 @@
 
         <!--Buttons for main menu-->
         <StackPanel HorizontalAlignment="Left" Orientation="Horizontal" Margin="5">
-            <Button   Width="250" Margin="5" Foreground="White" Command="{Binding BtnPlantafel}">
+            <Button   Width="230" Margin="5" Foreground="White" Command="{Binding BtnPlantafel}">
                 <Grid Width="110">
                     <materialDesign:PackIcon Kind="ChartTimeline" VerticalAlignment="Center"/>
                     <TextBlock Text="Plantafel" HorizontalAlignment="Center"/>
                 </Grid>
             </Button>
-            <Button   Width="250" Margin="5" Foreground="White" Command="{Binding BtnMitarbeiter}">
+            <Button   Width="230" Margin="5" Foreground="White" Command="{Binding BtnMitarbeiter}">
                 <Grid Width="170">
                     <materialDesign:PackIcon Kind="Contacts" VerticalAlignment="Center"/>
                     <TextBlock Text="Mitarbeiterplannung" HorizontalAlignment="Center"/>
                 </Grid>
             </Button>
-            <Button   Width="250" Margin="5" Foreground="White" Command="{Binding BtnArbeitsplatz}">
+            <Button   Width="230" Margin="5" Foreground="White" Command="{Binding BtnArbeitsplatz}">
                 <Grid Width="170">
                     <materialDesign:PackIcon Kind="Worker" VerticalAlignment="Center"/>
                     <TextBlock Text="Arbeitsplatz" HorizontalAlignment="Center"/>
+                </Grid>
+            </Button>
+            <Button   Width="230" Margin="5" Foreground="White" Command="{Binding BtnArbeitsplan}">
+                <Grid Width="170">
+                    <materialDesign:PackIcon Kind="Timetable" VerticalAlignment="Center"/>
+                    <TextBlock Text="Arbeitsplan" HorizontalAlignment="Center"/>
                 </Grid>
             </Button>
         </StackPanel>
