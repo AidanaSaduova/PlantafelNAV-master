@@ -6,16 +6,16 @@
         <xsd:sequence>
           <xsd:element minOccurs="0" maxOccurs="1" name="Key" type="xsd:string" />
           <xsd:element minOccurs="0" maxOccurs="1" name="Auftragsnr" type="xsd:string" />
-          <xsd:element minOccurs="0" maxOccurs="1" name="AP1_Enddatum" type="xsd:dateTime" />
-          <xsd:element minOccurs="0" maxOccurs="1" name="AP2_Enddatum" type="xsd:dateTime" />
-          <xsd:element minOccurs="0" maxOccurs="1" name="AP3_Enddatum" type="xsd:dateTime" />
-          <xsd:element minOccurs="0" maxOccurs="1" name="AP4_Enddatum" type="xsd:dateTime" />
-          <xsd:element minOccurs="0" maxOccurs="1" name="AP1_Startdatum" type="xsd:dateTime" />
-          <xsd:element minOccurs="0" maxOccurs="1" name="AP2_Startdatum" type="xsd:dateTime" />
-          <xsd:element minOccurs="0" maxOccurs="1" name="AP3_Startdatum" type="xsd:dateTime" />
-          <xsd:element minOccurs="0" maxOccurs="1" name="AP4_Startdatum" type="xsd:dateTime" />
-          <xsd:element minOccurs="0" maxOccurs="1" name="Start" type="xsd:dateTime" />
-          <xsd:element minOccurs="0" maxOccurs="1" name="Ende" type="xsd:dateTime" />
+          <xsd:element minOccurs="0" maxOccurs="1" name="AP1_Enddatum" type="xsd:string" />
+          <xsd:element minOccurs="0" maxOccurs="1" name="AP2_Enddatum" type="xsd:string" />
+          <xsd:element minOccurs="0" maxOccurs="1" name="AP3_Enddatum" type="xsd:string" />
+          <xsd:element minOccurs="0" maxOccurs="1" name="AP4_Enddatum" type="xsd:string" />
+          <xsd:element minOccurs="0" maxOccurs="1" name="AP1_Startdatum" type="xsd:string" />
+          <xsd:element minOccurs="0" maxOccurs="1" name="AP2_Startdatum" type="xsd:string" />
+          <xsd:element minOccurs="0" maxOccurs="1" name="AP3_Startdatum" type="xsd:string" />
+          <xsd:element minOccurs="0" maxOccurs="1" name="AP4_Startdatum" type="xsd:string" />
+          <xsd:element minOccurs="0" maxOccurs="1" name="Start" type="xsd:string" />
+          <xsd:element minOccurs="0" maxOccurs="1" name="Ende" type="xsd:string" />
         </xsd:sequence>
       </xsd:complexType>
       <xsd:complexType name="WS_Auf_Arb_Nav_List">

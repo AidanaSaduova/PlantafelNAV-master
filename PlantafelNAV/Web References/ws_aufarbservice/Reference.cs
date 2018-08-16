@@ -449,45 +449,25 @@ namespace PlantafelNAV.ws_aufarbservice {
         
         private string auftragsnrField;
         
-        private System.DateTime aP1_EnddatumField;
+        private string aP1_EnddatumField;
         
-        private bool aP1_EnddatumFieldSpecified;
+        private string aP2_EnddatumField;
         
-        private System.DateTime aP2_EnddatumField;
+        private string aP3_EnddatumField;
         
-        private bool aP2_EnddatumFieldSpecified;
+        private string aP4_EnddatumField;
         
-        private System.DateTime aP3_EnddatumField;
+        private string aP1_StartdatumField;
         
-        private bool aP3_EnddatumFieldSpecified;
+        private string aP2_StartdatumField;
         
-        private System.DateTime aP4_EnddatumField;
+        private string aP3_StartdatumField;
         
-        private bool aP4_EnddatumFieldSpecified;
+        private string aP4_StartdatumField;
         
-        private System.DateTime aP1_StartdatumField;
+        private string startField;
         
-        private bool aP1_StartdatumFieldSpecified;
-        
-        private System.DateTime aP2_StartdatumField;
-        
-        private bool aP2_StartdatumFieldSpecified;
-        
-        private System.DateTime aP3_StartdatumField;
-        
-        private bool aP3_StartdatumFieldSpecified;
-        
-        private System.DateTime aP4_StartdatumField;
-        
-        private bool aP4_StartdatumFieldSpecified;
-        
-        private System.DateTime startField;
-        
-        private bool startFieldSpecified;
-        
-        private System.DateTime endeField;
-        
-        private bool endeFieldSpecified;
+        private string endeField;
         
         /// <remarks/>
         public string Key {
@@ -510,7 +490,7 @@ namespace PlantafelNAV.ws_aufarbservice {
         }
         
         /// <remarks/>
-        public System.DateTime AP1_Enddatum {
+        public string AP1_Enddatum {
             get {
                 return this.aP1_EnddatumField;
             }
@@ -520,18 +500,7 @@ namespace PlantafelNAV.ws_aufarbservice {
         }
         
         /// <remarks/>
-        [System.Xml.Serialization.XmlIgnoreAttribute()]
-        public bool AP1_EnddatumSpecified {
-            get {
-                return this.aP1_EnddatumFieldSpecified;
-            }
-            set {
-                this.aP1_EnddatumFieldSpecified = value;
-            }
-        }
-        
-        /// <remarks/>
-        public System.DateTime AP2_Enddatum {
+        public string AP2_Enddatum {
             get {
                 return this.aP2_EnddatumField;
             }
@@ -541,18 +510,7 @@ namespace PlantafelNAV.ws_aufarbservice {
         }
         
         /// <remarks/>
-        [System.Xml.Serialization.XmlIgnoreAttribute()]
-        public bool AP2_EnddatumSpecified {
-            get {
-                return this.aP2_EnddatumFieldSpecified;
-            }
-            set {
-                this.aP2_EnddatumFieldSpecified = value;
-            }
-        }
-        
-        /// <remarks/>
-        public System.DateTime AP3_Enddatum {
+        public string AP3_Enddatum {
             get {
                 return this.aP3_EnddatumField;
             }
@@ -562,18 +520,7 @@ namespace PlantafelNAV.ws_aufarbservice {
         }
         
         /// <remarks/>
-        [System.Xml.Serialization.XmlIgnoreAttribute()]
-        public bool AP3_EnddatumSpecified {
-            get {
-                return this.aP3_EnddatumFieldSpecified;
-            }
-            set {
-                this.aP3_EnddatumFieldSpecified = value;
-            }
-        }
-        
-        /// <remarks/>
-        public System.DateTime AP4_Enddatum {
+        public string AP4_Enddatum {
             get {
                 return this.aP4_EnddatumField;
             }
@@ -583,18 +530,7 @@ namespace PlantafelNAV.ws_aufarbservice {
         }
         
         /// <remarks/>
-        [System.Xml.Serialization.XmlIgnoreAttribute()]
-        public bool AP4_EnddatumSpecified {
-            get {
-                return this.aP4_EnddatumFieldSpecified;
-            }
-            set {
-                this.aP4_EnddatumFieldSpecified = value;
-            }
-        }
-        
-        /// <remarks/>
-        public System.DateTime AP1_Startdatum {
+        public string AP1_Startdatum {
             get {
                 return this.aP1_StartdatumField;
             }
@@ -604,18 +540,7 @@ namespace PlantafelNAV.ws_aufarbservice {
         }
         
         /// <remarks/>
-        [System.Xml.Serialization.XmlIgnoreAttribute()]
-        public bool AP1_StartdatumSpecified {
-            get {
-                return this.aP1_StartdatumFieldSpecified;
-            }
-            set {
-                this.aP1_StartdatumFieldSpecified = value;
-            }
-        }
-        
-        /// <remarks/>
-        public System.DateTime AP2_Startdatum {
+        public string AP2_Startdatum {
             get {
                 return this.aP2_StartdatumField;
             }
@@ -625,18 +550,7 @@ namespace PlantafelNAV.ws_aufarbservice {
         }
         
         /// <remarks/>
-        [System.Xml.Serialization.XmlIgnoreAttribute()]
-        public bool AP2_StartdatumSpecified {
-            get {
-                return this.aP2_StartdatumFieldSpecified;
-            }
-            set {
-                this.aP2_StartdatumFieldSpecified = value;
-            }
-        }
-        
-        /// <remarks/>
-        public System.DateTime AP3_Startdatum {
+        public string AP3_Startdatum {
             get {
                 return this.aP3_StartdatumField;
             }
@@ -646,18 +560,7 @@ namespace PlantafelNAV.ws_aufarbservice {
         }
         
         /// <remarks/>
-        [System.Xml.Serialization.XmlIgnoreAttribute()]
-        public bool AP3_StartdatumSpecified {
-            get {
-                return this.aP3_StartdatumFieldSpecified;
-            }
-            set {
-                this.aP3_StartdatumFieldSpecified = value;
-            }
-        }
-        
-        /// <remarks/>
-        public System.DateTime AP4_Startdatum {
+        public string AP4_Startdatum {
             get {
                 return this.aP4_StartdatumField;
             }
@@ -667,18 +570,7 @@ namespace PlantafelNAV.ws_aufarbservice {
         }
         
         /// <remarks/>
-        [System.Xml.Serialization.XmlIgnoreAttribute()]
-        public bool AP4_StartdatumSpecified {
-            get {
-                return this.aP4_StartdatumFieldSpecified;
-            }
-            set {
-                this.aP4_StartdatumFieldSpecified = value;
-            }
-        }
-        
-        /// <remarks/>
-        public System.DateTime Start {
+        public string Start {
             get {
                 return this.startField;
             }
@@ -688,34 +580,12 @@ namespace PlantafelNAV.ws_aufarbservice {
         }
         
         /// <remarks/>
-        [System.Xml.Serialization.XmlIgnoreAttribute()]
-        public bool StartSpecified {
-            get {
-                return this.startFieldSpecified;
-            }
-            set {
-                this.startFieldSpecified = value;
-            }
-        }
-        
-        /// <remarks/>
-        public System.DateTime Ende {
+        public string Ende {
             get {
                 return this.endeField;
             }
             set {
                 this.endeField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlIgnoreAttribute()]
-        public bool EndeSpecified {
-            get {
-                return this.endeFieldSpecified;
-            }
-            set {
-                this.endeFieldSpecified = value;
             }
         }
     }

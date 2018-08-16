@@ -52,6 +52,7 @@ namespace PlantafelNAV.TimelineNAV
             TimelineElement te = new TimelineElement(this, innerHeight, start_seconds, duration, id);
             TElements1.Add(te);
             mainCanvas.Children.Add(te);
+            
             Canvas.SetTop(te, elementTop);
             Canvas.SetLeft(te, (pixelDistance * (start_seconds - startSeconds) / (endSeconds - startSeconds)) - 2);
             te.savePositions();
@@ -59,9 +60,11 @@ namespace PlantafelNAV.TimelineNAV
 
         public void clearCanvas()
         {
-            foreach (TimelineElement x in TElements) {
+            
+            foreach (TimelineElement x in TElements1)
+            {
                 mainCanvas.Children.Remove(x);
-                    }
+            }
         }
 
         /// <summary>
@@ -166,6 +169,8 @@ namespace PlantafelNAV.TimelineNAV
             string x = hours + ":" + minutes;
             return x;
         }
+
+ 
 
  
     }

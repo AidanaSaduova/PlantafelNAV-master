@@ -46,7 +46,7 @@
             <DockPanel x:Name="host2" Margin="0,22,0,0" Grid.Column="0" Grid.Row="1"/>
             <DockPanel x:Name="host3" Margin="0,22,0,0" Grid.Column="0" Grid.Row="2"/>
             <DockPanel x:Name="host4" Margin="0,22,0,0" Grid.Column="0" Grid.Row="3"/>
-
+ 
         </Grid>
         <Grid Grid.Row="1" Grid.Column="0">
             <Grid.ColumnDefinitions>

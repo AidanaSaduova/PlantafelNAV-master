@@ -15,12 +15,24 @@ namespace PlantafelNAV.ViewModel
     {
         WS_Arbeitzplatz_Service ws_serviceap = new WS_Arbeitzplatz_Service();
         ObservableCollection<WS_Arbeitzplatz> _arbeitsplaetze = new ObservableCollection<WS_Arbeitzplatz>();
-        WS_Arbeitzplatz _selitem = new WS_Arbeitzplatz();
-        RelayCommand doUpdate;
+        private WS_Arbeitzplatz _selitem = new WS_Arbeitzplatz();
+        private RelayCommand doUpdate;
+        public ObservableCollection<WS_Arbeitzplatz> Arbeitsplaetze { get => _arbeitsplaetze; set => _arbeitsplaetze = value; }
+        public WS_Arbeitzplatz Selitem
+        {
+            get { return _selitem; }
+            set { _selitem = value; RaisePropertyChanged(); }
+        }
 
+        public RelayCommand DoUpdate
+        {
+            get { return doUpdate; }
+            set { doUpdate = value; }
+        }
 
         public ArbeitsplatzVm()
         {
+            
             DoUpdate = new RelayCommand(doUpdateMeth);
             ws_serviceap.UseDefaultCredentials = true;
             loadArbeitsplatz();
@@ -51,9 +63,6 @@ namespace PlantafelNAV.ViewModel
             }
         }
 
-        public ObservableCollection<WS_Arbeitzplatz> Arbeitsplaetze { get => _arbeitsplaetze; set => _arbeitsplaetze = value; }
-        public WS_Arbeitzplatz Selitem { get { return _selitem; } set { _selitem = value; RaisePropertyChanged(); } }
-
-        public RelayCommand DoUpdate { get => doUpdate; set => doUpdate = value; }
+        
     }
 }

@@ -125,26 +125,27 @@ namespace PlantafelNAV.ViewModel
         //Auftrag in Nav aktualisieren
         public void doUpdateProdNav(string nr, DateTime date)
         {
-            WS_Auf_Arb_Nav x = ws_auftragnavservice.Read(nr);
-            ws_auftragnavservice.Update(ref x);
+          //  WS_Production x = ws_productionservice.Read(nr);
+            
+           // ws_auftragnavservice.Update(ref x);
         }
 
         //neuen Auftrag in Tabelle erstellem
-        public void newProdToTable(string Auftragsnummer, DateTime start, DateTime end, DateTime ApStart1, DateTime ApStart2, DateTime ApStart3, DateTime ApStart4, DateTime ApEnd1, DateTime ApEnd2, DateTime ApEnd3, DateTime ApEnd4)
+         public void newProdToTable(string Auftragsnummer, DateTime start, DateTime end, DateTime ApStart1, DateTime ApStart2, DateTime ApStart3, DateTime ApStart4, DateTime ApEnd1, DateTime ApEnd2, DateTime ApEnd3, DateTime ApEnd4)
+      
         {
             WS_Auf_Arb_Nav x = new WS_Auf_Arb_Nav();
-            x.AP1_Startdatum = ApStart1;
-            x.AP2_Startdatum = ApStart2;
-            x.AP3_Startdatum = ApStart3;
-            x.AP4_Startdatum = ApStart4;
-            x.AP1_Enddatum = ApEnd1;
-            x.AP2_Enddatum = ApEnd2;
-            x.AP3_Enddatum = ApEnd3;
-            x.AP4_Enddatum = ApEnd4;
-            x.Start = start;
-            x.Ende = end;
+            x.AP1_Startdatum = ApStart1.ToString();
+            x.AP2_Startdatum = ApStart2.ToString();
+            x.AP3_Startdatum = ApStart3.ToString();
+            x.AP4_Startdatum = ApStart4.ToString();
+            x.AP1_Enddatum = ApEnd1.ToString();
+            x.AP2_Enddatum = ApEnd2.ToString();
+            x.AP3_Enddatum = ApEnd3.ToString();
+            x.AP4_Enddatum = ApEnd4.ToString();
+            x.Start = start.ToString();
+            x.Ende = end.ToString();
             x.Auftragsnr = Auftragsnummer;
-
             ws_auftragnavservice.Create(ref x);
         }
 
@@ -163,14 +164,20 @@ namespace PlantafelNAV.ViewModel
             ObservableCollection<TMElement> prods = new ObservableCollection<TMElement>();
             foreach (WS_Auf_Arb_Nav x in list)
             {
-                TMElement y = new TMElement();
-                if (x.AP1_Startdatum.Date == date) { y.Id = x.Auftragsnr; y.StartDate = x.AP1_Startdatum; y.EndDate = x.AP1_Enddatum; y.TimeLineNumber = 1; prods.Add(y); }
-                else if (x.AP2_Startdatum.Date == date) { y.Id = x.Auftragsnr; y.StartDate = x.AP2_Startdatum; y.EndDate = x.AP2_Enddatum; y.TimeLineNumber = 2; prods.Add(y); }
-                else if (x.AP3_Startdatum.Date == date) { y.Id = x.Auftragsnr; y.StartDate = x.AP3_Startdatum; y.EndDate = x.AP3_Enddatum; y.TimeLineNumber = 3; prods.Add(y); }
-                else if (x.AP4_Startdatum.Date == date) { y.Id = x.Auftragsnr; y.StartDate = x.AP4_Startdatum; y.EndDate = x.AP4_Enddatum; y.TimeLineNumber = 4; prods.Add(y); }
+
+                if (convertStringToDate(x.AP1_Startdatum).Date == date.Date) { TMElement y = new TMElement(); y.Id = x.Auftragsnr; y.StartDate = convertStringToDate(x.AP1_Startdatum); y.EndDate = convertStringToDate(x.AP1_Enddatum); y.TimeLineNumber = 1; prods.Add(y); }
+                if (convertStringToDate(x.AP2_Startdatum).Date == date.Date) { TMElement y = new TMElement(); y.Id = x.Auftragsnr; y.StartDate = convertStringToDate(x.AP2_Startdatum); y.EndDate = convertStringToDate(x.AP2_Enddatum); y.TimeLineNumber = 2; prods.Add(y); }
+                if (convertStringToDate(x.AP3_Startdatum).Date == date.Date) { TMElement y = new TMElement(); y.Id = x.Auftragsnr; y.StartDate = convertStringToDate(x.AP3_Startdatum); y.EndDate = convertStringToDate(x.AP3_Enddatum); y.TimeLineNumber = 3; prods.Add(y); }
+                if (convertStringToDate(x.AP4_Startdatum).Date == date.Date) { TMElement y = new TMElement(); y.Id = x.Auftragsnr; y.StartDate = convertStringToDate(x.AP4_Startdatum); y.EndDate = convertStringToDate(x.AP4_Enddatum); y.TimeLineNumber = 4; prods.Add(y); }
             }
             return prods;
 
+        }
+
+        //da es nicht möglich ist ein datetime in die tabelle zu schreiben (grund auch nach intensiver suche unbekannt), wird jetzt die toStringFunktion benutzt, die jedoch wieder in datetimes umgewanfdelt werden müssen 
+        public DateTime convertStringToDate(string date)
+        {
+            return DateTime.Parse(date);
         }
 
         //überprüfen ob Auftrag schon in neuer Tabelle

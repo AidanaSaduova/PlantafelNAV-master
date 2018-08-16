@@ -32,6 +32,8 @@ namespace PlantafelNAV.Views
         Timeline t3 = new Timeline(1000, 80);
         Timeline t4 = new Timeline(1000, 80);
 
+
+
         ObservableCollection<TMElement> _tmelements = new ObservableCollection<TMElement>();
         private decimal dlfz1;
         private decimal dlfz2;
@@ -43,8 +45,9 @@ namespace PlantafelNAV.Views
         public decimal Dlfz2 { get => dlfz2; set => dlfz2 = value; }
         public decimal Dlfz3 { get => dlfz3; set => dlfz3 = value; }
         public decimal Dlfz4 { get => dlfz4; set => dlfz4 = value; }
+        public ObservableCollection<TMElement> Prods { get => _prods; set => _prods = value; }
 
-
+        ObservableCollection<TMElement> _prods = new ObservableCollection<TMElement>();
 
         public Plantafel()
         {
@@ -52,7 +55,6 @@ namespace PlantafelNAV.Views
             DataContext = new PlantafelNAV.ViewModel.PlantafelVm();
             PlantafelNAV.ViewModel.PlantafelVm planVM = this.DataContext as PlantafelNAV.ViewModel.PlantafelVm;
             InitializeComponent();
-
 
 
             //jetzt werden einmal die 4 timelines erzeugt
@@ -71,9 +73,55 @@ namespace PlantafelNAV.Views
             //Eventhandler der die Timelines leert
             datePicker1.SelectedDateChanged += new EventHandler<SelectionChangedEventArgs>(reloadTimelines);
 
+            //TimelineEntrys erzeugen
+            doTheTimelineStuff();
+        }
 
-            //Produktaten laden
+        
+
+        private void reloadTimelines(object sender, SelectionChangedEventArgs e)
+        {
+
+
+            doTheTimelineStuff();
+        }
+
+
+        private void addTimelineEntry(Timeline tl, int Starttime, int Duration, string Id)
+        {
+
+            tl.AddElement(Starttime, Duration, Id);
+        }
+
+
+        private void msgbox_TextChanged(object sender, TextChangedEventArgs e)
+        {
+
+        }
+
+        public void doTheTimelineStuff()
+        {
+           
+            t1.clearCanvas(); 
+            t2.clearCanvas(); 
+            t3.clearCanvas(); 
+            t4.clearCanvas();
+
+            //remove all elements
+            t1.TElements1.Clear();
+            t2.TElements1.Clear();
+            t3.TElements1.Clear();
+            t4.TElements1.Clear();
+
+
+
+
+
+            PlantafelNAV.ViewModel.PlantafelVm planVM = this.DataContext as PlantafelNAV.ViewModel.PlantafelVm;
+            DateTime prod_date = planVM.Prod_date;
+            //Aufträge laden
             planVM.loadProduction();
+            Tmelements.Clear();
             foreach (var x in planVM.Production)
             {
                 TMElement tmp = new TMElement();
@@ -102,8 +150,25 @@ namespace PlantafelNAV.Views
                 //einmal, falls vorhanden, tabelleneintrag holen und Auftrag ergänzen
                 if (planVM.getSpecAuftrag(x.Id) != null)
                 {
-                    //Jetzt magic
-                    Debug.WriteLine("Auftrag drinnen");
+                    Prods.Clear();
+                    Prods = planVM.getProdOfSpecDate(prod_date);
+
+                    // Hier gehts weiter mit dem Erzeugen der TimelineElements - bisheriges Problem das nur Auftragsnummer in Tabelle hineingeschrieben wird durch strings statt datetimes gelöst
+                    Debug.WriteLine("Anzahl: " + Prods.Count);
+                    foreach (TMElement y in Prods)
+                    {
+                        
+                        //alle zeiten müssen in sekunden übergeben werden
+                        //timeline, Anfangszeit in Sekunden, Dauer in Sekunden, ID
+                        int begin = (y.StartDate.Hour * 60 * 60) + (y.StartDate.Minute * 60);
+                        int duration = (y.EndDate.Hour - y.StartDate.Hour) * 60 + (y.EndDate.Minute - y.StartDate.Minute);
+                        int end = duration * 60;
+                        if (y.TimeLineNumber == 1) { addTimelineEntry(t1, begin, end, y.Id); }
+                        if (y.TimeLineNumber == 2) { addTimelineEntry(t2, begin, end, y.Id); }
+                        if (y.TimeLineNumber == 3) { addTimelineEntry(t3, begin, end, y.Id); }
+                        if (y.TimeLineNumber == 4) { addTimelineEntry(t4, begin, end, y.Id);  }
+                        //addTimelineEntry(t1, 8*60*60, , y.Id );
+                    }
                 }
                 else
                 {
@@ -184,90 +249,31 @@ namespace PlantafelNAV.Views
 
                     //jetzt Werte in Tabelle schreiben
                     planVM.newProdToTable(x.Id, ApStart1, ApEnd1, ApStart1, ApStart2, ApStart3, ApStart4, ApEnd1, ApEnd2, ApEnd3, ApEnd4);
+
                     //jetzt Auftrag in Nav aktualisieren
                     planVM.doUpdateProdNav(x.Id, ApEnd4);
                     //jetzt Elemente zur Timeline hinzufügen
                     ObservableCollection<TMElement> prods = planVM.getProdOfSpecDate(prod_date);
-                    foreach (TMElement h in prods)
+
+                    // Hier gehts weiter mit dem Erzeugen der TimelineElements - bisheriges Problem das nur Auftragsnummer in Tabelle hineingeschrieben wird durch strings statt datetimes gelöst
+                    foreach (TMElement y in prods)
                     {
-                        Debug.WriteLine(h.Id + "_" + h.StartDate + "_" + h.EndDate);
+                        //alle zeiten müssen in sekunden übergeben werden
+                        //timeline, Anfangszeit in Sekunden, Dauer in Sekunden, ID
+                        int begin = (y.StartDate.Hour * 60 * 60) + (y.StartDate.Minute * 60);
+                        int duration = (y.EndDate.Hour - y.StartDate.Hour) * 60 + (y.EndDate.Minute - y.StartDate.Minute);
+                        int end = duration * 60;
+                        if (y.TimeLineNumber == 1) { addTimelineEntry(t1, begin, end, y.Id); }
+                        if (y.TimeLineNumber == 2) { addTimelineEntry(t2, begin, end, y.Id); }
+                        if (y.TimeLineNumber == 3) { addTimelineEntry(t3, begin, end, y.Id); }
+                        if (y.TimeLineNumber == 4) { addTimelineEntry(t4, begin, end, y.Id); }
+                        //addTimelineEntry(t1, 8*60*60, , y.Id );
                     }
-                    // Hier gehts weiter mit dem Erzeugen der TimelineElements - bisheriges Problem das nur Auftragsnummer in Tabelle hineingeschrieben wird
                 }
             }
 
-
-
-            /* TMElement test = planVM.test;
-             addTimelineEntry(t1, test.StartTime, test.EndTime, test.Id);
-             addTimelineEntry(t2, test.StartTime, test.EndTime, test.Id);
-             addTimelineEntry(t3, test.StartTime, test.EndTime, test.Id);
-             addTimelineEntry(t4, test.StartTime, test.EndTime, test.Id);
-             */
-
-            /*
-            
-            //in sekunden
-            addTimelineEntry(t1, 8 * 60 * 60, 60 * 60 * 2, "#12345");
-            addTimelineEntry(t1, 12 * 60 * 60, 60 * 60 * 2, "#98765");
-
-            addTimelineEntry(t2, 8 * 60 * 60, 60 * 60 * 2, "#12345");
-            addTimelineEntry(t2, 12 * 60 * 60, 60 * 60 * 2, "#98765");
-
-            addTimelineEntry(t3, 8 * 60 * 60, 60 * 60 * 2, "#12345");
-            addTimelineEntry(t3, 12 * 60 * 60, 60 * 60 * 2, "#98765");
-
-            addTimelineEntry(t4, 8 * 60 * 60, 60 * 60 * 2, "#12345");
-            addTimelineEntry(t4, 12 * 60 * 60, 60 * 60 * 2, "#98765");*/
         }
-
-        private void reloadTimelines(object sender, SelectionChangedEventArgs e)
-        {
-            //remove all elements
-            t1.clearCanvas();
-            t2.clearCanvas();
-            t3.clearCanvas();
-            t4.clearCanvas();
-        }
-
-
-        private void addTimelineEntry(Timeline tl, int Starttime, int Duration, string Id)
-        {
-
-            tl.AddElement(Starttime, Duration, Id);
-        }
-
-        /* public Timeline generateTimeline(int hostnumber)
-         {
-             //ACHTUNG: Bei Änderung ist zu beachten, dass die Länge eines Eintrages von Minuten abhängt, die anhand der Länge der Timeline (1000) in Pixel umgerechnet werden; Diese Umrechnung muss dann im TimeLineElement-File geändert werden
-             Timeline tl = new Timeline(1000, 80);
-             //Setupaufruf mit Startzeit 08:00, Endzeit 16:00, Stundenintervallen sowie 
-             tl.Setup(28800, 57600, 3600, 120);
-             switch (hostnumber)
-             {
-                 case 1:
-                     host1.Children.Add(tl);
-                     break;
-                 case 2:
-                     host2.Children.Add(tl);
-                     break;
-                 case 3:
-                     host3.Children.Add(tl);
-                     break;
-                 case 4:
-                     host4.Children.Add(tl);
-                     break;
-             }
-
-             return tl;
-
-         }*/
-
-        private void msgbox_TextChanged(object sender, TextChangedEventArgs e)
-        {
-
-        }
-
+       
 
 
     }
