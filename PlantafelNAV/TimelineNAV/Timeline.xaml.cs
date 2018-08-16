@@ -21,6 +21,7 @@ namespace PlantafelNAV.TimelineNAV
         int startSeconds;
         int endSeconds;
         internal int pixelDistance;
+        public int identify;
 
         public List<TimelineElement> TElements1 { get => TElements; set => TElements = value; }
 
@@ -32,7 +33,7 @@ namespace PlantafelNAV.TimelineNAV
         /// </summary>
         /// <param name="w">Set the height</param>
         /// <param name="h">Set the width</param>
-        public Timeline(int w, int h)
+        public Timeline(int w, int h, int x)
         {
             InitializeComponent();
 
@@ -40,6 +41,7 @@ namespace PlantafelNAV.TimelineNAV
             height = h;
             border.Width = w;
             border.Height = h;
+            identify = x;
         }
 
         /// <summary>

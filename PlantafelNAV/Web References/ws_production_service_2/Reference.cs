@@ -39,6 +39,18 @@ namespace PlantafelNAV.ws_production_service_2 {
         
         private System.Threading.SendOrPostCallback GetRecIdFromKeyOperationCompleted;
         
+        private System.Threading.SendOrPostCallback CreateOperationCompleted;
+        
+        private System.Threading.SendOrPostCallback CreateMultipleOperationCompleted;
+        
+        private System.Threading.SendOrPostCallback UpdateOperationCompleted;
+        
+        private System.Threading.SendOrPostCallback UpdateMultipleOperationCompleted;
+        
+        private System.Threading.SendOrPostCallback DeleteOperationCompleted;
+        
+        private System.Threading.SendOrPostCallback Delete_ProdOrderLinesOperationCompleted;
+        
         private bool useDefaultCredentialsSetExplicitly;
         
         /// <remarks/>
@@ -93,27 +105,43 @@ namespace PlantafelNAV.ws_production_service_2 {
         public event GetRecIdFromKeyCompletedEventHandler GetRecIdFromKeyCompleted;
         
         /// <remarks/>
+        public event CreateCompletedEventHandler CreateCompleted;
+        
+        /// <remarks/>
+        public event CreateMultipleCompletedEventHandler CreateMultipleCompleted;
+        
+        /// <remarks/>
+        public event UpdateCompletedEventHandler UpdateCompleted;
+        
+        /// <remarks/>
+        public event UpdateMultipleCompletedEventHandler UpdateMultipleCompleted;
+        
+        /// <remarks/>
+        public event DeleteCompletedEventHandler DeleteCompleted;
+        
+        /// <remarks/>
+        public event Delete_ProdOrderLinesCompletedEventHandler Delete_ProdOrderLinesCompleted;
+        
+        /// <remarks/>
         [System.Web.Services.Protocols.SoapDocumentMethodAttribute("urn:microsoft-dynamics-schemas/page/ws_production:Read", RequestNamespace="urn:microsoft-dynamics-schemas/page/ws_production", ResponseElementName="Read_Result", ResponseNamespace="urn:microsoft-dynamics-schemas/page/ws_production", Use=System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle=System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
         [return: System.Xml.Serialization.XmlElementAttribute("WS_Production")]
-        public WS_Production Read(string Status, string No) {
+        public WS_Production Read(string No) {
             object[] results = this.Invoke("Read", new object[] {
-                        Status,
                         No});
             return ((WS_Production)(results[0]));
         }
         
         /// <remarks/>
-        public void ReadAsync(string Status, string No) {
-            this.ReadAsync(Status, No, null);
+        public void ReadAsync(string No) {
+            this.ReadAsync(No, null);
         }
         
         /// <remarks/>
-        public void ReadAsync(string Status, string No, object userState) {
+        public void ReadAsync(string No, object userState) {
             if ((this.ReadOperationCompleted == null)) {
                 this.ReadOperationCompleted = new System.Threading.SendOrPostCallback(this.OnReadOperationCompleted);
             }
             this.InvokeAsync("Read", new object[] {
-                        Status,
                         No}, this.ReadOperationCompleted, userState);
         }
         
@@ -250,6 +278,182 @@ namespace PlantafelNAV.ws_production_service_2 {
         }
         
         /// <remarks/>
+        [System.Web.Services.Protocols.SoapDocumentMethodAttribute("urn:microsoft-dynamics-schemas/page/ws_production:Create", RequestNamespace="urn:microsoft-dynamics-schemas/page/ws_production", ResponseElementName="Create_Result", ResponseNamespace="urn:microsoft-dynamics-schemas/page/ws_production", Use=System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle=System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
+        public void Create(ref WS_Production WS_Production) {
+            object[] results = this.Invoke("Create", new object[] {
+                        WS_Production});
+            WS_Production = ((WS_Production)(results[0]));
+        }
+        
+        /// <remarks/>
+        public void CreateAsync(WS_Production WS_Production) {
+            this.CreateAsync(WS_Production, null);
+        }
+        
+        /// <remarks/>
+        public void CreateAsync(WS_Production WS_Production, object userState) {
+            if ((this.CreateOperationCompleted == null)) {
+                this.CreateOperationCompleted = new System.Threading.SendOrPostCallback(this.OnCreateOperationCompleted);
+            }
+            this.InvokeAsync("Create", new object[] {
+                        WS_Production}, this.CreateOperationCompleted, userState);
+        }
+        
+        private void OnCreateOperationCompleted(object arg) {
+            if ((this.CreateCompleted != null)) {
+                System.Web.Services.Protocols.InvokeCompletedEventArgs invokeArgs = ((System.Web.Services.Protocols.InvokeCompletedEventArgs)(arg));
+                this.CreateCompleted(this, new CreateCompletedEventArgs(invokeArgs.Results, invokeArgs.Error, invokeArgs.Cancelled, invokeArgs.UserState));
+            }
+        }
+        
+        /// <remarks/>
+        [System.Web.Services.Protocols.SoapDocumentMethodAttribute("urn:microsoft-dynamics-schemas/page/ws_production:CreateMultiple", RequestNamespace="urn:microsoft-dynamics-schemas/page/ws_production", ResponseElementName="CreateMultiple_Result", ResponseNamespace="urn:microsoft-dynamics-schemas/page/ws_production", Use=System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle=System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
+        public void CreateMultiple([System.Xml.Serialization.XmlArrayItemAttribute(IsNullable=false)] ref WS_Production[] WS_Production_List) {
+            object[] results = this.Invoke("CreateMultiple", new object[] {
+                        WS_Production_List});
+            WS_Production_List = ((WS_Production[])(results[0]));
+        }
+        
+        /// <remarks/>
+        public void CreateMultipleAsync(WS_Production[] WS_Production_List) {
+            this.CreateMultipleAsync(WS_Production_List, null);
+        }
+        
+        /// <remarks/>
+        public void CreateMultipleAsync(WS_Production[] WS_Production_List, object userState) {
+            if ((this.CreateMultipleOperationCompleted == null)) {
+                this.CreateMultipleOperationCompleted = new System.Threading.SendOrPostCallback(this.OnCreateMultipleOperationCompleted);
+            }
+            this.InvokeAsync("CreateMultiple", new object[] {
+                        WS_Production_List}, this.CreateMultipleOperationCompleted, userState);
+        }
+        
+        private void OnCreateMultipleOperationCompleted(object arg) {
+            if ((this.CreateMultipleCompleted != null)) {
+                System.Web.Services.Protocols.InvokeCompletedEventArgs invokeArgs = ((System.Web.Services.Protocols.InvokeCompletedEventArgs)(arg));
+                this.CreateMultipleCompleted(this, new CreateMultipleCompletedEventArgs(invokeArgs.Results, invokeArgs.Error, invokeArgs.Cancelled, invokeArgs.UserState));
+            }
+        }
+        
+        /// <remarks/>
+        [System.Web.Services.Protocols.SoapDocumentMethodAttribute("urn:microsoft-dynamics-schemas/page/ws_production:Update", RequestNamespace="urn:microsoft-dynamics-schemas/page/ws_production", ResponseElementName="Update_Result", ResponseNamespace="urn:microsoft-dynamics-schemas/page/ws_production", Use=System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle=System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
+        public void Update(ref WS_Production WS_Production) {
+            object[] results = this.Invoke("Update", new object[] {
+                        WS_Production});
+            WS_Production = ((WS_Production)(results[0]));
+        }
+        
+        /// <remarks/>
+        public void UpdateAsync(WS_Production WS_Production) {
+            this.UpdateAsync(WS_Production, null);
+        }
+        
+        /// <remarks/>
+        public void UpdateAsync(WS_Production WS_Production, object userState) {
+            if ((this.UpdateOperationCompleted == null)) {
+                this.UpdateOperationCompleted = new System.Threading.SendOrPostCallback(this.OnUpdateOperationCompleted);
+            }
+            this.InvokeAsync("Update", new object[] {
+                        WS_Production}, this.UpdateOperationCompleted, userState);
+        }
+        
+        private void OnUpdateOperationCompleted(object arg) {
+            if ((this.UpdateCompleted != null)) {
+                System.Web.Services.Protocols.InvokeCompletedEventArgs invokeArgs = ((System.Web.Services.Protocols.InvokeCompletedEventArgs)(arg));
+                this.UpdateCompleted(this, new UpdateCompletedEventArgs(invokeArgs.Results, invokeArgs.Error, invokeArgs.Cancelled, invokeArgs.UserState));
+            }
+        }
+        
+        /// <remarks/>
+        [System.Web.Services.Protocols.SoapDocumentMethodAttribute("urn:microsoft-dynamics-schemas/page/ws_production:UpdateMultiple", RequestNamespace="urn:microsoft-dynamics-schemas/page/ws_production", ResponseElementName="UpdateMultiple_Result", ResponseNamespace="urn:microsoft-dynamics-schemas/page/ws_production", Use=System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle=System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
+        public void UpdateMultiple([System.Xml.Serialization.XmlArrayItemAttribute(IsNullable=false)] ref WS_Production[] WS_Production_List) {
+            object[] results = this.Invoke("UpdateMultiple", new object[] {
+                        WS_Production_List});
+            WS_Production_List = ((WS_Production[])(results[0]));
+        }
+        
+        /// <remarks/>
+        public void UpdateMultipleAsync(WS_Production[] WS_Production_List) {
+            this.UpdateMultipleAsync(WS_Production_List, null);
+        }
+        
+        /// <remarks/>
+        public void UpdateMultipleAsync(WS_Production[] WS_Production_List, object userState) {
+            if ((this.UpdateMultipleOperationCompleted == null)) {
+                this.UpdateMultipleOperationCompleted = new System.Threading.SendOrPostCallback(this.OnUpdateMultipleOperationCompleted);
+            }
+            this.InvokeAsync("UpdateMultiple", new object[] {
+                        WS_Production_List}, this.UpdateMultipleOperationCompleted, userState);
+        }
+        
+        private void OnUpdateMultipleOperationCompleted(object arg) {
+            if ((this.UpdateMultipleCompleted != null)) {
+                System.Web.Services.Protocols.InvokeCompletedEventArgs invokeArgs = ((System.Web.Services.Protocols.InvokeCompletedEventArgs)(arg));
+                this.UpdateMultipleCompleted(this, new UpdateMultipleCompletedEventArgs(invokeArgs.Results, invokeArgs.Error, invokeArgs.Cancelled, invokeArgs.UserState));
+            }
+        }
+        
+        /// <remarks/>
+        [System.Web.Services.Protocols.SoapDocumentMethodAttribute("urn:microsoft-dynamics-schemas/page/ws_production:Delete", RequestNamespace="urn:microsoft-dynamics-schemas/page/ws_production", ResponseElementName="Delete_Result", ResponseNamespace="urn:microsoft-dynamics-schemas/page/ws_production", Use=System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle=System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
+        [return: System.Xml.Serialization.XmlElementAttribute("Delete_Result")]
+        public bool Delete(string Key) {
+            object[] results = this.Invoke("Delete", new object[] {
+                        Key});
+            return ((bool)(results[0]));
+        }
+        
+        /// <remarks/>
+        public void DeleteAsync(string Key) {
+            this.DeleteAsync(Key, null);
+        }
+        
+        /// <remarks/>
+        public void DeleteAsync(string Key, object userState) {
+            if ((this.DeleteOperationCompleted == null)) {
+                this.DeleteOperationCompleted = new System.Threading.SendOrPostCallback(this.OnDeleteOperationCompleted);
+            }
+            this.InvokeAsync("Delete", new object[] {
+                        Key}, this.DeleteOperationCompleted, userState);
+        }
+        
+        private void OnDeleteOperationCompleted(object arg) {
+            if ((this.DeleteCompleted != null)) {
+                System.Web.Services.Protocols.InvokeCompletedEventArgs invokeArgs = ((System.Web.Services.Protocols.InvokeCompletedEventArgs)(arg));
+                this.DeleteCompleted(this, new DeleteCompletedEventArgs(invokeArgs.Results, invokeArgs.Error, invokeArgs.Cancelled, invokeArgs.UserState));
+            }
+        }
+        
+        /// <remarks/>
+        [System.Web.Services.Protocols.SoapDocumentMethodAttribute("urn:microsoft-dynamics-schemas/page/ws_production:Delete_ProdOrderLines", RequestNamespace="urn:microsoft-dynamics-schemas/page/ws_production", ResponseElementName="Delete_ProdOrderLines_Result", ResponseNamespace="urn:microsoft-dynamics-schemas/page/ws_production", Use=System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle=System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
+        [return: System.Xml.Serialization.XmlElementAttribute("Delete_ProdOrderLines_Result")]
+        public bool Delete_ProdOrderLines(string ProdOrderLines_Key) {
+            object[] results = this.Invoke("Delete_ProdOrderLines", new object[] {
+                        ProdOrderLines_Key});
+            return ((bool)(results[0]));
+        }
+        
+        /// <remarks/>
+        public void Delete_ProdOrderLinesAsync(string ProdOrderLines_Key) {
+            this.Delete_ProdOrderLinesAsync(ProdOrderLines_Key, null);
+        }
+        
+        /// <remarks/>
+        public void Delete_ProdOrderLinesAsync(string ProdOrderLines_Key, object userState) {
+            if ((this.Delete_ProdOrderLinesOperationCompleted == null)) {
+                this.Delete_ProdOrderLinesOperationCompleted = new System.Threading.SendOrPostCallback(this.OnDelete_ProdOrderLinesOperationCompleted);
+            }
+            this.InvokeAsync("Delete_ProdOrderLines", new object[] {
+                        ProdOrderLines_Key}, this.Delete_ProdOrderLinesOperationCompleted, userState);
+        }
+        
+        private void OnDelete_ProdOrderLinesOperationCompleted(object arg) {
+            if ((this.Delete_ProdOrderLinesCompleted != null)) {
+                System.Web.Services.Protocols.InvokeCompletedEventArgs invokeArgs = ((System.Web.Services.Protocols.InvokeCompletedEventArgs)(arg));
+                this.Delete_ProdOrderLinesCompleted(this, new Delete_ProdOrderLinesCompletedEventArgs(invokeArgs.Results, invokeArgs.Error, invokeArgs.Cancelled, invokeArgs.UserState));
+            }
+        }
+        
+        /// <remarks/>
         public new void CancelAsync(object userState) {
             base.CancelAsync(userState);
         }
@@ -282,19 +486,29 @@ namespace PlantafelNAV.ws_production_service_2 {
         
         private string descriptionField;
         
+        private string description_2Field;
+        
+        private Source_Type source_TypeField;
+        
+        private bool source_TypeFieldSpecified;
+        
         private string source_NoField;
         
-        private string routing_NoField;
+        private string search_DescriptionField;
         
         private decimal quantityField;
         
         private bool quantityFieldSpecified;
         
-        private string shortcut_Dimension_1_CodeField;
+        private System.DateTime due_DateField;
         
-        private string shortcut_Dimension_2_CodeField;
+        private bool due_DateFieldSpecified;
         
-        private string location_CodeField;
+        private string assigned_User_IDField;
+        
+        private System.DateTime last_Date_ModifiedField;
+        
+        private bool last_Date_ModifiedFieldSpecified;
         
         private System.DateTime starting_TimeField;
         
@@ -312,27 +526,21 @@ namespace PlantafelNAV.ws_production_service_2 {
         
         private bool ending_DateFieldSpecified;
         
-        private System.DateTime due_DateField;
+        private string inventory_Posting_GroupField;
         
-        private bool due_DateFieldSpecified;
+        private string gen_Prod_Posting_GroupField;
         
-        private string assigned_User_IDField;
+        private string gen_Bus_Posting_GroupField;
         
-        private System.DateTime finished_DateField;
+        private string shortcut_Dimension_1_CodeField;
         
-        private bool finished_DateFieldSpecified;
+        private string shortcut_Dimension_2_CodeField;
         
-        private Status statusField;
-        
-        private bool statusFieldSpecified;
-        
-        private string search_DescriptionField;
-        
-        private System.DateTime last_Date_ModifiedField;
-        
-        private bool last_Date_ModifiedFieldSpecified;
+        private string location_CodeField;
         
         private string bin_CodeField;
+        
+        private Planned_Prod_Order_Lines[] prodOrderLinesField;
         
         /// <remarks/>
         public string Key {
@@ -365,6 +573,37 @@ namespace PlantafelNAV.ws_production_service_2 {
         }
         
         /// <remarks/>
+        public string Description_2 {
+            get {
+                return this.description_2Field;
+            }
+            set {
+                this.description_2Field = value;
+            }
+        }
+        
+        /// <remarks/>
+        public Source_Type Source_Type {
+            get {
+                return this.source_TypeField;
+            }
+            set {
+                this.source_TypeField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlIgnoreAttribute()]
+        public bool Source_TypeSpecified {
+            get {
+                return this.source_TypeFieldSpecified;
+            }
+            set {
+                this.source_TypeFieldSpecified = value;
+            }
+        }
+        
+        /// <remarks/>
         public string Source_No {
             get {
                 return this.source_NoField;
@@ -375,12 +614,12 @@ namespace PlantafelNAV.ws_production_service_2 {
         }
         
         /// <remarks/>
-        public string Routing_No {
+        public string Search_Description {
             get {
-                return this.routing_NoField;
+                return this.search_DescriptionField;
             }
             set {
-                this.routing_NoField = value;
+                this.search_DescriptionField = value;
             }
         }
         
@@ -406,32 +645,56 @@ namespace PlantafelNAV.ws_production_service_2 {
         }
         
         /// <remarks/>
-        public string Shortcut_Dimension_1_Code {
+        [System.Xml.Serialization.XmlElementAttribute(DataType="date")]
+        public System.DateTime Due_Date {
             get {
-                return this.shortcut_Dimension_1_CodeField;
+                return this.due_DateField;
             }
             set {
-                this.shortcut_Dimension_1_CodeField = value;
+                this.due_DateField = value;
             }
         }
         
         /// <remarks/>
-        public string Shortcut_Dimension_2_Code {
+        [System.Xml.Serialization.XmlIgnoreAttribute()]
+        public bool Due_DateSpecified {
             get {
-                return this.shortcut_Dimension_2_CodeField;
+                return this.due_DateFieldSpecified;
             }
             set {
-                this.shortcut_Dimension_2_CodeField = value;
+                this.due_DateFieldSpecified = value;
             }
         }
         
         /// <remarks/>
-        public string Location_Code {
+        public string Assigned_User_ID {
             get {
-                return this.location_CodeField;
+                return this.assigned_User_IDField;
             }
             set {
-                this.location_CodeField = value;
+                this.assigned_User_IDField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(DataType="date")]
+        public System.DateTime Last_Date_Modified {
+            get {
+                return this.last_Date_ModifiedField;
+            }
+            set {
+                this.last_Date_ModifiedField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlIgnoreAttribute()]
+        public bool Last_Date_ModifiedSpecified {
+            get {
+                return this.last_Date_ModifiedFieldSpecified;
+            }
+            set {
+                this.last_Date_ModifiedFieldSpecified = value;
             }
         }
         
@@ -524,6 +787,230 @@ namespace PlantafelNAV.ws_production_service_2 {
         }
         
         /// <remarks/>
+        public string Inventory_Posting_Group {
+            get {
+                return this.inventory_Posting_GroupField;
+            }
+            set {
+                this.inventory_Posting_GroupField = value;
+            }
+        }
+        
+        /// <remarks/>
+        public string Gen_Prod_Posting_Group {
+            get {
+                return this.gen_Prod_Posting_GroupField;
+            }
+            set {
+                this.gen_Prod_Posting_GroupField = value;
+            }
+        }
+        
+        /// <remarks/>
+        public string Gen_Bus_Posting_Group {
+            get {
+                return this.gen_Bus_Posting_GroupField;
+            }
+            set {
+                this.gen_Bus_Posting_GroupField = value;
+            }
+        }
+        
+        /// <remarks/>
+        public string Shortcut_Dimension_1_Code {
+            get {
+                return this.shortcut_Dimension_1_CodeField;
+            }
+            set {
+                this.shortcut_Dimension_1_CodeField = value;
+            }
+        }
+        
+        /// <remarks/>
+        public string Shortcut_Dimension_2_Code {
+            get {
+                return this.shortcut_Dimension_2_CodeField;
+            }
+            set {
+                this.shortcut_Dimension_2_CodeField = value;
+            }
+        }
+        
+        /// <remarks/>
+        public string Location_Code {
+            get {
+                return this.location_CodeField;
+            }
+            set {
+                this.location_CodeField = value;
+            }
+        }
+        
+        /// <remarks/>
+        public string Bin_Code {
+            get {
+                return this.bin_CodeField;
+            }
+            set {
+                this.bin_CodeField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlArrayItemAttribute(IsNullable=false)]
+        public Planned_Prod_Order_Lines[] ProdOrderLines {
+            get {
+                return this.prodOrderLinesField;
+            }
+            set {
+                this.prodOrderLinesField = value;
+            }
+        }
+    }
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.7.3130.0")]
+    [System.SerializableAttribute()]
+    [System.Xml.Serialization.XmlTypeAttribute(Namespace="urn:microsoft-dynamics-schemas/page/ws_production")]
+    public enum Source_Type {
+        
+        /// <remarks/>
+        Item,
+        
+        /// <remarks/>
+        Family,
+        
+        /// <remarks/>
+        Sales_Header,
+    }
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.7.3130.0")]
+    [System.SerializableAttribute()]
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.ComponentModel.DesignerCategoryAttribute("code")]
+    [System.Xml.Serialization.XmlTypeAttribute(Namespace="urn:microsoft-dynamics-schemas/page/ws_production")]
+    public partial class Planned_Prod_Order_Lines {
+        
+        private string keyField;
+        
+        private string item_NoField;
+        
+        private string variant_CodeField;
+        
+        private System.DateTime due_DateField;
+        
+        private bool due_DateFieldSpecified;
+        
+        private string descriptionField;
+        
+        private string description_2Field;
+        
+        private string production_BOM_NoField;
+        
+        private string routing_NoField;
+        
+        private string production_BOM_Version_CodeField;
+        
+        private string routing_Version_CodeField;
+        
+        private string location_CodeField;
+        
+        private string bin_CodeField;
+        
+        private System.DateTime starting_Date_TimeField;
+        
+        private bool starting_Date_TimeFieldSpecified;
+        
+        private System.DateTime starting_TimeField;
+        
+        private bool starting_TimeFieldSpecified;
+        
+        private System.DateTime starting_DateField;
+        
+        private bool starting_DateFieldSpecified;
+        
+        private System.DateTime ending_Date_TimeField;
+        
+        private bool ending_Date_TimeFieldSpecified;
+        
+        private System.DateTime ending_TimeField;
+        
+        private bool ending_TimeFieldSpecified;
+        
+        private System.DateTime ending_DateField;
+        
+        private bool ending_DateFieldSpecified;
+        
+        private decimal scrap_PercentField;
+        
+        private bool scrap_PercentFieldSpecified;
+        
+        private decimal quantityField;
+        
+        private bool quantityFieldSpecified;
+        
+        private decimal reserved_QuantityField;
+        
+        private bool reserved_QuantityFieldSpecified;
+        
+        private string unit_of_Measure_CodeField;
+        
+        private decimal unit_CostField;
+        
+        private bool unit_CostFieldSpecified;
+        
+        private decimal cost_AmountField;
+        
+        private bool cost_AmountFieldSpecified;
+        
+        private string shortcut_Dimension_1_CodeField;
+        
+        private string shortcut_Dimension_2_CodeField;
+        
+        private string shortcutDimCode3Field;
+        
+        private string shortcutDimCode4Field;
+        
+        private string shortcutDimCode5Field;
+        
+        private string shortcutDimCode6Field;
+        
+        private string shortcutDimCode7Field;
+        
+        private string shortcutDimCode8Field;
+        
+        /// <remarks/>
+        public string Key {
+            get {
+                return this.keyField;
+            }
+            set {
+                this.keyField = value;
+            }
+        }
+        
+        /// <remarks/>
+        public string Item_No {
+            get {
+                return this.item_NoField;
+            }
+            set {
+                this.item_NoField = value;
+            }
+        }
+        
+        /// <remarks/>
+        public string Variant_Code {
+            get {
+                return this.variant_CodeField;
+            }
+            set {
+                this.variant_CodeField = value;
+            }
+        }
+        
+        /// <remarks/>
         [System.Xml.Serialization.XmlElementAttribute(DataType="date")]
         public System.DateTime Due_Date {
             get {
@@ -546,87 +1033,72 @@ namespace PlantafelNAV.ws_production_service_2 {
         }
         
         /// <remarks/>
-        public string Assigned_User_ID {
+        public string Description {
             get {
-                return this.assigned_User_IDField;
+                return this.descriptionField;
             }
             set {
-                this.assigned_User_IDField = value;
+                this.descriptionField = value;
             }
         }
         
         /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(DataType="date")]
-        public System.DateTime Finished_Date {
+        public string Description_2 {
             get {
-                return this.finished_DateField;
+                return this.description_2Field;
             }
             set {
-                this.finished_DateField = value;
+                this.description_2Field = value;
             }
         }
         
         /// <remarks/>
-        [System.Xml.Serialization.XmlIgnoreAttribute()]
-        public bool Finished_DateSpecified {
+        public string Production_BOM_No {
             get {
-                return this.finished_DateFieldSpecified;
+                return this.production_BOM_NoField;
             }
             set {
-                this.finished_DateFieldSpecified = value;
+                this.production_BOM_NoField = value;
             }
         }
         
         /// <remarks/>
-        public Status Status {
+        public string Routing_No {
             get {
-                return this.statusField;
+                return this.routing_NoField;
             }
             set {
-                this.statusField = value;
+                this.routing_NoField = value;
             }
         }
         
         /// <remarks/>
-        [System.Xml.Serialization.XmlIgnoreAttribute()]
-        public bool StatusSpecified {
+        public string Production_BOM_Version_Code {
             get {
-                return this.statusFieldSpecified;
+                return this.production_BOM_Version_CodeField;
             }
             set {
-                this.statusFieldSpecified = value;
+                this.production_BOM_Version_CodeField = value;
             }
         }
         
         /// <remarks/>
-        public string Search_Description {
+        public string Routing_Version_Code {
             get {
-                return this.search_DescriptionField;
+                return this.routing_Version_CodeField;
             }
             set {
-                this.search_DescriptionField = value;
+                this.routing_Version_CodeField = value;
             }
         }
         
         /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(DataType="date")]
-        public System.DateTime Last_Date_Modified {
+        public string Location_Code {
             get {
-                return this.last_Date_ModifiedField;
+                return this.location_CodeField;
             }
             set {
-                this.last_Date_ModifiedField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlIgnoreAttribute()]
-        public bool Last_Date_ModifiedSpecified {
-            get {
-                return this.last_Date_ModifiedFieldSpecified;
-            }
-            set {
-                this.last_Date_ModifiedFieldSpecified = value;
+                this.location_CodeField = value;
             }
         }
         
@@ -639,28 +1111,337 @@ namespace PlantafelNAV.ws_production_service_2 {
                 this.bin_CodeField = value;
             }
         }
-    }
-    
-    /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.7.3130.0")]
-    [System.SerializableAttribute()]
-    [System.Xml.Serialization.XmlTypeAttribute(Namespace="urn:microsoft-dynamics-schemas/page/ws_production")]
-    public enum Status {
         
         /// <remarks/>
-        Simulated,
+        public System.DateTime Starting_Date_Time {
+            get {
+                return this.starting_Date_TimeField;
+            }
+            set {
+                this.starting_Date_TimeField = value;
+            }
+        }
         
         /// <remarks/>
-        Planned,
+        [System.Xml.Serialization.XmlIgnoreAttribute()]
+        public bool Starting_Date_TimeSpecified {
+            get {
+                return this.starting_Date_TimeFieldSpecified;
+            }
+            set {
+                this.starting_Date_TimeFieldSpecified = value;
+            }
+        }
         
         /// <remarks/>
-        Firm_Planned,
+        [System.Xml.Serialization.XmlElementAttribute(DataType="time")]
+        public System.DateTime Starting_Time {
+            get {
+                return this.starting_TimeField;
+            }
+            set {
+                this.starting_TimeField = value;
+            }
+        }
         
         /// <remarks/>
-        Released,
+        [System.Xml.Serialization.XmlIgnoreAttribute()]
+        public bool Starting_TimeSpecified {
+            get {
+                return this.starting_TimeFieldSpecified;
+            }
+            set {
+                this.starting_TimeFieldSpecified = value;
+            }
+        }
         
         /// <remarks/>
-        Finished,
+        [System.Xml.Serialization.XmlElementAttribute(DataType="date")]
+        public System.DateTime Starting_Date {
+            get {
+                return this.starting_DateField;
+            }
+            set {
+                this.starting_DateField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlIgnoreAttribute()]
+        public bool Starting_DateSpecified {
+            get {
+                return this.starting_DateFieldSpecified;
+            }
+            set {
+                this.starting_DateFieldSpecified = value;
+            }
+        }
+        
+        /// <remarks/>
+        public System.DateTime Ending_Date_Time {
+            get {
+                return this.ending_Date_TimeField;
+            }
+            set {
+                this.ending_Date_TimeField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlIgnoreAttribute()]
+        public bool Ending_Date_TimeSpecified {
+            get {
+                return this.ending_Date_TimeFieldSpecified;
+            }
+            set {
+                this.ending_Date_TimeFieldSpecified = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(DataType="time")]
+        public System.DateTime Ending_Time {
+            get {
+                return this.ending_TimeField;
+            }
+            set {
+                this.ending_TimeField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlIgnoreAttribute()]
+        public bool Ending_TimeSpecified {
+            get {
+                return this.ending_TimeFieldSpecified;
+            }
+            set {
+                this.ending_TimeFieldSpecified = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(DataType="date")]
+        public System.DateTime Ending_Date {
+            get {
+                return this.ending_DateField;
+            }
+            set {
+                this.ending_DateField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlIgnoreAttribute()]
+        public bool Ending_DateSpecified {
+            get {
+                return this.ending_DateFieldSpecified;
+            }
+            set {
+                this.ending_DateFieldSpecified = value;
+            }
+        }
+        
+        /// <remarks/>
+        public decimal Scrap_Percent {
+            get {
+                return this.scrap_PercentField;
+            }
+            set {
+                this.scrap_PercentField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlIgnoreAttribute()]
+        public bool Scrap_PercentSpecified {
+            get {
+                return this.scrap_PercentFieldSpecified;
+            }
+            set {
+                this.scrap_PercentFieldSpecified = value;
+            }
+        }
+        
+        /// <remarks/>
+        public decimal Quantity {
+            get {
+                return this.quantityField;
+            }
+            set {
+                this.quantityField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlIgnoreAttribute()]
+        public bool QuantitySpecified {
+            get {
+                return this.quantityFieldSpecified;
+            }
+            set {
+                this.quantityFieldSpecified = value;
+            }
+        }
+        
+        /// <remarks/>
+        public decimal Reserved_Quantity {
+            get {
+                return this.reserved_QuantityField;
+            }
+            set {
+                this.reserved_QuantityField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlIgnoreAttribute()]
+        public bool Reserved_QuantitySpecified {
+            get {
+                return this.reserved_QuantityFieldSpecified;
+            }
+            set {
+                this.reserved_QuantityFieldSpecified = value;
+            }
+        }
+        
+        /// <remarks/>
+        public string Unit_of_Measure_Code {
+            get {
+                return this.unit_of_Measure_CodeField;
+            }
+            set {
+                this.unit_of_Measure_CodeField = value;
+            }
+        }
+        
+        /// <remarks/>
+        public decimal Unit_Cost {
+            get {
+                return this.unit_CostField;
+            }
+            set {
+                this.unit_CostField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlIgnoreAttribute()]
+        public bool Unit_CostSpecified {
+            get {
+                return this.unit_CostFieldSpecified;
+            }
+            set {
+                this.unit_CostFieldSpecified = value;
+            }
+        }
+        
+        /// <remarks/>
+        public decimal Cost_Amount {
+            get {
+                return this.cost_AmountField;
+            }
+            set {
+                this.cost_AmountField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlIgnoreAttribute()]
+        public bool Cost_AmountSpecified {
+            get {
+                return this.cost_AmountFieldSpecified;
+            }
+            set {
+                this.cost_AmountFieldSpecified = value;
+            }
+        }
+        
+        /// <remarks/>
+        public string Shortcut_Dimension_1_Code {
+            get {
+                return this.shortcut_Dimension_1_CodeField;
+            }
+            set {
+                this.shortcut_Dimension_1_CodeField = value;
+            }
+        }
+        
+        /// <remarks/>
+        public string Shortcut_Dimension_2_Code {
+            get {
+                return this.shortcut_Dimension_2_CodeField;
+            }
+            set {
+                this.shortcut_Dimension_2_CodeField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute("ShortcutDimCode[3]")]
+        public string ShortcutDimCode3 {
+            get {
+                return this.shortcutDimCode3Field;
+            }
+            set {
+                this.shortcutDimCode3Field = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute("ShortcutDimCode[4]")]
+        public string ShortcutDimCode4 {
+            get {
+                return this.shortcutDimCode4Field;
+            }
+            set {
+                this.shortcutDimCode4Field = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute("ShortcutDimCode[5]")]
+        public string ShortcutDimCode5 {
+            get {
+                return this.shortcutDimCode5Field;
+            }
+            set {
+                this.shortcutDimCode5Field = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute("ShortcutDimCode[6]")]
+        public string ShortcutDimCode6 {
+            get {
+                return this.shortcutDimCode6Field;
+            }
+            set {
+                this.shortcutDimCode6Field = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute("ShortcutDimCode[7]")]
+        public string ShortcutDimCode7 {
+            get {
+                return this.shortcutDimCode7Field;
+            }
+            set {
+                this.shortcutDimCode7Field = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute("ShortcutDimCode[8]")]
+        public string ShortcutDimCode8 {
+            get {
+                return this.shortcutDimCode8Field;
+            }
+            set {
+                this.shortcutDimCode8Field = value;
+            }
+        }
     }
     
     /// <remarks/>
@@ -709,22 +1490,28 @@ namespace PlantafelNAV.ws_production_service_2 {
         Description,
         
         /// <remarks/>
+        Description_2,
+        
+        /// <remarks/>
+        Source_Type,
+        
+        /// <remarks/>
         Source_No,
         
         /// <remarks/>
-        Routing_No,
+        Search_Description,
         
         /// <remarks/>
         Quantity,
         
         /// <remarks/>
-        Shortcut_Dimension_1_Code,
+        Due_Date,
         
         /// <remarks/>
-        Shortcut_Dimension_2_Code,
+        Assigned_User_ID,
         
         /// <remarks/>
-        Location_Code,
+        Last_Date_Modified,
         
         /// <remarks/>
         Starting_Time,
@@ -739,22 +1526,22 @@ namespace PlantafelNAV.ws_production_service_2 {
         Ending_Date,
         
         /// <remarks/>
-        Due_Date,
+        Inventory_Posting_Group,
         
         /// <remarks/>
-        Assigned_User_ID,
+        Gen_Prod_Posting_Group,
         
         /// <remarks/>
-        Finished_Date,
+        Gen_Bus_Posting_Group,
         
         /// <remarks/>
-        Status,
+        Shortcut_Dimension_1_Code,
         
         /// <remarks/>
-        Search_Description,
+        Shortcut_Dimension_2_Code,
         
         /// <remarks/>
-        Last_Date_Modified,
+        Location_Code,
         
         /// <remarks/>
         Bin_Code,
@@ -886,6 +1673,162 @@ namespace PlantafelNAV.ws_production_service_2 {
             get {
                 this.RaiseExceptionIfNecessary();
                 return ((string)(this.results[0]));
+            }
+        }
+    }
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.7.2558.0")]
+    public delegate void CreateCompletedEventHandler(object sender, CreateCompletedEventArgs e);
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.7.2558.0")]
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.ComponentModel.DesignerCategoryAttribute("code")]
+    public partial class CreateCompletedEventArgs : System.ComponentModel.AsyncCompletedEventArgs {
+        
+        private object[] results;
+        
+        internal CreateCompletedEventArgs(object[] results, System.Exception exception, bool cancelled, object userState) : 
+                base(exception, cancelled, userState) {
+            this.results = results;
+        }
+        
+        /// <remarks/>
+        public WS_Production WS_Production {
+            get {
+                this.RaiseExceptionIfNecessary();
+                return ((WS_Production)(this.results[0]));
+            }
+        }
+    }
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.7.2558.0")]
+    public delegate void CreateMultipleCompletedEventHandler(object sender, CreateMultipleCompletedEventArgs e);
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.7.2558.0")]
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.ComponentModel.DesignerCategoryAttribute("code")]
+    public partial class CreateMultipleCompletedEventArgs : System.ComponentModel.AsyncCompletedEventArgs {
+        
+        private object[] results;
+        
+        internal CreateMultipleCompletedEventArgs(object[] results, System.Exception exception, bool cancelled, object userState) : 
+                base(exception, cancelled, userState) {
+            this.results = results;
+        }
+        
+        /// <remarks/>
+        public WS_Production[] WS_Production_List {
+            get {
+                this.RaiseExceptionIfNecessary();
+                return ((WS_Production[])(this.results[0]));
+            }
+        }
+    }
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.7.2558.0")]
+    public delegate void UpdateCompletedEventHandler(object sender, UpdateCompletedEventArgs e);
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.7.2558.0")]
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.ComponentModel.DesignerCategoryAttribute("code")]
+    public partial class UpdateCompletedEventArgs : System.ComponentModel.AsyncCompletedEventArgs {
+        
+        private object[] results;
+        
+        internal UpdateCompletedEventArgs(object[] results, System.Exception exception, bool cancelled, object userState) : 
+                base(exception, cancelled, userState) {
+            this.results = results;
+        }
+        
+        /// <remarks/>
+        public WS_Production WS_Production {
+            get {
+                this.RaiseExceptionIfNecessary();
+                return ((WS_Production)(this.results[0]));
+            }
+        }
+    }
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.7.2558.0")]
+    public delegate void UpdateMultipleCompletedEventHandler(object sender, UpdateMultipleCompletedEventArgs e);
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.7.2558.0")]
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.ComponentModel.DesignerCategoryAttribute("code")]
+    public partial class UpdateMultipleCompletedEventArgs : System.ComponentModel.AsyncCompletedEventArgs {
+        
+        private object[] results;
+        
+        internal UpdateMultipleCompletedEventArgs(object[] results, System.Exception exception, bool cancelled, object userState) : 
+                base(exception, cancelled, userState) {
+            this.results = results;
+        }
+        
+        /// <remarks/>
+        public WS_Production[] WS_Production_List {
+            get {
+                this.RaiseExceptionIfNecessary();
+                return ((WS_Production[])(this.results[0]));
+            }
+        }
+    }
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.7.2558.0")]
+    public delegate void DeleteCompletedEventHandler(object sender, DeleteCompletedEventArgs e);
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.7.2558.0")]
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.ComponentModel.DesignerCategoryAttribute("code")]
+    public partial class DeleteCompletedEventArgs : System.ComponentModel.AsyncCompletedEventArgs {
+        
+        private object[] results;
+        
+        internal DeleteCompletedEventArgs(object[] results, System.Exception exception, bool cancelled, object userState) : 
+                base(exception, cancelled, userState) {
+            this.results = results;
+        }
+        
+        /// <remarks/>
+        public bool Result {
+            get {
+                this.RaiseExceptionIfNecessary();
+                return ((bool)(this.results[0]));
+            }
+        }
+    }
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.7.2558.0")]
+    public delegate void Delete_ProdOrderLinesCompletedEventHandler(object sender, Delete_ProdOrderLinesCompletedEventArgs e);
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.7.2558.0")]
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.ComponentModel.DesignerCategoryAttribute("code")]
+    public partial class Delete_ProdOrderLinesCompletedEventArgs : System.ComponentModel.AsyncCompletedEventArgs {
+        
+        private object[] results;
+        
+        internal Delete_ProdOrderLinesCompletedEventArgs(object[] results, System.Exception exception, bool cancelled, object userState) : 
+                base(exception, cancelled, userState) {
+            this.results = results;
+        }
+        
+        /// <remarks/>
+        public bool Result {
+            get {
+                this.RaiseExceptionIfNecessary();
+                return ((bool)(this.results[0]));
             }
         }
     }

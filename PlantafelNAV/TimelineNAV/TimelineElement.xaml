@@ -14,7 +14,7 @@
                 </i:EventTrigger>
             </i:Interaction.Triggers>-->
             <Rectangle.InputBindings>
-                <MouseBinding Gesture="LeftDoubleClick"  Command="{Binding Main.DoIt}" CommandParameter="Error"/>
+                <MouseBinding Gesture="LeftDoubleClick"  Command="" CommandParameter="Error"/>
             </Rectangle.InputBindings>
         </Rectangle>
 

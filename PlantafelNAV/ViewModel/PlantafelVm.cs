@@ -12,6 +12,7 @@ using PlantafelNAV.ws_aufarbservice;
 using System.Windows;
 using PlantafelNAV.TimelineNAV;
 using PlantafelNAV.ViewModel.Helpers;
+using GalaSoft.MvvmLight.Messaging;
 
 namespace PlantafelNAV.ViewModel
 {
@@ -36,6 +37,7 @@ namespace PlantafelNAV.ViewModel
         #region Properties
 
         private string messageBoxEntry;
+        private string auftrNrDetailbox;
         private DateTime prod_date;
 
         public string MessageBoxEntry { get { return messageBoxEntry; } set { messageBoxEntry = value; RaisePropertyChanged(); } }
@@ -46,14 +48,18 @@ namespace PlantafelNAV.ViewModel
         public ObservableCollection<WS_Arbeitzplatz> Arbeitsplaetze { get => _arbeitsplaetze; set => _arbeitsplaetze = value; }
         public WS_Production Tmp_production { get => _tmp_production; set => _tmp_production = value; }
         public ObservableCollection<WS_Auf_Arb_Nav> Auftraegenav { get => _auftraegenav; set => _auftraegenav = value; }
+        public string AuftrNrDetailbox { get { return auftrNrDetailbox; } set { auftrNrDetailbox = value; RaisePropertyChanged();   } }
 
         public TMElement test = new TMElement();
+
+       
 
         #endregion
 
 
         public PlantafelVm()
         {
+            
             ws_productionservice.UseDefaultCredentials = true;
             ws_serviceap.UseDefaultCredentials = true;
             ws_auftragnavservice.UseDefaultCredentials = true;
@@ -64,11 +70,19 @@ namespace PlantafelNAV.ViewModel
 
         }
 
+      
+
         public void createTimeLine()
         {
 
 
 
+        }
+
+        //Auftragsdetailbox aktualisieren
+        public void createDetails(string auftragNr)
+        {
+            AuftrNrDetailbox = auftragNr;
         }
 
         //die komplette DLFZeit pro Arbeitsplatz
@@ -122,12 +136,50 @@ namespace PlantafelNAV.ViewModel
 
         }
 
+        //Aufträge in Tabelle mit Nav abgleichen
+        public void cleanProductions()
+        {
+            WS_Auf_Arb_Nav[] list = ws_auftragnavservice.ReadMultiple(null, null, 100);
+            foreach(WS_Auf_Arb_Nav x in list)
+            {
+                WS_Production[] list2 = ws_productionservice.ReadMultiple(null, null, 100);
+                int check = 0;
+                foreach (WS_Production y in list2)
+                {
+                    
+                    if (y.No == x.Auftragsnr) { check = 1; }
+                }
+                if(check == 0)
+                {
+                    ws_auftragnavservice.Delete(x.Key);
+                }
+            }
+        }
+
         //Auftrag in Nav aktualisieren
         public void doUpdateProdNav(string nr, DateTime date)
         {
-          //  WS_Production x = ws_productionservice.Read(nr);
+            WS_Production[] list = ws_productionservice.ReadMultiple(null, null, 100);
+            foreach(WS_Production x in list)
+            {
+                if(x.No == nr)
+                {
+                    WS_Production y = new WS_Production();
+                    y.Key = x.Key;
+                    y.Ending_Date = date;
+                    y.Ending_Time = date;
+                    y.Quantity = 3;
+                    ws_productionservice.Update(ref y);
+
+                    ws_productionservice.UpdateAsync(y);
+                 
+
+                    Debug.WriteLine(y.No + "  " + y.Ending_Date);
+                }
+
+            }
             
-           // ws_auftragnavservice.Update(ref x);
+           
         }
 
         //neuen Auftrag in Tabelle erstellem
@@ -177,7 +229,11 @@ namespace PlantafelNAV.ViewModel
         //da es nicht möglich ist ein datetime in die tabelle zu schreiben (grund auch nach intensiver suche unbekannt), wird jetzt die toStringFunktion benutzt, die jedoch wieder in datetimes umgewanfdelt werden müssen 
         public DateTime convertStringToDate(string date)
         {
-            return DateTime.Parse(date);
+            if (date != null)
+            {
+                return DateTime.Parse(date);
+            }
+            else { return new DateTime(); }
         }
 
         //überprüfen ob Auftrag schon in neuer Tabelle

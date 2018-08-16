@@ -1,4 +1,5 @@
-﻿using PlantafelNAV.TimelineNAV;
+﻿using GalaSoft.MvvmLight.Messaging;
+using PlantafelNAV.TimelineNAV;
 using PlantafelNAV.ViewModel.Helpers;
 using System;
 using System.Collections.Generic;
@@ -16,6 +17,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using PlantafelNAV.ws_aufarbservice;
 
 namespace PlantafelNAV.Views
 {
@@ -27,10 +29,10 @@ namespace PlantafelNAV.Views
     {
 
         //timelines erstellen
-        Timeline t1 = new Timeline(1000, 80);
-        Timeline t2 = new Timeline(1000, 80);
-        Timeline t3 = new Timeline(1000, 80);
-        Timeline t4 = new Timeline(1000, 80);
+        Timeline t1 = new Timeline(1000, 80, 1);
+        Timeline t2 = new Timeline(1000, 80, 2);
+        Timeline t3 = new Timeline(1000, 80, 3);
+        Timeline t4 = new Timeline(1000, 80, 4);
 
 
 
@@ -56,6 +58,8 @@ namespace PlantafelNAV.Views
             PlantafelNAV.ViewModel.PlantafelVm planVM = this.DataContext as PlantafelNAV.ViewModel.PlantafelVm;
             InitializeComponent();
 
+            //Messaging
+            Messenger.Default.Register<string[]>(this, updateDetailBox);
 
             //jetzt werden einmal die 4 timelines erzeugt
             t1.Setup(28800, 57600, 3600, 120);
@@ -72,12 +76,30 @@ namespace PlantafelNAV.Views
 
             //Eventhandler der die Timelines leert
             datePicker1.SelectedDateChanged += new EventHandler<SelectionChangedEventArgs>(reloadTimelines);
+            //Überprüfen ob es Aufträge in "unserer" Tabelle gibt, die nicht mehr in Navision vorhanden sind und diese dann löschen
+            planVM.cleanProductions();
 
             //TimelineEntrys erzeugen
             doTheTimelineStuff();
         }
 
-        
+        private void updateDetailBox(string[] info)
+        {
+            foreach (var x in t1.TElements1) { if (info[1] != "1") { x.rectOuter.Stroke = new SolidColorBrush(Color.FromRgb(0, 0, 0)); x.rectOuter.Opacity = 1; } }
+            foreach (var x in t2.TElements1) { if (info[1] != "2") { x.rectOuter.Stroke = new SolidColorBrush(Color.FromRgb(0, 0, 0)); x.rectOuter.Opacity = 1; } }
+            foreach(var x in t3.TElements1) { if (info[1] != "3") { x.rectOuter.Stroke = new SolidColorBrush(Color.FromRgb(0, 0, 0)); x.rectOuter.Opacity = 1; } }
+            foreach(var x in t4.TElements1) { if (info[1] != "4") { x.rectOuter.Stroke = new SolidColorBrush(Color.FromRgb(0, 0, 0)); x.rectOuter.Opacity = 1; }}
+            PlantafelNAV.ViewModel.PlantafelVm planVM = this.DataContext as PlantafelNAV.ViewModel.PlantafelVm;
+            
+            WS_Auf_Arb_Nav tmp = planVM.getSpecAuftrag(info[0]);
+            auftragnr.Content = tmp.Auftragsnr;
+            auftrag_beginn.Content = tmp.Start;
+            auftrag_ende.Content = tmp.Ende;
+            if(info[1] == "1") { zeit_von.Content = tmp.AP1_Startdatum; zeit_bis.Content = tmp.AP1_Enddatum;  }
+            else if (info[1] == "2") { zeit_von.Content = tmp.AP2_Startdatum; zeit_bis.Content = tmp.AP2_Enddatum; }
+            else if (info[1] == "3") { zeit_von.Content = tmp.AP3_Startdatum; zeit_bis.Content = tmp.AP3_Enddatum; }
+            else if (info[1] == "4") { zeit_von.Content = tmp.AP4_Startdatum; zeit_bis.Content = tmp.AP4_Enddatum; }
+        }
 
         private void reloadTimelines(object sender, SelectionChangedEventArgs e)
         {

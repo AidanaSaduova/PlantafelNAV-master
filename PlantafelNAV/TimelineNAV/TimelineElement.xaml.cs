@@ -4,6 +4,7 @@ using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
 using System.Windows.Media;
+using GalaSoft.MvvmLight.Messaging;
 using PlantafelNAV.ViewModel;
 
 namespace PlantafelNAV.TimelineNAV
@@ -50,8 +51,10 @@ namespace PlantafelNAV.TimelineNAV
         /// <param name="seconds">Position on the timeline in seconds</param>
         public TimelineElement(Timeline parent, int height, int seconds, int duration, string id)
         {
+            DataContext = new PlantafelNAV.ViewModel.PlantafelVm();
+            
             InitializeComponent();
-
+            
             rectOuter.Stroke = new SolidColorBrush(Color.FromRgb(0, 0, 0));
 
             CheckIfSelected = false;
@@ -107,7 +110,7 @@ namespace PlantafelNAV.TimelineNAV
         private void TimelineElement_MouseEnter(object sender, MouseEventArgs e)
         {
             // Respond visually
-            rectOuter.Opacity = 0.5;
+            //rectOuter.Opacity = 0.5;
 
             // Prime
             primed = true;
@@ -142,13 +145,14 @@ namespace PlantafelNAV.TimelineNAV
 
                 //als ausgewählt markieren
                 CheckIfSelected = true;
-
-                rectOuter.Stroke = new SolidColorBrush(Color.FromRgb(255, 140, 0));
+            
+                this.rectOuter.Stroke = new SolidColorBrush(Color.FromRgb(255, 140, 0)); this.rectOuter.Opacity = 0.6;
+                
                 //alle anderen als nicht ausgewählt markieren
-                foreach (TimelineElement x in parent.TElements1)
+                /*foreach (TimelineElement x in parent.TElements1)
                 {
                     if (x.Id != this.Id) { x.CheckIfSelected = false; x.rectOuter.Stroke = new SolidColorBrush(Color.FromRgb(0, 0, 0)); x.rectOuter.Opacity = 1; }
-                }
+                }*/
 
                 // Enter dragging
                 canvasLeft = Canvas.GetLeft(this);
@@ -186,6 +190,15 @@ namespace PlantafelNAV.TimelineNAV
         }
         private void Parent_MouseLeftButtonUp(object sender, MouseButtonEventArgs e)
         {
+            PlantafelNAV.ViewModel.PlantafelVm planVM = this.DataContext as PlantafelNAV.ViewModel.PlantafelVm;
+            planVM.createDetails(Id);
+
+            //detailbox füllen
+            string[] tmp = new string[2];
+            tmp[0] = Id; tmp[1] = parent.identify.ToString();
+            Messenger.Default.Send<string[], Views.Plantafel>(tmp);
+            
+
             // Respond visually
             if (CheckIfSelected == false)
             {

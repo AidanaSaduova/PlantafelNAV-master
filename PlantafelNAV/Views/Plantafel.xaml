@@ -6,7 +6,7 @@
              xmlns:local="clr-namespace:PlantafelNAV.Views"
              mc:Ignorable="d" 
              d:DesignHeight="1000" d:DesignWidth="1000" DataContext="{Binding Plantafel, Mode=OneWay, Source={StaticResource Locator}}" >
-    <!--DataContext="{Binding Source={StaticResource Locator}, Path=Plantafel}"> --> 
+    <!--DataContext="{Binding Source={StaticResource Locator}, Path=Plantafel}"> -->
     <Grid Background="White" DataContext="{Binding Plantafel, Mode=OneWay, Source={StaticResource Locator}}">
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="*"/>
@@ -46,7 +46,7 @@
             <DockPanel x:Name="host2" Margin="0,22,0,0" Grid.Column="0" Grid.Row="1"/>
             <DockPanel x:Name="host3" Margin="0,22,0,0" Grid.Column="0" Grid.Row="2"/>
             <DockPanel x:Name="host4" Margin="0,22,0,0" Grid.Column="0" Grid.Row="3"/>
- 
+
         </Grid>
         <Grid Grid.Row="1" Grid.Column="0">
             <Grid.ColumnDefinitions>
@@ -63,17 +63,17 @@
             <TextBox  Grid.Row="1" Height="30"  TextWrapping="Wrap" Text="CNC Drehmaschine" VerticalAlignment="Center" HorizontalAlignment="Center" Width="150" TextAlignment="Center" FontSize="14" FontWeight="Bold"/>
             <TextBox  Grid.Row="2" Height="30"  TextWrapping="Wrap" Text="Ausrichtestation" VerticalAlignment="Center" HorizontalAlignment="Center" Width="150" TextAlignment="Center" FontSize="14" FontWeight="Bold"/>
             <TextBox  Grid.Row="3" Height="30"  TextWrapping="Wrap" Text="Schwingungssensor" VerticalAlignment="Center" HorizontalAlignment="Center" Width="150" TextAlignment="Center" FontSize="14" FontWeight="Bold"/>
-            
+
 
 
         </Grid>
 
 
-        <Grid Grid.Row="2" Grid.Column="1">
+        <Grid Grid.Row="2" Grid.Column="1" DataContext="{Binding Source={StaticResource Locator}}" >
             <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="*"/>
-                <ColumnDefinition Width="*"/>
-                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="267*"/>
+                <ColumnDefinition Width="356*"/>
+                <ColumnDefinition Width="177*"/>
             </Grid.ColumnDefinitions>
             <Grid.RowDefinitions>
                 <RowDefinition Height="*"/>
@@ -85,15 +85,16 @@
 
 
             <!--AuftragNr-->
-            <StackPanel Orientation="Horizontal">
+            <StackPanel Orientation="Horizontal" >
                 <Label Content="AuftragsNr." FontWeight="Bold" VerticalAlignment="Center"/>
-                <Label VerticalAlignment="Center" FontWeight="Bold"/>
+                <Label x:Name="auftragnr" Content="" FontWeight="Bold" VerticalAlignment="Center" Foreground="#DDFF0000"  />
+
             </StackPanel>
 
             <!--AuftragBeginn-->
             <StackPanel Orientation="Horizontal" Grid.Row="1">
                 <Label Content="Auftrag Beginn" FontWeight="Bold" VerticalAlignment="Center"/>
-                <ComboBox VerticalAlignment="Center" Margin="5"/>
+                <Label x:Name="auftrag_beginn" Content="" FontWeight="Bold" VerticalAlignment="Center"  Foreground="#DDFF0000"  />
             </StackPanel>
 
 
@@ -101,14 +102,13 @@
             <!--Auftrag Dauer-->
             <StackPanel Orientation="Horizontal" Grid.Row="2">
                 <Label Content="Auftrag Dauer" FontWeight="Bold" VerticalAlignment="Center"/>
-                <ComboBox VerticalAlignment="Center" Margin="5"/>
-                <Label Content="Tage" FontWeight="Bold" VerticalAlignment="Center"/>
+                <Label x:Name="auftrag_ende" Content="" FontWeight="Bold" VerticalAlignment="Center" Foreground="#DDFF0000"  />
             </StackPanel>
 
             <!--Mitarbeiter-->
-            <StackPanel Orientation="Horizontal" Grid.Row="3">
+            <StackPanel Orientation="Horizontal" Grid.Row="2" Grid.Column="1">
                 <Label Content="Mitarbeiter" FontWeight="Bold" VerticalAlignment="Center"/>
-                <ComboBox VerticalAlignment="Center" Margin="5"/>
+                <ComboBox VerticalAlignment="Center" Margin="5" ItemsSource="{Binding Mitarbeiter.Mitarbeiter/FullName}"/>
             </StackPanel>
 
             <!--Status-->
@@ -118,16 +118,16 @@
             </StackPanel>
 
             <!--Mitarbeiter-->
-            <StackPanel Orientation="Horizontal" Grid.Row="3" Grid.Column="1">
+            <StackPanel Orientation="Horizontal" Grid.Row="1" Grid.Column="1">
                 <Label Content="Zeit von:" FontWeight="Bold" VerticalAlignment="Center"/>
-                <ComboBox VerticalAlignment="Center" Margin="5"/>
+                <Label x:Name="zeit_von" Content="" FontWeight="Bold" Foreground="#DDFF0000" VerticalAlignment="Center" />
                 <Label Content="Zeit bis:" FontWeight="Bold" VerticalAlignment="Center"/>
-                <ComboBox VerticalAlignment="Center" Margin="5"/>
+                <Label x:Name="zeit_bis" Content="" FontWeight="Bold" VerticalAlignment="Center" Foreground="#DDFF0000"  />
             </StackPanel>
 
         </Grid>
         <TextBox x:Name="msgbox" Grid.Column="1" HorizontalAlignment="Center" Height="30" Margin="74,30,0,0" TextWrapping="Wrap" Text="{Binding Plantafel.Instance.MessageBoxEntry}" VerticalAlignment="Top" Width="564" TextChanged="msgbox_TextChanged" FontWeight="Bold" Foreground="Red"/>
-        
+
 
     </Grid>
 </UserControl>
