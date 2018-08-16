@@ -19,15 +19,21 @@ namespace PlantafelNAV.ViewModel
     public class PlantafelVm : ViewModelBase
     {
 
+        #region Services
         WS_Production_Service ws_productionservice = new WS_Production_Service();
         WS_Arbeitzplatz_Service ws_serviceap = new WS_Arbeitzplatz_Service();
         WS_Auf_Arb_Nav_Service ws_auftragnavservice = new WS_Auf_Arb_Nav_Service();
+        #endregion
 
+        #region Collections
         ObservableCollection<WS_Production> _production = new ObservableCollection<WS_Production>();
         ObservableCollection<WS_Arbeitzplatz> _arbeitsplaetze = new ObservableCollection<WS_Arbeitzplatz>();
         ObservableCollection<WS_Auf_Arb_Nav> _auftraegenav = new ObservableCollection<WS_Auf_Arb_Nav>();
+        #endregion
 
         WS_Production _tmp_production;
+
+        #region Properties
 
         private string messageBoxEntry;
         private DateTime prod_date;
@@ -43,7 +49,7 @@ namespace PlantafelNAV.ViewModel
 
         public TMElement test = new TMElement();
 
-
+        #endregion
 
 
         public PlantafelVm()
