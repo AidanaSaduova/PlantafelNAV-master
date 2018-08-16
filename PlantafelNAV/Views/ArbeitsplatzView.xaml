@@ -6,28 +6,30 @@
              xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
              xmlns:local="clr-namespace:PlantafelNAV.Views"
              mc:Ignorable="d" 
-             d:DesignHeight="1000" d:DesignWidth="1000"
+             d:DesignHeight="1000" d:DesignWidth="1000" Background="White"
             DataContext="{Binding Source={StaticResource Locator}, Path=Arbeitsplatz}">
     <Grid>
         <Grid.RowDefinitions>
-            <RowDefinition Height="50"/>
-            <RowDefinition Height="450"/>
-            <!--<RowDefinition Height="50"/>-->
             <RowDefinition Height="*"/>
+            <RowDefinition Height="10*"/>
+            <!--<RowDefinition Height="50"/>-->
+            <RowDefinition Height="10*"/>
         </Grid.RowDefinitions>
 
         <!--Label-->
         <Label Content="Arbeitsplatz"  FontSize="15" FontWeight="Bold" VerticalAlignment="Center"/>
 
         <!--Arbeitsplaetze List mit info-->
-        <ListView Grid.Row="1" Margin="15,10,12,0" ItemsSource="{Binding Mitarbeiter}" SelectedItem="{Binding SelUser}">
+        <ListView Grid.Row="1" Margin="15,10,12,0" ItemsSource="{Binding Arbeitsplaetze}" SelectedItem="{Binding Selitem}">
             <ListView.View>
                 <GridView>
-                    <GridViewColumn Header="Nr" Width="150"/>
-                    <GridViewColumn Header="Name" Width="150"/>
-                    <GridViewColumn Header="Name" Width="150"/>
-                    <GridViewColumn Header="Beginn" Width="150"/>
-                    <GridViewColumn Header="Ende" Width="150"/>
+                    <GridViewColumn Header="Nr" Width="150" DisplayMemberBinding="{Binding No}"/>
+                    <GridViewColumn Header="Name" Width="150" DisplayMemberBinding="{Binding Description}"/>
+                    <GridViewColumn Header="Rüstzeit" Width="150" DisplayMemberBinding="{Binding Setup_Time}"/>
+                    <GridViewColumn Header="Bearbeitungszeit" Width="150" DisplayMemberBinding="{Binding Run_Time}"/>
+                    <GridViewColumn Header="Transportzeit" Width="150" DisplayMemberBinding="{Binding Move_Time}"/>
+                    <GridViewColumn Header="Wartezeit" Width="150" DisplayMemberBinding="{Binding Wait_Time}"/>
+                  
                     
                 </GridView>
             </ListView.View>
@@ -36,7 +38,7 @@
         <!--===========Edit Arbeitsplatz===========-->
         <Grid Grid.Row="2">
             <Grid.RowDefinitions>
-                <RowDefinition/>
+               
                 <RowDefinition/>
                 <RowDefinition/>
                 <RowDefinition/>
@@ -50,30 +52,28 @@
             </Grid.ColumnDefinitions>
 
             <!--Kapazität-->
-            <Label Content="Kapazität" Grid.Row="0" FontSize="15" FontWeight="Bold" VerticalAlignment="Center" HorizontalAlignment="Center"/>
-            <TextBox Grid.Column="1" VerticalAlignment="Center" Margin="10"/>
-            
+
             <!--Effektivität-->
-            <Label Content="Effektivität" Grid.Row="1" FontSize="15" FontWeight="Bold" VerticalAlignment="Center" HorizontalAlignment="Center"/>
-            <TextBox Grid.Column="1" Grid.Row="1" VerticalAlignment="Center" Margin="10"/>
+            <Label Content="Bearbeitungszeit" Grid.Row="0" FontSize="15" FontWeight="Bold" VerticalAlignment="Center" HorizontalAlignment="Center"/>
+            <TextBox Grid.Column="1" Grid.Row="0" VerticalAlignment="Center" Margin="10" Text="{Binding Selitem.Run_Time}"/>
             
             <!--Rüstzeit-->
-            <Label Content="Rüstzeit" Grid.Row="2" FontSize="15" FontWeight="Bold" VerticalAlignment="Center" HorizontalAlignment="Center"/>
-            <TextBox Grid.Column="1" Grid.Row="2" VerticalAlignment="Center" Margin="10"/>
+            <Label Content="Rüstzeit" Grid.Row="1" FontSize="15" FontWeight="Bold" VerticalAlignment="Center" HorizontalAlignment="Center"/>
+            <TextBox Grid.Column="1" Grid.Row="1" VerticalAlignment="Center" Margin="10" Text="{Binding Selitem.Setup_Time}"/>
 
             <!--Wartezeit-->
-            <Label Content="Wartezeit" Grid.Row="3" FontSize="15" FontWeight="Bold" VerticalAlignment="Center" HorizontalAlignment="Center"/>
-            <TextBox Grid.Column="1" Grid.Row="3" VerticalAlignment="Center" Margin="10"/>
+            <Label Content="Wartezeit" Grid.Row="2" FontSize="15" FontWeight="Bold" VerticalAlignment="Center" HorizontalAlignment="Center"/>
+            <TextBox Grid.Column="1" Grid.Row="2" VerticalAlignment="Center" Margin="10" Text="{Binding Selitem.Wait_Time}"/>
 
             <!--Transportzeit-->
-            <Label Content="Transportzeit" Grid.Row="4" FontSize="15" FontWeight="Bold" VerticalAlignment="Center" HorizontalAlignment="Center"/>
-            <TextBox Grid.Column="1" Grid.Row="4" VerticalAlignment="Center" Margin="10"/>
+            <Label Content="Transportzeit" Grid.Row="3" FontSize="15" FontWeight="Bold" VerticalAlignment="Center" HorizontalAlignment="Center"/>
+            <TextBox Grid.Column="1" Grid.Row="3" VerticalAlignment="Center" Margin="10" Text="{Binding Selitem.Move_Time}"/>
 
             <!--Button save-->
-            <Button Grid.Column="2" Grid.Row="5" Width="200" Margin="5" Foreground="White"  HorizontalAlignment="Center">
+            <Button Grid.Column="2" Grid.Row="5" Width="200" Margin="5" Foreground="White"  HorizontalAlignment="Center" Command="{Binding DoUpdate}">
                 <Grid Width="110">
                     <materialDesign:PackIcon Kind="ContentSave" VerticalAlignment="Center"/>
-                    <TextBlock Text="Speichern" HorizontalAlignment="Center"/>
+                    <TextBlock Text="Update" HorizontalAlignment="Center"/>
                 </Grid>
             </Button>
         </Grid>

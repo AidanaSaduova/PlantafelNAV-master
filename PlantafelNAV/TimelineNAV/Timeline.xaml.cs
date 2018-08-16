@@ -57,6 +57,13 @@ namespace PlantafelNAV.TimelineNAV
             te.savePositions();
         }
 
+        public void clearCanvas()
+        {
+            foreach (TimelineElement x in TElements) {
+                mainCanvas.Children.Remove(x);
+                    }
+        }
+
         /// <summary>
         /// Called by a TimelineElement once it has finished being dragged to a new location
         /// </summary>
@@ -142,7 +149,8 @@ namespace PlantafelNAV.TimelineNAV
         public void changeTextInInfobox(string text, string id)
         {
             if (id == "#") { Infobox.Text = text; }
-            else { Infobox.Text = text + " (" + id + ")"; }
+            else { Infobox.Text = text + " (" + id + ")";
+                }
 
         }
 
@@ -158,5 +166,7 @@ namespace PlantafelNAV.TimelineNAV
             string x = hours + ":" + minutes;
             return x;
         }
+
+ 
     }
 }

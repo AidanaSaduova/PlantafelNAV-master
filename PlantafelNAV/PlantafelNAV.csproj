@@ -91,6 +91,7 @@
     <Compile Include="ViewModel\Helpers\Auftrag.cs" />
     <Compile Include="ViewModel\Helpers\Maschine.cs" />
     <Compile Include="ViewModel\Helpers\Mitarbeiter.cs" />
+    <Compile Include="ViewModel\Helpers\TMElement.cs" />
     <Compile Include="ViewModel\MainViewModel.cs" />
     <Compile Include="ViewModel\MitarbeiterVm.cs" />
     <Compile Include="ViewModel\PlantafelVm.cs" />
@@ -103,6 +104,16 @@
     </Compile>
     <Compile Include="Views\Plantafel.xaml.cs">
       <DependentUpon>Plantafel.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Web References\ws_arbeitsplatzservice\Reference.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Reference.map</DependentUpon>
+    </Compile>
+    <Compile Include="Web References\ws_aufarbservice\Reference.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Reference.map</DependentUpon>
     </Compile>
     <Compile Include="Web References\ws_mitarbeiterservice\Reference.cs">
       <AutoGen>True</AutoGen>
@@ -174,6 +185,22 @@
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
     </None>
+    <None Include="Web References\ws_arbeitsplatzservice\Reference.map">
+      <Generator>MSDiscoCodeGenerator</Generator>
+      <LastGenOutput>Reference.cs</LastGenOutput>
+    </None>
+    <None Include="Web References\ws_arbeitsplatzservice\WS_Arbeitzplatz.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </None>
+    <None Include="Web References\ws_arbeitsplatzservice\WS_Arbeitzplatz.wsdl" />
+    <None Include="Web References\ws_aufarbservice\Reference.map">
+      <Generator>MSDiscoCodeGenerator</Generator>
+      <LastGenOutput>Reference.cs</LastGenOutput>
+    </None>
+    <None Include="Web References\ws_aufarbservice\WS_Auf_Arb_Nav.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </None>
+    <None Include="Web References\ws_aufarbservice\WS_Auf_Arb_Nav.wsdl" />
     <None Include="Web References\ws_mitarbeiterservice\Reference.map">
       <Generator>MSDiscoCodeGenerator</Generator>
       <LastGenOutput>Reference.cs</LastGenOutput>
@@ -201,6 +228,28 @@
     <WebReferences Include="Web References\" />
   </ItemGroup>
   <ItemGroup>
+    <WebReferenceUrl Include="http://win-nav16:7047/DynamicsNAV90/WS/Carpart%2520GmbH/Page/WS_Arbeitzplatz">
+      <UrlBehavior>Dynamic</UrlBehavior>
+      <RelPath>Web References\ws_arbeitsplatzservice\</RelPath>
+      <UpdateFromURL>http://win-nav16:7047/DynamicsNAV90/WS/Carpart%2520GmbH/Page/WS_Arbeitzplatz</UpdateFromURL>
+      <ServiceLocationURL>
+      </ServiceLocationURL>
+      <CachedDynamicPropName>
+      </CachedDynamicPropName>
+      <CachedAppSettingsObjectName>Settings</CachedAppSettingsObjectName>
+      <CachedSettingsPropName>PlantafelNAV_ws_arbeitsplatzservice_WS_Arbeitzplatz_Service</CachedSettingsPropName>
+    </WebReferenceUrl>
+    <WebReferenceUrl Include="http://win-nav16:7047/DynamicsNAV90/WS/Carpart%2520GmbH/Page/WS_Auf_Arb_Nav">
+      <UrlBehavior>Dynamic</UrlBehavior>
+      <RelPath>Web References\ws_aufarbservice\</RelPath>
+      <UpdateFromURL>http://win-nav16:7047/DynamicsNAV90/WS/Carpart%2520GmbH/Page/WS_Auf_Arb_Nav</UpdateFromURL>
+      <ServiceLocationURL>
+      </ServiceLocationURL>
+      <CachedDynamicPropName>
+      </CachedDynamicPropName>
+      <CachedAppSettingsObjectName>Settings</CachedAppSettingsObjectName>
+      <CachedSettingsPropName>PlantafelNAV_ws_aufarbservice_WS_Auf_Arb_Nav_Service</CachedSettingsPropName>
+    </WebReferenceUrl>
     <WebReferenceUrl Include="http://win-nav16:7047/DynamicsNAV90/WS/Carpart%2520GmbH/Page/ws_mitarbeiter">
       <UrlBehavior>Dynamic</UrlBehavior>
       <RelPath>Web References\ws_mitarbeiterservice\</RelPath>

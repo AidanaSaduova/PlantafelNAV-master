@@ -42,5 +42,25 @@ namespace PlantafelNAV.Properties {
                 return ((string)(this["PlantafelNAV_ws_production_service_2_WS_Production_Service"]));
             }
         }
+        
+        [global::System.Configuration.ApplicationScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.SpecialSettingAttribute(global::System.Configuration.SpecialSetting.WebServiceUrl)]
+        [global::System.Configuration.DefaultSettingValueAttribute("http://win-nav16:7047/DynamicsNAV90/WS/Carpart%20GmbH/Page/WS_Arbeitzplatz")]
+        public string PlantafelNAV_ws_arbeitsplatzservice_WS_Arbeitzplatz_Service {
+            get {
+                return ((string)(this["PlantafelNAV_ws_arbeitsplatzservice_WS_Arbeitzplatz_Service"]));
+            }
+        }
+        
+        [global::System.Configuration.ApplicationScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.SpecialSettingAttribute(global::System.Configuration.SpecialSetting.WebServiceUrl)]
+        [global::System.Configuration.DefaultSettingValueAttribute("http://win-nav16:7047/DynamicsNAV90/WS/Carpart%20GmbH/Page/WS_Auf_Arb_Nav")]
+        public string PlantafelNAV_ws_aufarbservice_WS_Auf_Arb_Nav_Service {
+            get {
+                return ((string)(this["PlantafelNAV_ws_aufarbservice_WS_Auf_Arb_Nav_Service"]));
+            }
+        }
     }
 }

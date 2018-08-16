@@ -5,14 +5,15 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              UseLayoutRounding="True"
              SnapsToDevicePixels="True"
-             mc:Ignorable="d" >
-    <Border x:Name="border" BorderBrush="#FF001263" Background="#FFD4D4D4" BorderThickness="1" Height="57" Width="600">
+             mc:Ignorable="d" DataContext="{Binding Plantafel, Mode=OneWay, Source={StaticResource Locator}}" >
+    <Border x:Name="border" BorderBrush="#FF001263" Background="#FFD4D4D4" BorderThickness="1" Height="57" Width="600" DataContext="{Binding Source={StaticResource Locator}}">
         <!--<ScrollViewer HorizontalScrollBarVisibility="Visible" VerticalScrollBarVisibility="Hidden">-->
         <Canvas x:Name="mainCanvas" Margin="2,2,2,-1">
 
 
-           
-            <TextBlock Height="12" x:Name="Infobox" TextWrapping="Wrap" Text="TextBox" Canvas.Top="60" Width="594" FontWeight="Bold" TextAlignment="Center" FontSize="8"/>
+
+            <TextBlock Height="12" x:Name="Infobox" TextWrapping="Wrap" Text="" Canvas.Top="60" Width="594" FontWeight="Bold" TextAlignment="Center" FontSize="8"/>
+
         </Canvas>
 
         <!--  </ScrollViewer>-->
