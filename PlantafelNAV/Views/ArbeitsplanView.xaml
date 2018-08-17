@@ -19,7 +19,7 @@
             <RowDefinition Height="4*"/>
         </Grid.RowDefinitions>
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="5*"/>
+            <ColumnDefinition Width="4*"/>
             <ColumnDefinition Width="*"/>
             <ColumnDefinition Width="3*"/>
             <ColumnDefinition Width="3*"/>
@@ -32,10 +32,10 @@
         <!--Arbeitsplätze-->
         <Label Content="Bezeichnung" Grid.Row="1" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="15" FontWeight="Bold"  Margin="10" />
 
-        <Label Content="Schmelzofen" Grid.Row="2" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="20" Height="50" Margin="0,70,10,71"  FontWeight="Bold" />
-        <Label Content="CNC Drehmaschine" Grid.Row="3" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="20" Height="50" Margin="0,69,0,71"  FontWeight="Bold" />
-        <Label Content="Ausrichtestation" Grid.Row="4" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="20" Height="50" Margin="10,74,0,67"  FontWeight="Bold"  />
-        <Label Content="Schwingungssensor" Grid.Row="5" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="20" Height="50" Margin="10,70,0,70"  FontWeight="Bold" />
+        <Label Content="Schmelzofen" Grid.Row="2" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="15" Height="50" Margin="10"  FontWeight="Bold" />
+        <Label Content="CNC Drehmaschine" Grid.Row="3" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="15" Height="50" Margin="10"  FontWeight="Bold" />
+        <Label Content="Ausrichtestation" Grid.Row="4" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="15" Height="50" Margin="10"  FontWeight="Bold"  />
+        <Label Content="Schwingungssensor" Grid.Row="5" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="15" Height="50" Margin="10"  FontWeight="Bold" />
 
         <!--Kapazitäten anzeigen-->
         <Label Content="Kapazität" Grid.Row="1" Grid.Column="1" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="20" FontWeight="Bold" Height="64" Margin="26,40,26,39" />
@@ -57,26 +57,26 @@
         <!--Buttons Zuweisen & Löschen-->
         <!--Schmelzofen Buttons-->
         <StackPanel Grid.Column="3" Grid.Row="2">
-            <Button Margin="20" Content="Zuweisen" />
-            <Button Margin="20" Content="Löschen" />
+            <Button Margin="30" Content="Zuweisen" />
+            <Button Margin="30" Content="Löschen" />
         </StackPanel>
 
         <!--Cnc Drehmaschine Buttons-->
         <StackPanel Grid.Column="3" Grid.Row="3">
-            <Button Margin="20" Content="Zuweisen" />
-            <Button Margin="20" Content="Löschen" />
+            <Button Margin="30" Content="Zuweisen" />
+            <Button Margin="30" Content="Löschen" />
         </StackPanel>
 
         <!--Ausrichtestation Buttons-->
         <StackPanel Grid.Column="3" Grid.Row="4">
-            <Button Margin="20" Content="Zuweisen" />
-            <Button Margin="20" Content="Löschen" />
+            <Button Margin="30" Content="Zuweisen" />
+            <Button Margin="30" Content="Löschen" />
         </StackPanel>
 
         <!--Schwingungssensor Buttons-->
         <StackPanel Grid.Column="3" Grid.Row="5">
-            <Button Margin="20" Content="Zuweisen" />
-            <Button Margin="20" Content="Löschen" />
+            <Button Margin="30" Content="Zuweisen" />
+            <Button Margin="30" Content="Löschen" />
         </StackPanel>
 
         <!--Kalender Tag Auswahl-->
