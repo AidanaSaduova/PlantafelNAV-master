@@ -15,6 +15,7 @@ using PlantafelNAV.TimelineNAV;
 using PlantafelNAV.ViewModel.Helpers;
 using PlantafelNAV.ws_mbplantafel_service;
 using GalaSoft.MvvmLight.Messaging;
+using GalaSoft.MvvmLight.CommandWpf;
 
 namespace PlantafelNAV.ViewModel
 {
@@ -54,9 +55,11 @@ namespace PlantafelNAV.ViewModel
         public ObservableCollection<WS_Auf_Arb_Nav> Auftraegenav { get => _auftraegenav; set => _auftraegenav = value; }
         public string AuftrNrDetailbox { get { return auftrNrDetailbox; } set { auftrNrDetailbox = value; RaisePropertyChanged();   } }
 
+        public RelayCommand<string> Pre_next { get => pre_next; set => pre_next = value; }
+
         public TMElement test = new TMElement();
 
-       
+        RelayCommand<string> pre_next;
 
         #endregion
 
@@ -73,10 +76,27 @@ namespace PlantafelNAV.ViewModel
            Prod_date = DateTime.Now;
             loadProduction();
             loadArbeitsplatz();
-
+            Pre_next = new RelayCommand<string>((s) => pre_nextMeth(s));
         }
 
-       
+        private void pre_nextMeth(string s)
+        {
+            Char delimiter = '@';
+            String[] substrings = s.Split(delimiter);
+            string Anr = substrings[0];
+            string ap = substrings[1];
+            string com = substrings[2];
+            string startzeit = "08:00";
+            
+            if(com == "n")
+            {
+                neuberechnungAuftrag(Anr, startzeit, int.Parse(ap), 1);
+            }
+            else
+            {
+                neuberechnungAuftrag(Anr, startzeit, int.Parse(ap), 2);
+            }
+        }
 
         public void createTimeLine()
         {
@@ -279,16 +299,24 @@ namespace PlantafelNAV.ViewModel
             }
         }
 
-        public void neuberechnungAuftrag(string auftrgnr, string startzeit, int ap)
+        public void neuberechnungAuftrag(string auftrgnr, string startzeit, int ap, int pre_next)
         {
             WS_Auf_Arb_Nav x = getSpecAuftrag(auftrgnr);
 
-            DateTime datum = DateTime.Parse(x.AP1_Startdatum);
+            DateTime datum = new DateTime();
+            if (ap == 1) { datum = DateTime.Parse(x.AP1_Startdatum); }
+            else if (ap == 2) { datum = DateTime.Parse(x.AP2_Startdatum); }
+            else if (ap == 3) { datum = DateTime.Parse(x.AP3_Startdatum); }
+            else if (ap == 4) { datum = DateTime.Parse(x.AP4_Startdatum); }
+
 
             DateTime start = DateTime.ParseExact(startzeit, "H:mm", null, System.Globalization.DateTimeStyles.None);
             //bei start noch das datum richtigstellen
             start = new DateTime(datum.Year, datum.Month, datum.Day, start.Hour, start.Minute, start.Millisecond);
-            Debug.WriteLine("Betdatum: " + start);
+            
+            if(pre_next == 1) { start = start.AddDays(1); }
+            if (pre_next == 2) { start = start.AddDays(-1); }
+
             decimal quantity = returnQuantity(auftrgnr);
 
             //dlfz für jeden schritt
@@ -369,17 +397,17 @@ namespace PlantafelNAV.ViewModel
             if(ap == 2)
             {
                 //Überprüfen ob sich der zweite noch ausgeht//
-                tmp = DateTime.Parse(x.AP1_Enddatum).AddMinutes((double)ApDLFZ2);
-                tmp1 = new DateTime(datum.Year, datum.Month, datum.Day, 16, 00, 00);
+                tmp = start.AddMinutes((double)ApDLFZ2);
+                tmp1 = new DateTime(start.Year, start.Month, start.Day, 16, 00, 00);
                 //geht sich noch an diesem Tag aus?
                 if (tmp.CompareTo(tmp1) != 1)
                 {
-                    ApStart2 = DateTime.Parse(x.AP1_Enddatum);
+                    ApStart2 = start;
                     ApEnd2 = ApStart2.AddMinutes((double)ApDLFZ2);
                 }
                 else
                 {
-                    DateTime nextDay = new DateTime(DateTime.Parse(x.AP1_Enddatum).Year, DateTime.Parse(x.AP1_Enddatum).Month, DateTime.Parse(x.AP1_Enddatum).Day, 08, 00, 00);
+                    DateTime nextDay = new DateTime(start.Year, start.Month, start.Day, 08, 00, 00);
                     nextDay = nextDay.AddDays(1);
                     ApStart2 = nextDay;
                     ApEnd2 = nextDay.AddMinutes((double)ApDLFZ2);
@@ -416,23 +444,24 @@ namespace PlantafelNAV.ViewModel
                     ApStart4 = nextDay;
                     ApEnd4 = nextDay.AddMinutes((double)ApDLFZ4);
                 }
+                Debug.WriteLine("NR: " + auftrgnr + " S1: " + DateTime.Parse(x.AP1_Startdatum) + " E1: " + DateTime.Parse(x.AP1_Enddatum) + " S2: " + ApStart2 + " E2: " + ApEnd2 + " S3: " + ApStart3 + " E3: " + ApEnd3 + " S4: " + ApStart4 + " E4: " + ApEnd4);
                 updateAuftrag(auftrgnr, DateTime.Parse(x.AP1_Startdatum), ApStart2, ApStart3, ApStart4, DateTime.Parse(x.AP1_Enddatum), ApEnd2, ApEnd3, ApEnd4);
             }
             if(ap == 3)
             {
                 
                 //Überprüfen ob sich der dritte noch ausgeht//
-                tmp = DateTime.Parse(x.AP2_Enddatum).AddMinutes((double)ApDLFZ3);
-                tmp1 = new DateTime(DateTime.Parse(x.AP2_Enddatum).Year, DateTime.Parse(x.AP2_Enddatum).Month, DateTime.Parse(x.AP2_Enddatum).Day, 16, 00, 00);
+                tmp = start.AddMinutes((double)ApDLFZ3);
+                tmp1 = new DateTime(start.Year, start.Month, start.Day, 16, 00, 00);
                 //geht sich noch an diesem Tag aus?
                 if (tmp.CompareTo(tmp1) != 1)
                 {
-                    ApStart3 = DateTime.Parse(x.AP2_Enddatum);
+                    ApStart3 = start;
                     ApEnd3 = ApStart3.AddMinutes((double)ApDLFZ3);
                 }
                 else
                 {
-                    DateTime nextDay = new DateTime(DateTime.Parse(x.AP2_Enddatum).Year, DateTime.Parse(x.AP2_Enddatum).Month, DateTime.Parse(x.AP2_Enddatum).Day, 08, 00, 00);
+                    DateTime nextDay = new DateTime(start.Year, start.Month, start.Day, 08, 00, 00);
                     nextDay = nextDay.AddDays(1);
                     ApStart3 = nextDay;
                     ApEnd3 = nextDay.AddMinutes((double)ApDLFZ3);
@@ -458,25 +487,26 @@ namespace PlantafelNAV.ViewModel
             if(ap == 4)
             {
                 //Überprüfen ob sich der vierte noch ausgeht//
-                tmp = DateTime.Parse(x.AP3_Enddatum).AddMinutes((double)ApDLFZ4);
-                tmp1 = new DateTime(DateTime.Parse(x.AP3_Enddatum).Year, DateTime.Parse(x.AP3_Enddatum).Month, DateTime.Parse(x.AP3_Enddatum).Day, 16, 00, 00);
+                tmp = start.AddMinutes((double)ApDLFZ4);
+                tmp1 = new DateTime(start.Year, start.Month, start.Day, 16, 00, 00);
                 //geht sich noch an diesem Tag aus?
                 if (tmp.CompareTo(tmp1) != 1)
                 {
-                    ApStart4 = DateTime.Parse(x.AP3_Enddatum);
+                    ApStart4 = start;
                     ApEnd4 = ApStart4.AddMinutes((double)ApDLFZ4);
                 }
                 else
                 {
-                    DateTime nextDay = new DateTime(DateTime.Parse(x.AP3_Enddatum).Year, DateTime.Parse(x.AP3_Enddatum).Month, DateTime.Parse(x.AP3_Enddatum).Day, 08, 00, 00);
+                    DateTime nextDay = new DateTime(start.Year, start.Month, start.Day, 08, 00, 00);
                     nextDay = nextDay.AddDays(1);
                     ApStart4 = nextDay;
                     ApEnd4 = nextDay.AddMinutes((double)ApDLFZ4);
                 }
-                updateAuftrag(auftrgnr, DateTime.Parse(x.AP1_Startdatum), DateTime.Parse(x.AP2_Startdatum), DateTime.Parse(x.AP4_Startdatum), ApStart4, DateTime.Parse(x.AP1_Enddatum), DateTime.Parse(x.AP2_Enddatum), DateTime.Parse(x.AP3_Enddatum), ApEnd4);
+                updateAuftrag(auftrgnr, DateTime.Parse(x.AP1_Startdatum), DateTime.Parse(x.AP2_Startdatum), DateTime.Parse(x.AP3_Startdatum), ApStart4, DateTime.Parse(x.AP1_Enddatum), DateTime.Parse(x.AP2_Enddatum), DateTime.Parse(x.AP3_Enddatum), ApEnd4);
             }
-            
 
+            string[] info = new string[2] { "doTheTimelineStuff", "" };
+            Messenger.Default.Send<string[], Views.Plantafel>(info);
             //Debug.WriteLine("NR: " + auftrgnr + " S1: " + ApStart1 + " E1: " + ApEnd1 + " S2: " + ApStart2 + " E2: " + ApEnd2 + " S3: " + ApStart3 + " E3: " + ApEnd3 + " S4: " + ApStart4 + " E4: " + ApEnd4);
         }
 

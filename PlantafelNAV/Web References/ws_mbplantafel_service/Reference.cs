@@ -453,9 +453,7 @@ namespace PlantafelNAV.ws_mbplantafel_service {
         
         private string nachnameField;
         
-        private int arbeitsplatzField;
-        
-        private bool arbeitsplatzFieldSpecified;
+        private string arbeitsplatzField;
         
         private string datumField;
         
@@ -500,23 +498,12 @@ namespace PlantafelNAV.ws_mbplantafel_service {
         }
         
         /// <remarks/>
-        public int Arbeitsplatz {
+        public string Arbeitsplatz {
             get {
                 return this.arbeitsplatzField;
             }
             set {
                 this.arbeitsplatzField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlIgnoreAttribute()]
-        public bool ArbeitsplatzSpecified {
-            get {
-                return this.arbeitsplatzFieldSpecified;
-            }
-            set {
-                this.arbeitsplatzFieldSpecified = value;
             }
         }
         

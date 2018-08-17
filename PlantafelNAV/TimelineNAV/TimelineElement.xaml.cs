@@ -32,6 +32,7 @@ namespace PlantafelNAV.TimelineNAV
         double _endposition;
         int _ap;
         bool wasMoved;
+        string unique;
 
 
 
@@ -46,6 +47,7 @@ namespace PlantafelNAV.TimelineNAV
         public double Originendposition { get => _originendposition; set => _originendposition = value; }
         public double DistanceRight { get => _distanceRight; set => _distanceRight = value; }
         public int Ap { get => _ap; set => _ap = value; }
+        public string Unique { get => unique; set => unique = value; }
 
         /// <summary>
         /// Creates the visual TimelineElement
@@ -60,15 +62,20 @@ namespace PlantafelNAV.TimelineNAV
             
             rectOuter.Stroke = new SolidColorBrush(Color.FromRgb(0, 0, 0));
             wasMoved = false;
+            //in welcher TL befindet sich das Element
             Ap = ap;
             CheckIfSelected = false;
             Duration = duration;
             this.seconds = seconds;
             this.parent = parent;
+            //auftragsnummer
             Id = id;
             rectOuter.Height = height;
             //die Dauer in Pixel umrechnen; 1000 (- 37 ... Breite von TLMark) Pixel = 8 Stunden
             PixProSec = 963.0 / (8 * 60 * 60.0);
+            //eindeutige identifizierung
+            unique = id + "@" + ap;
+       
 
             ElementWidth = PixProSec * Duration;
             rectOuter.Width = ElementWidth;
@@ -83,7 +90,16 @@ namespace PlantafelNAV.TimelineNAV
             this.MouseLeave += TimelineElement_MouseLeave;
             this.MouseLeftButtonDown += TimelineElement_MouseLeftButtonDown;
 
-
+            //unique zu button hinzufügen
+            if (ap == 1)
+            {
+                btnBack.CommandParameter = unique + "@b";
+            }
+            else
+            {
+                btnBack.IsEnabled = false;
+            }
+            btnNext.CommandParameter = unique + "@n";
         }
 
         // Creates tooltip from seconds value
@@ -256,8 +272,8 @@ namespace PlantafelNAV.TimelineNAV
             if (wasMoved == true)
             {
                 //Neuberechnung für alle Elemente dieses Auftrags durchführen, wenn Element bewegt wurde
-                string curPosAsTime = parent.getTimeFromSeconds((int)((Canvas.GetLeft(this) + 2) / PixProSec) + 8 * 60 * 60);
-                planVM.neuberechnungAuftrag(Id, curPosAsTime, Ap);
+                string curPosAsTime = parent.getTimeFromSeconds((int)((Canvas.GetLeft(this) + 2) / PixProSec) + 8 * 60 * 60 + 60);
+                planVM.neuberechnungAuftrag(Id, curPosAsTime, Ap, 0);
                 //dothetimelinestuff in der Plantafel.xaml.cs -> mittel messenger
                 string[] info = new string[2] { "doTheTimelineStuff", "" };
                 Messenger.Default.Send<string[], Views.Plantafel>(info);
@@ -289,6 +305,5 @@ namespace PlantafelNAV.TimelineNAV
         }
 
 
-       
     }
 }

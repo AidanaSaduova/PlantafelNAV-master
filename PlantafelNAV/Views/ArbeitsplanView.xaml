@@ -47,47 +47,79 @@
         <!--Mitarbeiter Dropdowns-->
         <Label Content="Mitarbeiter Auswahl" Grid.Row="1" Grid.Column="2" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="15" FontWeight="Bold"  Margin="10" />
 
-        <ComboBox Grid.Row="2" Grid.Column="2" Margin="20" Height="28"/>
-        <ComboBox Grid.Row="3" Grid.Column="2" Margin="20" Height="28"/>
-        <ComboBox Grid.Row="4" Grid.Column="2" Margin="20" Height="28"/>
-        <ComboBox Grid.Row="5" Grid.Column="2" Margin="20" Height="28"/>
-        <ComboBox Grid.Row="5" Grid.Column="2" Margin="20" Height="28"/>
+        <ComboBox Grid.Row="2" Grid.Column="2" Margin="20" Height="28" ItemsSource="{Binding ColAp1}" SelectedItem="{Binding SelItem2, Mode=TwoWay}"  SelectedIndex="0"    >
+            <ComboBox.ItemTemplate>
+                <DataTemplate>
+                    <StackPanel Orientation="Horizontal">
+                        <TextBlock Text="{Binding Nachname}" />
+                    </StackPanel>
+                </DataTemplate>
+            </ComboBox.ItemTemplate>
+        </ComboBox>
+        <ComboBox Grid.Row="3" Grid.Column="2" Margin="20" Height="28" ItemsSource="{Binding ColAp2}" IsSynchronizedWithCurrentItem="True" SelectedIndex="0" SelectedItem="{Binding SelItem3}">
+            <ComboBox.ItemTemplate>
+                <DataTemplate>
+                    <StackPanel Orientation="Horizontal">
+                        <TextBlock Text="{Binding Nachname}" />
+                    </StackPanel>
+                </DataTemplate>
+            </ComboBox.ItemTemplate>
+        </ComboBox>
+        <ComboBox Grid.Row="4" Grid.Column="2" Margin="20" Height="28" ItemsSource="{Binding ColAp3}" IsSynchronizedWithCurrentItem="True" SelectedIndex="0" SelectedItem="{Binding SelItem4}">
+            <ComboBox.ItemTemplate>
+                <DataTemplate>
+                    <StackPanel Orientation="Horizontal">
+                        <TextBlock Text="{Binding Nachname}" />
+                    </StackPanel>
+                </DataTemplate>
+            </ComboBox.ItemTemplate>
+        </ComboBox>
+        <ComboBox Grid.Row="5" Grid.Column="2" Margin="20" Height="28" ItemsSource="{Binding ColAp4}" IsSynchronizedWithCurrentItem="True" SelectedIndex="0" SelectedItem="{Binding SelItem5}">
+            <ComboBox.ItemTemplate>
+                <DataTemplate>
+                    <StackPanel Orientation="Horizontal">
+                        <TextBlock Text="{Binding Nachname}" />
+                    </StackPanel>
+                </DataTemplate>
+            </ComboBox.ItemTemplate>
+        </ComboBox>
+
 
         <!--Buttons Zuweisen & Löschen-->
         <!--Schmelzofen Buttons-->
-        <StackPanel Grid.Column="3" Grid.Row="2" Margin="10">
-            <Button Content="Zuweisen" Margin="10"/>
-            <Button Content="Löschen" />
+        <StackPanel Grid.Column="3" Grid.Row="2" Margin="10" VerticalAlignment="Center" >
+            <Button Content="Zuweisen" Margin="0,0,0,10" Command="{Binding AddRC}" CommandParameter="1" />
+            <Button Content="Löschen" Command="{Binding RemoveRC}" CommandParameter="1" />
         </StackPanel>
 
         <!--Cnc Drehmaschine Buttons-->
-        <StackPanel Grid.Column="3" Grid.Row="3" Margin="10">
-            <Button Content="Zuweisen" Margin="10"/>
-            <Button Content="Löschen" />
+        <StackPanel Grid.Column="3" Grid.Row="3" Margin="10" VerticalAlignment="Center"  >
+            <Button Content="Zuweisen" Margin="0,0,0,10" Command="{Binding AddRC}" CommandParameter="2" />
+            <Button Content="Löschen" Command="{Binding RemoveRC}" CommandParameter="2" />
         </StackPanel>
 
         <!--Ausrichtestation Buttons-->
-        <StackPanel Grid.Column="3" Grid.Row="4" Margin="10">
-            <Button Content="Zuweisen" Margin="10"/>
-            <Button Content="Löschen" />
+        <StackPanel Grid.Column="3" Grid.Row="4" Margin="10" VerticalAlignment="Center" >
+            <Button Content="Zuweisen" Margin="0,0,0,10" Command="{Binding AddRC}" CommandParameter="3" />
+            <Button Content="Löschen" Command="{Binding RemoveRC}" CommandParameter="3"/>
         </StackPanel>
 
         <!--Schwingungssensor Buttons-->
-        <StackPanel Grid.Column="3" Grid.Row="5" Margin="10">
-            <Button Content="Zuweisen" Margin="10"/>
-            <Button Content="Löschen" />
+        <StackPanel Grid.Column="3" Grid.Row="5" Margin="10" VerticalAlignment="Center" >
+            <Button Content="Zuweisen" Margin="0,0,0,10" Command="{Binding AddRC}" CommandParameter="4" />
+            <Button Content="Löschen" Command="{Binding RemoveRC}" CommandParameter="4" />
         </StackPanel>
 
         <!--Kalender Tag Auswahl-->
         <StackPanel Margin="2" VerticalAlignment="Center" HorizontalAlignment="Right" Orientation="Horizontal" Grid.Row="0" Grid.Column="4" >
-            <Label Content="Date:" FontSize="20"/>
-            <DatePicker FontSize="20" Name="datePicker1" Text="{Binding Plantafel.Prod_date}" SelectedDate="{Binding Prod_date}" Grid.Row="0"  />
+            <Label Content="Date:" FontSize="15" Width="62" HorizontalAlignment="Center" VerticalAlignment="Center" FontWeight="Bold"/>
+            <DatePicker FontSize="15" Name="datePicker1" Text="{Binding Arbeitsplatzdatum}" SelectedDate="{Binding Arbeitsplatzdatum}" Grid.Row="0"  />
         </StackPanel>
         
         <!--Liste verfügbarer Mitarbeiter-->
         <Label Content="MitarbeiterListe" Grid.Row="1" Grid.Column="4" FontSize="15" FontWeight="Bold"  HorizontalAlignment="Center" VerticalAlignment="Center" Margin="10"/>
 
-        <ListView Grid.Row="2" Grid.Column="4" Grid.RowSpan="4" Margin="10,20,15,0" DataContext="{Binding Source={StaticResource Locator}}" ItemsSource="{Binding Mitarbeiter.Mitarbeiter}">
+        <ListView Grid.Row="2" Grid.Column="4" Grid.RowSpan="4" Margin="10,20,15,0" DataContext="{Binding Source={StaticResource Locator}}" ItemsSource="{Binding Arbeitsplan.Colmb}" SelectedItem="{Binding Arbeitsplan.SelItem}">
             <ListView.View>
                 <GridView>
                     <GridViewColumn Header="Nachname" Width="150" DisplayMemberBinding="{Binding Last_Name}" />

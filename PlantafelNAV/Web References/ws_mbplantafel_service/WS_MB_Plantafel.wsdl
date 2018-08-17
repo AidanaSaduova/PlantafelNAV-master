@@ -8,7 +8,7 @@
           <xsd:element minOccurs="0" maxOccurs="1" name="No" type="xsd:string" />
           <xsd:element minOccurs="0" maxOccurs="1" name="Vorname" type="xsd:string" />
           <xsd:element minOccurs="0" maxOccurs="1" name="Nachname" type="xsd:string" />
-          <xsd:element minOccurs="0" maxOccurs="1" name="Arbeitsplatz" type="xsd:int" />
+          <xsd:element minOccurs="0" maxOccurs="1" name="Arbeitsplatz" type="xsd:string" />
           <xsd:element minOccurs="0" maxOccurs="1" name="Datum" type="xsd:string" />
         </xsd:sequence>
       </xsd:complexType>

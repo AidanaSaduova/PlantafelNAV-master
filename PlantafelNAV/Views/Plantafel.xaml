@@ -108,7 +108,8 @@
             <!--Mitarbeiter-->
             <StackPanel Orientation="Horizontal" Grid.Row="2" Grid.Column="1" >
                 <Label Content="Mitarbeiter" FontWeight="Bold" VerticalAlignment="Center"/>
-               
+                <TextBlock TextWrapping="Wrap" Text="Kein Mitarbeiter zugewiesen" x:Name="MB_DB"/>
+
             </StackPanel>
 
             <!--Status-->

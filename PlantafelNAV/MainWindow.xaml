@@ -34,14 +34,14 @@
             </Button>
             <Button   Width="230" Margin="5" Foreground="White" Command="{Binding BtnArbeitsplatz}">
                 <Grid Width="170">
-                    <materialDesign:PackIcon Kind="Worker" VerticalAlignment="Center"/>
-                    <TextBlock Text="Arbeitsplatz" HorizontalAlignment="Center"/>
+                    <materialDesign:PackIcon Kind="Timetable" VerticalAlignment="Center"/>
+                    <TextBlock Text="Arbeitsplan" HorizontalAlignment="Center"/>
                 </Grid>
             </Button>
             <Button   Width="230" Margin="5" Foreground="White" Command="{Binding BtnArbeitsplan}">
                 <Grid Width="170">
-                    <materialDesign:PackIcon Kind="Timetable" VerticalAlignment="Center"/>
-                    <TextBlock Text="Arbeitsplan" HorizontalAlignment="Center"/>
+                    <materialDesign:PackIcon Kind="Worker" VerticalAlignment="Center"/>
+                    <TextBlock Text="Arbeitsplätzen" HorizontalAlignment="Center"/>
                 </Grid>
             </Button>
         </StackPanel>

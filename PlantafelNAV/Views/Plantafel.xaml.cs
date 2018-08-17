@@ -18,6 +18,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 using PlantafelNAV.ws_aufarbservice;
+using PlantafelNAV.ws_mbplantafel_service;
 
 namespace PlantafelNAV.Views
 {
@@ -51,6 +52,8 @@ namespace PlantafelNAV.Views
 
         ObservableCollection<TMElement> _prods = new ObservableCollection<TMElement>();
 
+        WS_MB_Plantafel_Service ws_planmbservice = new WS_MB_Plantafel_Service();
+
         public Plantafel()
         {
             //Da wir kommunikationsfreudig sind, wird zuerst der Datacontext per Code geladen (notwendig für PlantafelVM DataContext)
@@ -58,6 +61,7 @@ namespace PlantafelNAV.Views
             PlantafelNAV.ViewModel.PlantafelVm planVM = this.DataContext as PlantafelNAV.ViewModel.PlantafelVm;
             InitializeComponent();
 
+            ws_planmbservice.UseDefaultCredentials = true;
 
             //Messaging
             Messenger.Default.Register<string[]>(this, messengerMethod);
@@ -102,6 +106,16 @@ namespace PlantafelNAV.Views
                 else if (info[1] == "2") { zeit_von.Content = tmp.AP2_Startdatum; zeit_bis.Content = tmp.AP2_Enddatum; }
                 else if (info[1] == "3") { zeit_von.Content = tmp.AP3_Startdatum; zeit_bis.Content = tmp.AP3_Enddatum; }
                 else if (info[1] == "4") { zeit_von.Content = tmp.AP4_Startdatum; zeit_bis.Content = tmp.AP4_Enddatum; }
+
+                //Gibt es bereits einen zugewiesenen Mitarbeiter für diese Aufgabe?
+                WS_MB_Plantafel[] list = ws_planmbservice.ReadMultiple(null, null, 1000);
+                foreach(WS_MB_Plantafel tmp1 in list)
+                {
+                    if(tmp1.Arbeitsplatz == info[1] && DateTime.Parse(tmp1.Datum) == planVM.Prod_date)
+                    {
+                        MB_DB.Text = tmp1.Nachname + "" + tmp1.Vorname;
+                    }
+                }
             }
             else
             {

@@ -17,7 +17,7 @@
         </Grid.RowDefinitions>
 
         <!--Label-->
-        <Label Content="Arbeitsplatz"  FontSize="15" FontWeight="Bold" VerticalAlignment="Center" Height="30" Margin="0,8,0,6"/>
+        <Label Content="Arbeitsplan"  FontSize="15" FontWeight="Bold" VerticalAlignment="Center" Height="30" Margin="0,8,0,6"/>
 
         <!--Arbeitsplaetze List mit info-->
         <ListView Grid.Row="1" Margin="15,10,12,0" ItemsSource="{Binding Arbeitsplaetze}" SelectedItem="{Binding Selitem}">
