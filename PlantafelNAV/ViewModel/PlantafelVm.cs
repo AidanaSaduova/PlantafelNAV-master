@@ -9,9 +9,11 @@ using System.Collections.ObjectModel;
 using PlantafelNAV.ws_production_service_2;
 using PlantafelNAV.ws_arbeitsplatzservice;
 using PlantafelNAV.ws_aufarbservice;
+using PlantafelNAV.ws_mitarbeiterservice;
 using System.Windows;
 using PlantafelNAV.TimelineNAV;
 using PlantafelNAV.ViewModel.Helpers;
+using PlantafelNAV.ws_mbplantafel_service;
 using GalaSoft.MvvmLight.Messaging;
 
 namespace PlantafelNAV.ViewModel
@@ -24,6 +26,8 @@ namespace PlantafelNAV.ViewModel
         WS_Production_Service ws_productionservice = new WS_Production_Service();
         WS_Arbeitzplatz_Service ws_serviceap = new WS_Arbeitzplatz_Service();
         WS_Auf_Arb_Nav_Service ws_auftragnavservice = new WS_Auf_Arb_Nav_Service();
+        WS_MB_Plantafel_Service ws_mbplatafelservice = new WS_MB_Plantafel_Service();
+        ws_mitarbeiter_Service ws_mbservice = new ws_mitarbeiter_Service();
         #endregion
 
         #region Collections
@@ -63,6 +67,8 @@ namespace PlantafelNAV.ViewModel
             ws_productionservice.UseDefaultCredentials = true;
             ws_serviceap.UseDefaultCredentials = true;
             ws_auftragnavservice.UseDefaultCredentials = true;
+            ws_mbplatafelservice.UseDefaultCredentials = true;
+            ws_mbservice.UseDefaultCredentials = true;
 
            Prod_date = DateTime.Now;
             loadProduction();
@@ -70,7 +76,7 @@ namespace PlantafelNAV.ViewModel
 
         }
 
-      
+       
 
         public void createTimeLine()
         {

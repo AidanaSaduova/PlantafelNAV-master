@@ -119,6 +119,11 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Reference.map</DependentUpon>
     </Compile>
+    <Compile Include="Web References\ws_mbplantafel_service\Reference.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Reference.map</DependentUpon>
+    </Compile>
     <Compile Include="Web References\ws_mitarbeiterservice\Reference.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -209,6 +214,14 @@
       <DependentUpon>Reference.map</DependentUpon>
     </None>
     <None Include="Web References\ws_aufarbservice\WS_Auf_Arb_Nav.wsdl" />
+    <None Include="Web References\ws_mbplantafel_service\Reference.map">
+      <Generator>MSDiscoCodeGenerator</Generator>
+      <LastGenOutput>Reference.cs</LastGenOutput>
+    </None>
+    <None Include="Web References\ws_mbplantafel_service\WS_MB_Plantafel.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </None>
+    <None Include="Web References\ws_mbplantafel_service\WS_MB_Plantafel.wsdl" />
     <None Include="Web References\ws_mitarbeiterservice\Reference.map">
       <Generator>MSDiscoCodeGenerator</Generator>
       <LastGenOutput>Reference.cs</LastGenOutput>
@@ -257,6 +270,17 @@
       </CachedDynamicPropName>
       <CachedAppSettingsObjectName>Settings</CachedAppSettingsObjectName>
       <CachedSettingsPropName>PlantafelNAV_ws_aufarbservice_WS_Auf_Arb_Nav_Service</CachedSettingsPropName>
+    </WebReferenceUrl>
+    <WebReferenceUrl Include="http://win-nav16:7047/DynamicsNAV90/WS/Carpart%2520GmbH/Page/WS_MB_Plantafel">
+      <UrlBehavior>Dynamic</UrlBehavior>
+      <RelPath>Web References\ws_mbplantafel_service\</RelPath>
+      <UpdateFromURL>http://win-nav16:7047/DynamicsNAV90/WS/Carpart%2520GmbH/Page/WS_MB_Plantafel</UpdateFromURL>
+      <ServiceLocationURL>
+      </ServiceLocationURL>
+      <CachedDynamicPropName>
+      </CachedDynamicPropName>
+      <CachedAppSettingsObjectName>Settings</CachedAppSettingsObjectName>
+      <CachedSettingsPropName>PlantafelNAV_ws_mbplantafel_service_WS_MB_Plantafel_Service</CachedSettingsPropName>
     </WebReferenceUrl>
     <WebReferenceUrl Include="http://win-nav16:7047/DynamicsNAV90/WS/Carpart%2520GmbH/Page/ws_mitarbeiter">
       <UrlBehavior>Dynamic</UrlBehavior>

@@ -14,5 +14,8 @@
     <Setting Name="PlantafelNAV_ws_aufarbservice_WS_Auf_Arb_Nav_Service" Type="(Web Service URL)" Scope="Application">
       <Value Profile="(Default)">http://win-nav16:7047/DynamicsNAV90/WS/Carpart%20GmbH/Page/WS_Auf_Arb_Nav</Value>
     </Setting>
+    <Setting Name="PlantafelNAV_ws_mbplantafel_service_WS_MB_Plantafel_Service" Type="(Web Service URL)" Scope="Application">
+      <Value Profile="(Default)">http://win-nav16:7047/DynamicsNAV90/WS/Carpart%20GmbH/Page/WS_MB_Plantafel</Value>
+    </Setting>
   </Settings>
 </SettingsFile>
