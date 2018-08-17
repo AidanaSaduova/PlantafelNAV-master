@@ -106,9 +106,17 @@
             </StackPanel>
 
             <!--Mitarbeiter-->
-            <StackPanel Orientation="Horizontal" Grid.Row="2" Grid.Column="1">
+            <StackPanel Orientation="Horizontal" Grid.Row="2" Grid.Column="1" >
                 <Label Content="Mitarbeiter" FontWeight="Bold" VerticalAlignment="Center"/>
-                <ComboBox VerticalAlignment="Center" Margin="5" ItemsSource="{Binding Mitarbeiter.Mitarbeiter/FullName}"/>
+                <ComboBox  Margin="5,0" Width="208"  ItemsSource="{Binding Mitarbeiter.Mitarbeiter}" Height="62"    >
+                    <ComboBox.ItemTemplate>
+                        <DataTemplate>
+                            <StackPanel>
+                                <TextBlock Text="{Binding FullName}"/>
+                            </StackPanel>
+                        </DataTemplate>
+                    </ComboBox.ItemTemplate>
+                </ComboBox>
             </StackPanel>
 
             <!--Status-->

@@ -6,6 +6,7 @@ using System.Text;
 using System.Threading.Tasks;
 using PlantafelNAV.ws_mitarbeiterservice;
 using System.Collections.ObjectModel;
+using System.Diagnostics;
 
 namespace PlantafelNAV.ViewModel
 {
@@ -34,6 +35,8 @@ namespace PlantafelNAV.ViewModel
                 ws_mitarbeiter tmp = new ws_mitarbeiter();
                 tmp.Last_Name = x.Last_Name;
                 tmp.First_Name = x.First_Name;
+                tmp.Job_Title = x.Job_Title;
+                tmp.FullName = x.First_Name + " " + x.Last_Name + " || " + x.Job_Title;
                 Mitarbeiter.Add(tmp);
             }
 
