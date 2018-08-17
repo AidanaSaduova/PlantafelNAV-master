@@ -38,7 +38,6 @@
         <Label Content="Schwingungssensor" Grid.Row="5" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="15" Height="50" Margin="10"  FontWeight="Bold" />
 
         <!--Kapazitäten anzeigen-->
-        <Label Content="Kapazität" Grid.Row="1" Grid.Column="1" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="20" FontWeight="Bold" Height="64" Margin="26,40,26,39" />
 
         <TextBlock Text="1" Grid.Row="2" Grid.Column="1" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="15"/>
         <TextBlock Text="1" Grid.Row="3" Grid.Column="1" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="15"/>
@@ -56,31 +55,31 @@
 
         <!--Buttons Zuweisen & Löschen-->
         <!--Schmelzofen Buttons-->
-        <StackPanel Grid.Column="3" Grid.Row="2">
-            <Button Margin="30" Content="Zuweisen" />
-            <Button Margin="30" Content="Löschen" />
+        <StackPanel Grid.Column="3" Grid.Row="2" Margin="10">
+            <Button Content="Zuweisen" Margin="10"/>
+            <Button Content="Löschen" />
         </StackPanel>
 
         <!--Cnc Drehmaschine Buttons-->
-        <StackPanel Grid.Column="3" Grid.Row="3">
-            <Button Margin="30" Content="Zuweisen" />
-            <Button Margin="30" Content="Löschen" />
+        <StackPanel Grid.Column="3" Grid.Row="3" Margin="10">
+            <Button Content="Zuweisen" Margin="10"/>
+            <Button Content="Löschen" />
         </StackPanel>
 
         <!--Ausrichtestation Buttons-->
-        <StackPanel Grid.Column="3" Grid.Row="4">
-            <Button Margin="30" Content="Zuweisen" />
-            <Button Margin="30" Content="Löschen" />
+        <StackPanel Grid.Column="3" Grid.Row="4" Margin="10">
+            <Button Content="Zuweisen" Margin="10"/>
+            <Button Content="Löschen" />
         </StackPanel>
 
         <!--Schwingungssensor Buttons-->
-        <StackPanel Grid.Column="3" Grid.Row="5">
-            <Button Margin="30" Content="Zuweisen" />
-            <Button Margin="30" Content="Löschen" />
+        <StackPanel Grid.Column="3" Grid.Row="5" Margin="10">
+            <Button Content="Zuweisen" Margin="10"/>
+            <Button Content="Löschen" />
         </StackPanel>
 
         <!--Kalender Tag Auswahl-->
-        <StackPanel Margin="5" VerticalAlignment="Center" HorizontalAlignment="Right" Orientation="Horizontal" Grid.Row="0" Grid.Column="4" >
+        <StackPanel Margin="2" VerticalAlignment="Center" HorizontalAlignment="Right" Orientation="Horizontal" Grid.Row="0" Grid.Column="4" >
             <Label Content="Date:" FontSize="20"/>
             <DatePicker FontSize="20" Name="datePicker1" Text="{Binding Plantafel.Prod_date}" SelectedDate="{Binding Prod_date}" Grid.Row="0"  />
         </StackPanel>
