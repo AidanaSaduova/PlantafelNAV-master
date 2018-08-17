@@ -48,10 +48,10 @@ namespace PlantafelNAV.TimelineNAV
         /// Creates a new TimelineElement at the desired location (in seconds)
         /// </summary>
         /// <param name="seconds">Position of the element in seconds</param>
-        public void AddElement(int start_seconds, int duration, string id)
+        public void AddElement(int start_seconds, int duration, string id, int ap)
         {
 
-            TimelineElement te = new TimelineElement(this, innerHeight, start_seconds, duration, id);
+            TimelineElement te = new TimelineElement(this, innerHeight, start_seconds, duration, id, ap);
             TElements1.Add(te);
             mainCanvas.Children.Add(te);
             

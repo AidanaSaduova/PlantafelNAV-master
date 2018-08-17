@@ -30,6 +30,8 @@ namespace PlantafelNAV.TimelineNAV
         double _originstartposition;
         double _originendposition;
         double _endposition;
+        int _ap;
+        bool wasMoved;
 
 
 
@@ -43,20 +45,22 @@ namespace PlantafelNAV.TimelineNAV
         public double Originstartposition { get => _originstartposition; set => _originstartposition = value; }
         public double Originendposition { get => _originendposition; set => _originendposition = value; }
         public double DistanceRight { get => _distanceRight; set => _distanceRight = value; }
+        public int Ap { get => _ap; set => _ap = value; }
 
         /// <summary>
         /// Creates the visual TimelineElement
         /// </summary>
         /// <param name="height">Height of the element (typically height of the Timeline's inner 'border' field)</param>
         /// <param name="seconds">Position on the timeline in seconds</param>
-        public TimelineElement(Timeline parent, int height, int seconds, int duration, string id)
+        public TimelineElement(Timeline parent, int height, int seconds, int duration, string id, int ap)
         {
             DataContext = new PlantafelNAV.ViewModel.PlantafelVm();
             
             InitializeComponent();
             
             rectOuter.Stroke = new SolidColorBrush(Color.FromRgb(0, 0, 0));
-
+            wasMoved = false;
+            Ap = ap;
             CheckIfSelected = false;
             Duration = duration;
             this.seconds = seconds;
@@ -187,6 +191,10 @@ namespace PlantafelNAV.TimelineNAV
 
             string curPosAsTime = parent.getTimeFromSeconds((int)((Canvas.GetLeft(this) + 2) / PixProSec) + 8 * 60 * 60);
             parent.changeTextInInfobox(curPosAsTime, Id);
+
+
+            wasMoved = true;
+
         }
         private void Parent_MouseLeftButtonUp(object sender, MouseButtonEventArgs e)
         {
@@ -197,7 +205,7 @@ namespace PlantafelNAV.TimelineNAV
             string[] tmp = new string[2];
             tmp[0] = Id; tmp[1] = parent.identify.ToString();
             Messenger.Default.Send<string[], Views.Plantafel>(tmp);
-            
+
 
             // Respond visually
             if (CheckIfSelected == false)
@@ -207,31 +215,31 @@ namespace PlantafelNAV.TimelineNAV
 
             Endposition = Canvas.GetLeft(this) + ElementWidth;
             Startposition = Canvas.GetLeft(this);
-            Debug.WriteLine("Setze Startposition: " + Startposition + "Setze Enposition: " + Endposition);
+            // Debug.WriteLine("Setze Startposition: " + Startposition + "Setze Enposition: " + Endposition);
 
             //überprüfen ob sich Elemente überschneiden und gff warnen bzw Aktion zurücksetzen
-            foreach (TimelineElement x in parent.TElements1)
-            {
+            /*  foreach (TimelineElement x in parent.TElements1)
+              {
 
-                if (x.Id != this.Id)
-                {
+                  if (x.Id != this.Id)
+                  {
 
-                    if (this.Startposition >= x.Startposition & this.Startposition <= x.Endposition)
-                    {
-                        //parent.Messagebox.Text = "Fehler: Produktionsschritte dürfen sich nicht überschneiden!";
-                        sendTextToMessagebox("Fehler: Produktionsschritte dürfen sich nicht überschneiden!");
-                        revertMove();
-                        Debug.WriteLine(Id + " - 1: Start: " + this.Startposition + " xStart: " + x.Startposition + " Start: " + this.Startposition + " x.End: " + x.Endposition);
-                    }
-                    if (this.Endposition >= x.Startposition & this.Endposition <= x.Endposition)
-                    {
-                        //parent.Messagebox.Text = "Fehler: Produktionsschritte dürfen sich nicht überschneiden!";
-                        sendTextToMessagebox("Fehler: Produktionsschritte dürfen sich nicht überschneiden!");
-                        revertMove();
-                        Debug.WriteLine(Id + " - 2: End: " + this.Endposition + " xStart: " + x.Startposition + " End: " + this.Endposition + " x.End: " + x.Endposition);
-                    }
-                }
-            }
+                      if (this.Startposition >= x.Startposition & this.Startposition <= x.Endposition)
+                      {
+                          //parent.Messagebox.Text = "Fehler: Produktionsschritte dürfen sich nicht überschneiden!";
+                          sendTextToMessagebox("Fehler: Produktionsschritte dürfen sich nicht überschneiden!");
+                          revertMove();
+                          Debug.WriteLine(Id + " - 1: Start: " + this.Startposition + " xStart: " + x.Startposition + " Start: " + this.Startposition + " x.End: " + x.Endposition);
+                      }
+                      if (this.Endposition >= x.Startposition & this.Endposition <= x.Endposition)
+                      {
+                          //parent.Messagebox.Text = "Fehler: Produktionsschritte dürfen sich nicht überschneiden!";
+                          sendTextToMessagebox("Fehler: Produktionsschritte dürfen sich nicht überschneiden!");
+                          revertMove();
+                          Debug.WriteLine(Id + " - 2: End: " + this.Endposition + " xStart: " + x.Startposition + " End: " + this.Endposition + " x.End: " + x.Endposition);
+                      }
+                  }
+              }*/
 
             // Reset to default 'stance'
             primed = false;
@@ -245,6 +253,17 @@ namespace PlantafelNAV.TimelineNAV
                 item.CommandParameter = Id;
             }
 
+            if (wasMoved == true)
+            {
+                //Neuberechnung für alle Elemente dieses Auftrags durchführen, wenn Element bewegt wurde
+                string curPosAsTime = parent.getTimeFromSeconds((int)((Canvas.GetLeft(this) + 2) / PixProSec) + 8 * 60 * 60);
+                planVM.neuberechnungAuftrag(Id, curPosAsTime, Ap);
+                //dothetimelinestuff in der Plantafel.xaml.cs -> mittel messenger
+                string[] info = new string[2] { "doTheTimelineStuff", "" };
+                Messenger.Default.Send<string[], Views.Plantafel>(info);
+                wasMoved = false;
+            }
+        
         }
 
         private void revertMove()
@@ -268,5 +287,8 @@ namespace PlantafelNAV.TimelineNAV
            //PlantafelVm.Instance.MessageBoxEntry = s;
 
         }
+
+
+       
     }
 }

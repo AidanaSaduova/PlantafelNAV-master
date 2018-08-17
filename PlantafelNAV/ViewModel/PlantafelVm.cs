@@ -42,7 +42,7 @@ namespace PlantafelNAV.ViewModel
 
         public string MessageBoxEntry { get { return messageBoxEntry; } set { messageBoxEntry = value; RaisePropertyChanged(); } }
 
-        public DateTime Prod_date { get { return prod_date; } set { prod_date = value; Debug.WriteLine(prod_date.ToLongDateString()); } }
+        public DateTime Prod_date { get { return prod_date; } set { prod_date = value; Debug.WriteLine("Date set: " + prod_date.ToLongDateString()); } }
 
         public ObservableCollection<WS_Production> Production { get => _production; set => _production = value; }
         public ObservableCollection<WS_Arbeitzplatz> Arbeitsplaetze { get => _arbeitsplaetze; set => _arbeitsplaetze = value; }
@@ -64,7 +64,7 @@ namespace PlantafelNAV.ViewModel
             ws_serviceap.UseDefaultCredentials = true;
             ws_auftragnavservice.UseDefaultCredentials = true;
 
-            Prod_date = DateTime.Now;
+           Prod_date = DateTime.Now;
             loadProduction();
             loadArbeitsplatz();
 
@@ -112,6 +112,13 @@ namespace PlantafelNAV.ViewModel
 
             }
             return 0;
+        }
+
+        //return quantity 
+        public decimal returnQuantity(string auftragnr)
+        {
+            WS_Production x = ws_productionservice.Read(auftragnr);
+            return x.Quantity;
         }
 
         public void loadProduction()
@@ -264,6 +271,224 @@ namespace PlantafelNAV.ViewModel
                 tmp.Key = x.Key;
                 Arbeitsplaetze.Add(tmp);
             }
+        }
+
+        public void neuberechnungAuftrag(string auftrgnr, string startzeit, int ap)
+        {
+            WS_Auf_Arb_Nav x = getSpecAuftrag(auftrgnr);
+
+            DateTime datum = DateTime.Parse(x.AP1_Startdatum);
+
+            DateTime start = DateTime.ParseExact(startzeit, "H:mm", null, System.Globalization.DateTimeStyles.None);
+            //bei start noch das datum richtigstellen
+            start = new DateTime(datum.Year, datum.Month, datum.Day, start.Hour, start.Minute, start.Millisecond);
+            Debug.WriteLine("Betdatum: " + start);
+            decimal quantity = returnQuantity(auftrgnr);
+
+            //dlfz für jeden schritt
+            decimal ApDLFZ1 = calculateRuntime(1, quantity);
+            decimal ApDLFZ2 = calculateRuntime(2, quantity);
+            decimal ApDLFZ3 = calculateRuntime(3, quantity);
+            decimal ApDLFZ4 = calculateRuntime(4, quantity);
+
+            //Anfangszeiten berechnen
+            DateTime ApStart1;
+            DateTime ApEnd1;
+            DateTime ApStart2;
+            DateTime ApEnd2;
+            DateTime ApStart3;
+            DateTime ApEnd3;
+            DateTime ApStart4;
+            DateTime ApEnd4;
+            DateTime tmp;
+            DateTime tmp1;
+
+            //je nachdem in welcher timeline sich das elementbefindet werden nur die elemente die in späteren Timelines kommen neu berechnet
+            if (ap == 1)
+            {
+                ApStart1 = start;
+                ApEnd1 = start.AddMinutes((double)ApDLFZ1);
+                ApStart1 = start;
+                ApEnd1 = start.AddMinutes((double)ApDLFZ1);
+                //Überprüfen ob sich der zweite noch ausgeht//
+                tmp = ApEnd1.AddMinutes((double)ApDLFZ2);
+                tmp1 = new DateTime(datum.Year, datum.Month, datum.Day, 16, 00, 00);
+                //geht sich noch an diesem Tag aus?
+                if (tmp.CompareTo(tmp1) != 1)
+                {
+                    ApStart2 = ApEnd1;
+                    ApEnd2 = ApStart2.AddMinutes((double)ApDLFZ2);
+                }
+                else
+                {
+                    DateTime nextDay = new DateTime(ApEnd1.Year, ApEnd1.Month, ApEnd1.Day, 08, 00, 00);
+                    nextDay = nextDay.AddDays(1);
+                    ApStart2 = nextDay;
+                    ApEnd2 = nextDay.AddMinutes((double)ApDLFZ2);
+                }
+                //Überprüfen ob sich der dritte noch ausgeht//
+                tmp = ApEnd2.AddMinutes((double)ApDLFZ3);
+                tmp1 = new DateTime(ApEnd2.Year, ApEnd2.Month, ApEnd2.Day, 16, 00, 00);
+                //geht sich noch an diesem Tag aus?
+                if (tmp.CompareTo(tmp1) != 1)
+                {
+                    ApStart3 = ApEnd2;
+                    ApEnd3 = ApStart3.AddMinutes((double)ApDLFZ3);
+                }
+                else
+                {
+                    DateTime nextDay = new DateTime(ApEnd2.Year, ApEnd2.Month, ApEnd2.Day, 08, 00, 00);
+                    nextDay = nextDay.AddDays(1);
+                    ApStart3 = nextDay;
+                    ApEnd3 = nextDay.AddMinutes((double)ApDLFZ3);
+                }
+                //Überprüfen ob sich der vierte noch ausgeht//
+                tmp = ApEnd3.AddMinutes((double)ApDLFZ4);
+                tmp1 = new DateTime(ApEnd3.Year, ApEnd3.Month, ApEnd3.Day, 16, 00, 00);
+                //geht sich noch an diesem Tag aus?
+                if (tmp.CompareTo(tmp1) != 1)
+                {
+                    ApStart4 = ApEnd3;
+                    ApEnd4 = ApStart4.AddMinutes((double)ApDLFZ4);
+                }
+                else
+                {
+                    DateTime nextDay = new DateTime(ApEnd3.Year, ApEnd3.Month, ApEnd3.Day, 08, 00, 00);
+                    nextDay = nextDay.AddDays(1);
+                    ApStart4 = nextDay;
+                    ApEnd4 = nextDay.AddMinutes((double)ApDLFZ4);
+                }
+                updateAuftrag(auftrgnr, ApStart1, ApStart2, ApStart3, ApStart4, ApEnd1, ApEnd2, ApEnd3, ApEnd4);
+            }
+            if(ap == 2)
+            {
+                //Überprüfen ob sich der zweite noch ausgeht//
+                tmp = DateTime.Parse(x.AP1_Enddatum).AddMinutes((double)ApDLFZ2);
+                tmp1 = new DateTime(datum.Year, datum.Month, datum.Day, 16, 00, 00);
+                //geht sich noch an diesem Tag aus?
+                if (tmp.CompareTo(tmp1) != 1)
+                {
+                    ApStart2 = DateTime.Parse(x.AP1_Enddatum);
+                    ApEnd2 = ApStart2.AddMinutes((double)ApDLFZ2);
+                }
+                else
+                {
+                    DateTime nextDay = new DateTime(DateTime.Parse(x.AP1_Enddatum).Year, DateTime.Parse(x.AP1_Enddatum).Month, DateTime.Parse(x.AP1_Enddatum).Day, 08, 00, 00);
+                    nextDay = nextDay.AddDays(1);
+                    ApStart2 = nextDay;
+                    ApEnd2 = nextDay.AddMinutes((double)ApDLFZ2);
+                }
+                //Überprüfen ob sich der dritte noch ausgeht//
+                tmp = ApEnd2.AddMinutes((double)ApDLFZ3);
+                tmp1 = new DateTime(ApEnd2.Year, ApEnd2.Month, ApEnd2.Day, 16, 00, 00);
+                //geht sich noch an diesem Tag aus?
+                if (tmp.CompareTo(tmp1) != 1)
+                {
+                    ApStart3 = ApEnd2;
+                    ApEnd3 = ApStart3.AddMinutes((double)ApDLFZ3);
+                }
+                else
+                {
+                    DateTime nextDay = new DateTime(ApEnd2.Year, ApEnd2.Month, ApEnd2.Day, 08, 00, 00);
+                    nextDay = nextDay.AddDays(1);
+                    ApStart3 = nextDay;
+                    ApEnd3 = nextDay.AddMinutes((double)ApDLFZ3);
+                }
+                //Überprüfen ob sich der vierte noch ausgeht//
+                tmp = ApEnd3.AddMinutes((double)ApDLFZ4);
+                tmp1 = new DateTime(ApEnd3.Year, ApEnd3.Month, ApEnd3.Day, 16, 00, 00);
+                //geht sich noch an diesem Tag aus?
+                if (tmp.CompareTo(tmp1) != 1)
+                {
+                    ApStart4 = ApEnd3;
+                    ApEnd4 = ApStart4.AddMinutes((double)ApDLFZ4);
+                }
+                else
+                {
+                    DateTime nextDay = new DateTime(ApEnd3.Year, ApEnd3.Month, ApEnd3.Day, 08, 00, 00);
+                    nextDay = nextDay.AddDays(1);
+                    ApStart4 = nextDay;
+                    ApEnd4 = nextDay.AddMinutes((double)ApDLFZ4);
+                }
+                updateAuftrag(auftrgnr, DateTime.Parse(x.AP1_Startdatum), ApStart2, ApStart3, ApStart4, DateTime.Parse(x.AP1_Enddatum), ApEnd2, ApEnd3, ApEnd4);
+            }
+            if(ap == 3)
+            {
+                
+                //Überprüfen ob sich der dritte noch ausgeht//
+                tmp = DateTime.Parse(x.AP2_Enddatum).AddMinutes((double)ApDLFZ3);
+                tmp1 = new DateTime(DateTime.Parse(x.AP2_Enddatum).Year, DateTime.Parse(x.AP2_Enddatum).Month, DateTime.Parse(x.AP2_Enddatum).Day, 16, 00, 00);
+                //geht sich noch an diesem Tag aus?
+                if (tmp.CompareTo(tmp1) != 1)
+                {
+                    ApStart3 = DateTime.Parse(x.AP2_Enddatum);
+                    ApEnd3 = ApStart3.AddMinutes((double)ApDLFZ3);
+                }
+                else
+                {
+                    DateTime nextDay = new DateTime(DateTime.Parse(x.AP2_Enddatum).Year, DateTime.Parse(x.AP2_Enddatum).Month, DateTime.Parse(x.AP2_Enddatum).Day, 08, 00, 00);
+                    nextDay = nextDay.AddDays(1);
+                    ApStart3 = nextDay;
+                    ApEnd3 = nextDay.AddMinutes((double)ApDLFZ3);
+                }
+                //Überprüfen ob sich der vierte noch ausgeht//
+                tmp = ApEnd3.AddMinutes((double)ApDLFZ4);
+                tmp1 = new DateTime(ApEnd3.Year, ApEnd3.Month, ApEnd3.Day, 16, 00, 00);
+                //geht sich noch an diesem Tag aus?
+                if (tmp.CompareTo(tmp1) != 1)
+                {
+                    ApStart4 = ApEnd3;
+                    ApEnd4 = ApStart4.AddMinutes((double)ApDLFZ4);
+                }
+                else
+                {
+                    DateTime nextDay = new DateTime(ApEnd3.Year, ApEnd3.Month, ApEnd3.Day, 08, 00, 00);
+                    nextDay = nextDay.AddDays(1);
+                    ApStart4 = nextDay;
+                    ApEnd4 = nextDay.AddMinutes((double)ApDLFZ4);
+                }
+                updateAuftrag(auftrgnr, DateTime.Parse(x.AP1_Startdatum), DateTime.Parse(x.AP2_Startdatum), ApStart3, ApStart4, DateTime.Parse(x.AP1_Enddatum), DateTime.Parse(x.AP2_Enddatum), ApEnd3, ApEnd4);
+            }
+            if(ap == 4)
+            {
+                //Überprüfen ob sich der vierte noch ausgeht//
+                tmp = DateTime.Parse(x.AP3_Enddatum).AddMinutes((double)ApDLFZ4);
+                tmp1 = new DateTime(DateTime.Parse(x.AP3_Enddatum).Year, DateTime.Parse(x.AP3_Enddatum).Month, DateTime.Parse(x.AP3_Enddatum).Day, 16, 00, 00);
+                //geht sich noch an diesem Tag aus?
+                if (tmp.CompareTo(tmp1) != 1)
+                {
+                    ApStart4 = DateTime.Parse(x.AP3_Enddatum);
+                    ApEnd4 = ApStart4.AddMinutes((double)ApDLFZ4);
+                }
+                else
+                {
+                    DateTime nextDay = new DateTime(DateTime.Parse(x.AP3_Enddatum).Year, DateTime.Parse(x.AP3_Enddatum).Month, DateTime.Parse(x.AP3_Enddatum).Day, 08, 00, 00);
+                    nextDay = nextDay.AddDays(1);
+                    ApStart4 = nextDay;
+                    ApEnd4 = nextDay.AddMinutes((double)ApDLFZ4);
+                }
+                updateAuftrag(auftrgnr, DateTime.Parse(x.AP1_Startdatum), DateTime.Parse(x.AP2_Startdatum), DateTime.Parse(x.AP4_Startdatum), ApStart4, DateTime.Parse(x.AP1_Enddatum), DateTime.Parse(x.AP2_Enddatum), DateTime.Parse(x.AP3_Enddatum), ApEnd4);
+            }
+            
+
+            //Debug.WriteLine("NR: " + auftrgnr + " S1: " + ApStart1 + " E1: " + ApEnd1 + " S2: " + ApStart2 + " E2: " + ApEnd2 + " S3: " + ApStart3 + " E3: " + ApEnd3 + " S4: " + ApStart4 + " E4: " + ApEnd4);
+        }
+
+        private void updateAuftrag(string AuftrNr, DateTime ApStart1, DateTime ApStart2, DateTime ApStart3, DateTime ApStart4, DateTime ApEnd1, DateTime ApEnd2, DateTime ApEnd3, DateTime ApEnd4)
+        {
+  
+            WS_Auf_Arb_Nav x = getSpecAuftrag(AuftrNr);
+            x.AP1_Startdatum = ApStart1.ToString();
+            x.AP2_Startdatum = ApStart2.ToString();
+            x.AP3_Startdatum = ApStart3.ToString();
+            x.AP4_Startdatum = ApStart4.ToString();
+            x.AP1_Enddatum = ApEnd1.ToString();
+            x.AP2_Enddatum = ApEnd2.ToString();
+            x.AP3_Enddatum = ApEnd3.ToString();
+            x.AP4_Enddatum = ApEnd4.ToString();
+            x.Start = ApStart1.ToString();
+            x.Ende = ApEnd4.ToString();
+            ws_auftragnavservice.Update(ref x);
         }
     }
 }

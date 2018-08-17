@@ -58,8 +58,9 @@ namespace PlantafelNAV.Views
             PlantafelNAV.ViewModel.PlantafelVm planVM = this.DataContext as PlantafelNAV.ViewModel.PlantafelVm;
             InitializeComponent();
 
+
             //Messaging
-            Messenger.Default.Register<string[]>(this, updateDetailBox);
+            Messenger.Default.Register<string[]>(this, messengerMethod);
 
             //jetzt werden einmal die 4 timelines erzeugt
             t1.Setup(28800, 57600, 3600, 120);
@@ -83,36 +84,41 @@ namespace PlantafelNAV.Views
             doTheTimelineStuff();
         }
 
-        private void updateDetailBox(string[] info)
+        private void messengerMethod(string[] info)
         {
-            foreach (var x in t1.TElements1) { if (info[1] != "1") { x.rectOuter.Stroke = new SolidColorBrush(Color.FromRgb(0, 0, 0)); x.rectOuter.Opacity = 1; } }
-            foreach (var x in t2.TElements1) { if (info[1] != "2") { x.rectOuter.Stroke = new SolidColorBrush(Color.FromRgb(0, 0, 0)); x.rectOuter.Opacity = 1; } }
-            foreach(var x in t3.TElements1) { if (info[1] != "3") { x.rectOuter.Stroke = new SolidColorBrush(Color.FromRgb(0, 0, 0)); x.rectOuter.Opacity = 1; } }
-            foreach(var x in t4.TElements1) { if (info[1] != "4") { x.rectOuter.Stroke = new SolidColorBrush(Color.FromRgb(0, 0, 0)); x.rectOuter.Opacity = 1; }}
-            PlantafelNAV.ViewModel.PlantafelVm planVM = this.DataContext as PlantafelNAV.ViewModel.PlantafelVm;
-            
-            WS_Auf_Arb_Nav tmp = planVM.getSpecAuftrag(info[0]);
-            auftragnr.Content = tmp.Auftragsnr;
-            auftrag_beginn.Content = tmp.Start;
-            auftrag_ende.Content = tmp.Ende;
-            if(info[1] == "1") { zeit_von.Content = tmp.AP1_Startdatum; zeit_bis.Content = tmp.AP1_Enddatum;  }
-            else if (info[1] == "2") { zeit_von.Content = tmp.AP2_Startdatum; zeit_bis.Content = tmp.AP2_Enddatum; }
-            else if (info[1] == "3") { zeit_von.Content = tmp.AP3_Startdatum; zeit_bis.Content = tmp.AP3_Enddatum; }
-            else if (info[1] == "4") { zeit_von.Content = tmp.AP4_Startdatum; zeit_bis.Content = tmp.AP4_Enddatum; }
+            if (info[0] != "doTheTimelineStuff")
+            {
+                foreach (var x in t1.TElements1) { if (info[1] != "1") { x.rectOuter.Stroke = new SolidColorBrush(Color.FromRgb(0, 0, 0)); x.rectOuter.Opacity = 1; } }
+                foreach (var x in t2.TElements1) { if (info[1] != "2") { x.rectOuter.Stroke = new SolidColorBrush(Color.FromRgb(0, 0, 0)); x.rectOuter.Opacity = 1; } }
+                foreach (var x in t3.TElements1) { if (info[1] != "3") { x.rectOuter.Stroke = new SolidColorBrush(Color.FromRgb(0, 0, 0)); x.rectOuter.Opacity = 1; } }
+                foreach (var x in t4.TElements1) { if (info[1] != "4") { x.rectOuter.Stroke = new SolidColorBrush(Color.FromRgb(0, 0, 0)); x.rectOuter.Opacity = 1; } }
+                PlantafelNAV.ViewModel.PlantafelVm planVM = this.DataContext as PlantafelNAV.ViewModel.PlantafelVm;
+
+                WS_Auf_Arb_Nav tmp = planVM.getSpecAuftrag(info[0]);
+                auftragnr.Content = tmp.Auftragsnr;
+                auftrag_beginn.Content = tmp.Start;
+                auftrag_ende.Content = tmp.Ende;
+                if (info[1] == "1") { zeit_von.Content = tmp.AP1_Startdatum; zeit_bis.Content = tmp.AP1_Enddatum; }
+                else if (info[1] == "2") { zeit_von.Content = tmp.AP2_Startdatum; zeit_bis.Content = tmp.AP2_Enddatum; }
+                else if (info[1] == "3") { zeit_von.Content = tmp.AP3_Startdatum; zeit_bis.Content = tmp.AP3_Enddatum; }
+                else if (info[1] == "4") { zeit_von.Content = tmp.AP4_Startdatum; zeit_bis.Content = tmp.AP4_Enddatum; }
+            }
+            else
+            {
+                doTheTimelineStuff();
+            }
         }
 
         private void reloadTimelines(object sender, SelectionChangedEventArgs e)
         {
-
-
             doTheTimelineStuff();
         }
 
 
-        private void addTimelineEntry(Timeline tl, int Starttime, int Duration, string Id)
+        private void addTimelineEntry(Timeline tl, int Starttime, int Duration, string Id, int ap)
         {
 
-            tl.AddElement(Starttime, Duration, Id);
+            tl.AddElement(Starttime, Duration, Id, ap);
         }
 
 
@@ -185,10 +191,10 @@ namespace PlantafelNAV.Views
                         int begin = (y.StartDate.Hour * 60 * 60) + (y.StartDate.Minute * 60);
                         int duration = (y.EndDate.Hour - y.StartDate.Hour) * 60 + (y.EndDate.Minute - y.StartDate.Minute);
                         int end = duration * 60;
-                        if (y.TimeLineNumber == 1) { addTimelineEntry(t1, begin, end, y.Id); }
-                        if (y.TimeLineNumber == 2) { addTimelineEntry(t2, begin, end, y.Id); }
-                        if (y.TimeLineNumber == 3) { addTimelineEntry(t3, begin, end, y.Id); }
-                        if (y.TimeLineNumber == 4) { addTimelineEntry(t4, begin, end, y.Id);  }
+                        if (y.TimeLineNumber == 1) { addTimelineEntry(t1, begin, end, y.Id, 1); }
+                        if (y.TimeLineNumber == 2) { addTimelineEntry(t2, begin, end, y.Id, 2); }
+                        if (y.TimeLineNumber == 3) { addTimelineEntry(t3, begin, end, y.Id, 3); }
+                        if (y.TimeLineNumber == 4) { addTimelineEntry(t4, begin, end, y.Id, 4);  }
                         //addTimelineEntry(t1, 8*60*60, , y.Id );
                     }
                 }
@@ -285,10 +291,10 @@ namespace PlantafelNAV.Views
                         int begin = (y.StartDate.Hour * 60 * 60) + (y.StartDate.Minute * 60);
                         int duration = (y.EndDate.Hour - y.StartDate.Hour) * 60 + (y.EndDate.Minute - y.StartDate.Minute);
                         int end = duration * 60;
-                        if (y.TimeLineNumber == 1) { addTimelineEntry(t1, begin, end, y.Id); }
-                        if (y.TimeLineNumber == 2) { addTimelineEntry(t2, begin, end, y.Id); }
-                        if (y.TimeLineNumber == 3) { addTimelineEntry(t3, begin, end, y.Id); }
-                        if (y.TimeLineNumber == 4) { addTimelineEntry(t4, begin, end, y.Id); }
+                        if (y.TimeLineNumber == 1) { addTimelineEntry(t1, begin, end, y.Id, 1); }
+                        if (y.TimeLineNumber == 2) { addTimelineEntry(t2, begin, end, y.Id, 2); }
+                        if (y.TimeLineNumber == 3) { addTimelineEntry(t3, begin, end, y.Id, 3); }
+                        if (y.TimeLineNumber == 4) { addTimelineEntry(t4, begin, end, y.Id, 4); }
                         //addTimelineEntry(t1, 8*60*60, , y.Id );
                     }
                 }
