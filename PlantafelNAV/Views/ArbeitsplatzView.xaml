@@ -10,14 +10,14 @@
             DataContext="{Binding Source={StaticResource Locator}, Path=Arbeitsplatz}">
     <Grid>
         <Grid.RowDefinitions>
-            <RowDefinition Height="*"/>
-            <RowDefinition Height="5*"/>
+            <RowDefinition Height="44*"/>
+            <RowDefinition Height="331*"/>
             <!--<RowDefinition Height="50"/>-->
-            <RowDefinition Height="10*"/>
+            <RowDefinition Height="625*"/>
         </Grid.RowDefinitions>
 
         <!--Label-->
-        <Label Content="Arbeitsplatz"  FontSize="15" FontWeight="Bold" VerticalAlignment="Center"/>
+        <Label Content="Arbeitsplatz"  FontSize="15" FontWeight="Bold" VerticalAlignment="Center" Height="30" Margin="0,8,0,6"/>
 
         <!--Arbeitsplaetze List mit info-->
         <ListView Grid.Row="1" Margin="15,10,12,0" ItemsSource="{Binding Arbeitsplaetze}" SelectedItem="{Binding Selitem}">
@@ -29,8 +29,8 @@
                     <GridViewColumn Header="Bearbeitungszeit" Width="150" DisplayMemberBinding="{Binding Run_Time}"/>
                     <GridViewColumn Header="Transportzeit" Width="150" DisplayMemberBinding="{Binding Move_Time}"/>
                     <GridViewColumn Header="Wartezeit" Width="150" DisplayMemberBinding="{Binding Wait_Time}"/>
-                  
-                    
+
+
                 </GridView>
             </ListView.View>
         </ListView>
@@ -38,7 +38,7 @@
         <!--===========Edit Arbeitsplatz===========-->
         <Grid Grid.Row="2">
             <Grid.RowDefinitions>
-               
+
                 <RowDefinition/>
                 <RowDefinition/>
                 <RowDefinition/>
@@ -51,10 +51,10 @@
                 <ColumnDefinition/>
             </Grid.ColumnDefinitions>
 
-            <!--Effektivität-->
+            <!--Bearbeitungszeit-->
             <Label Content="Bearbeitungszeit" Grid.Row="0" FontSize="15" FontWeight="Bold" VerticalAlignment="Center" HorizontalAlignment="Center"/>
             <TextBox Grid.Column="1" Grid.Row="0" VerticalAlignment="Center" Margin="10" Text="{Binding Selitem.Run_Time}"/>
-            
+
             <!--Rüstzeit-->
             <Label Content="Rüstzeit" Grid.Row="1" FontSize="15" FontWeight="Bold" VerticalAlignment="Center" HorizontalAlignment="Center"/>
             <TextBox Grid.Column="1" Grid.Row="1" VerticalAlignment="Center" Margin="10" Text="{Binding Selitem.Setup_Time}"/>

@@ -6,51 +6,96 @@
              xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
              xmlns:local="clr-namespace:PlantafelNAV.Views"
              mc:Ignorable="d" 
-             d:DesignHeight="1000" d:DesignWidth="1000"
+             d:DesignHeight="1000" d:DesignWidth="1920"
              DataContext="{Binding Source={StaticResource Locator}, Path=Arbeitsplan}">
-    <Grid>
+    <Grid Background="White">
         <Grid.RowDefinitions>
-            <RowDefinition Height="*"/>
-            <RowDefinition Height="5*"/>
-            <RowDefinition Height="10*"/>
+            <RowDefinition Height="74*"/>
+            <RowDefinition Height="143*"/>
+            <RowDefinition Height="169*"/>
+            <RowDefinition Height="187*"/>
+            <RowDefinition Height="195*"/>
+            <RowDefinition Height="232*"/>
         </Grid.RowDefinitions>
-
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="334*"/>
+            <ColumnDefinition Width="240*"/>
+            <ColumnDefinition Width="436*"/>
+            <ColumnDefinition Width="407*"/>
+            <ColumnDefinition Width="503*"/>
+        </Grid.ColumnDefinitions>
 
         <!--Label-->
-        <Label Content="Arbeitsplatz"  FontSize="15" FontWeight="Bold" VerticalAlignment="Center"/>
+        <Label Content="Arbeitsplätze" FontSize="40" FontFamily="Arial" HorizontalAlignment="Center" VerticalAlignment="Center" FontWeight="Bold" Grid.ColumnSpan="2" Grid.Column="2"/>
 
-        <!--===========Arbeitsplan List mit info============-->
-        <ListView Grid.Row="1" Margin="15,10,12,0" ItemsSource="{Binding Arbeitsplaetze}" SelectedItem="{Binding Selitem}">
+        <!--Arbeitsplätze-->
+        <Label Content="Bezeichnung" Grid.Row="1" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="40" FontWeight="Bold" Height="64" Margin="42,40,42,39" Width="250"/>
+
+        <Label Content="Schmelzofen" Grid.Row="2" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="30" Height="50" Margin="78,59,78,60" Width="178"/>
+        <Label Content="CNC Drehmaschine" Grid.Row="3" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="30" Height="50" Margin="34,68,34,69" Width="266"/>
+        <Label Content="Ausrichtestation" Grid.Row="4" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="30" Height="50" Margin="55,76,55,69" Width="224"/>
+        <Label Content="Schwingungssensor" Grid.Row="5" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="30" Height="50" Margin="32,91" Width="270"/>
+
+        <!--Kapazitäten anzeigen-->
+        <Label Content="Kapazität" Grid.Row="1" Grid.Column="1" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="40" FontWeight="Bold" Height="64" Margin="26,40,26,39" Width="188"/>
+
+        <TextBlock Text="1" Grid.Row="2" Grid.Column="1" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="30"/>
+        <TextBlock Text="1" Grid.Row="3" Grid.Column="1" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="30"/>
+        <TextBlock Text="1" Grid.Row="4" Grid.Column="1" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="30"/>
+        <TextBlock Text="1" Grid.Row="5" Grid.Column="1" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="30"/>
+
+        <!--Mitarbeiter Dropdowns-->
+        <Label Content="Mitarbeiter Auswahl" Grid.Row="1" Grid.Column="2" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="40" FontWeight="Bold" Height="64" Margin="21,40,21,39" Width="394"/>
+
+        <ComboBox Grid.Row="2" Grid.Column="2" Margin="20,71,20,70" Height="28"/>
+        <ComboBox Grid.Row="3" Grid.Column="2" Margin="20,80,20,79" Height="28"/>
+        <ComboBox Grid.Row="4" Grid.Column="2" Margin="20,83,20,84" Height="28"/>
+        <ComboBox Grid.Row="5" Grid.Column="2" Margin="20,102" Height="28"/>
+        <ComboBox Grid.Row="5" Grid.Column="2" Margin="20,102" Height="28"/>
+        
+        <!--Buttons Zuweisen & Löschen-->
+        <!--Schmelzofen Buttons-->
+        <StackPanel Grid.Column="3" Grid.Row="2">
+            <Button Margin="30" Content="Zuweisen" Width="200"/>
+            <Button Margin="10" Content="Löschen" Width="200"/>
+        </StackPanel>
+
+        <!--Cnc Drehmaschine Buttons-->
+        <StackPanel Grid.Column="3" Grid.Row="3">
+            <Button Margin="30" Content="Zuweisen" Width="200"/>
+            <Button Margin="10" Content="Löschen" Width="200"/>
+        </StackPanel>
+
+        <!--Ausrichtestation Buttons-->
+        <StackPanel Grid.Column="3" Grid.Row="4">
+            <Button Margin="30" Content="Zuweisen" Width="200"/>
+            <Button Margin="10" Content="Löschen" Width="200"/>
+        </StackPanel>
+        
+        <!--Schwingungssensor Buttons-->
+        <StackPanel Grid.Column="3" Grid.Row="5">
+            <Button Margin="30" Content="Zuweisen" Width="200"/>
+            <Button Margin="10" Content="Löschen" Width="200"/>
+        </StackPanel>
+        
+
+        <!--Liste verfügbarer Mitarbeiter-->
+        <StackPanel Grid.Row="1" Grid.Column="4" Orientation="Horizontal">
+            <Label Content="MitarbeiterListe" FontSize="40" FontWeight="Bold"  HorizontalAlignment="Center" VerticalAlignment="Center" Margin="10"/>
+            <!--Kalender Tag Auswahl-->
+            <StackPanel Margin="5,11" VerticalAlignment="Center" HorizontalAlignment="Center" Orientation="Horizontal" Grid.Row="0" Grid.Column="4" Height="30">
+                <Label Content="Date:" FontSize="20"/>
+                <DatePicker FontSize="20" Name="datePicker1" Text="{Binding Plantafel.Prod_date}" SelectedDate="{Binding Prod_date}" Width="75"  />
+            </StackPanel>
+        </StackPanel>
+        <ListView Grid.Row="2" Grid.Column="4" Grid.RowSpan="4" Margin="10,20,15,0">
             <ListView.View>
                 <GridView>
-                    <GridViewColumn Header="Name" Width="150" DisplayMemberBinding="{Binding Description}"/>
+                    <GridViewColumn Header="Nachname" Width="150" />
+                    <GridViewColumn Header="Vorname" Width="150"/>
                 </GridView>
             </ListView.View>
         </ListView>
-
-        <!--===========Edit Arbeitsplan===========-->
-        <Grid Grid.Row="2">
-            <Grid.RowDefinitions>
-                <RowDefinition/>
-                <RowDefinition/>
-            </Grid.RowDefinitions>
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition/>
-                <ColumnDefinition/>
-                <ColumnDefinition/>
-            </Grid.ColumnDefinitions>
-
-            <!--Name-->
-            <Label Content="Name" Grid.Row="0" FontSize="15" FontWeight="Bold" VerticalAlignment="Center" HorizontalAlignment="Center"/>
-            <TextBox Grid.Column="1" Grid.Row="0" VerticalAlignment="Center" Margin="10" Text="{Binding Selitem.Run_Time}"/>
-
-            <!--Button update-->
-            <Button Grid.Column="2" Grid.Row="1" Width="200" Margin="5" Foreground="White"  HorizontalAlignment="Center" Command="{Binding DoUpdate}">
-                <Grid Width="110">
-                    <materialDesign:PackIcon Kind="Update" VerticalAlignment="Center"/>
-                    <TextBlock Text="Update" HorizontalAlignment="Center"/>
-                </Grid>
-            </Button>
-        </Grid>
+        
     </Grid>
 </UserControl>
