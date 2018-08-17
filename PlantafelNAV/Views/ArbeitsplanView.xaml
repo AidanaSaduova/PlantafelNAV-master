@@ -21,7 +21,7 @@
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="5*"/>
             <ColumnDefinition Width="*"/>
-            <ColumnDefinition Width="5*"/>
+            <ColumnDefinition Width="3*"/>
             <ColumnDefinition Width="3*"/>
             <ColumnDefinition Width="5*"/>
         </Grid.ColumnDefinitions>
@@ -30,7 +30,7 @@
         <Label Content="Arbeitsplätze" FontSize="20" FontFamily="Arial" HorizontalAlignment="Center" VerticalAlignment="Center" FontWeight="Bold" Grid.ColumnSpan="2" Grid.Column="2"/>
 
         <!--Arbeitsplätze-->
-        <Label Content="Bezeichnung" Grid.Row="1" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="20" FontWeight="Bold"  Margin="42,40,42,39" />
+        <Label Content="Bezeichnung" Grid.Row="1" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="15" FontWeight="Bold"  Margin="10" />
 
         <Label Content="Schmelzofen" Grid.Row="2" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="20" Height="50" Margin="0,70,10,71"  FontWeight="Bold" />
         <Label Content="CNC Drehmaschine" Grid.Row="3" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="20" Height="50" Margin="0,69,0,71"  FontWeight="Bold" />
@@ -40,55 +40,54 @@
         <!--Kapazitäten anzeigen-->
         <Label Content="Kapazität" Grid.Row="1" Grid.Column="1" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="20" FontWeight="Bold" Height="64" Margin="26,40,26,39" />
 
-        <TextBlock Text="1" Grid.Row="2" Grid.Column="1" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="10"/>
-        <TextBlock Text="1" Grid.Row="3" Grid.Column="1" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="10"/>
-        <TextBlock Text="1" Grid.Row="4" Grid.Column="1" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="10"/>
-        <TextBlock Text="1" Grid.Row="5" Grid.Column="1" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="10"/>
+        <TextBlock Text="1" Grid.Row="2" Grid.Column="1" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="15"/>
+        <TextBlock Text="1" Grid.Row="3" Grid.Column="1" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="15"/>
+        <TextBlock Text="1" Grid.Row="4" Grid.Column="1" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="15"/>
+        <TextBlock Text="1" Grid.Row="5" Grid.Column="1" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="15"/>
 
         <!--Mitarbeiter Dropdowns-->
-        <Label Content="Mitarbeiter Auswahl" Grid.Row="1" Grid.Column="2" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="20" FontWeight="Bold"  Margin="21,40,21,39" />
+        <Label Content="Mitarbeiter Auswahl" Grid.Row="1" Grid.Column="2" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="15" FontWeight="Bold"  Margin="10" />
 
-        <ComboBox Grid.Row="2" Grid.Column="2" Margin="20,71,20,70" Height="28"/>
-        <ComboBox Grid.Row="3" Grid.Column="2" Margin="20,80,20,79" Height="28"/>
-        <ComboBox Grid.Row="4" Grid.Column="2" Margin="20,83,20,84" Height="28"/>
-        <ComboBox Grid.Row="5" Grid.Column="2" Margin="20,102" Height="28"/>
-        <ComboBox Grid.Row="5" Grid.Column="2" Margin="20,102" Height="28"/>
+        <ComboBox Grid.Row="2" Grid.Column="2" Margin="20" Height="28"/>
+        <ComboBox Grid.Row="3" Grid.Column="2" Margin="20" Height="28"/>
+        <ComboBox Grid.Row="4" Grid.Column="2" Margin="20" Height="28"/>
+        <ComboBox Grid.Row="5" Grid.Column="2" Margin="20" Height="28"/>
+        <ComboBox Grid.Row="5" Grid.Column="2" Margin="20" Height="28"/>
 
         <!--Buttons Zuweisen & Löschen-->
         <!--Schmelzofen Buttons-->
         <StackPanel Grid.Column="3" Grid.Row="2">
-            <Button Margin="30" Content="Zuweisen" />
-            <Button Margin="10" Content="Löschen" />
+            <Button Margin="20" Content="Zuweisen" />
+            <Button Margin="20" Content="Löschen" />
         </StackPanel>
 
         <!--Cnc Drehmaschine Buttons-->
         <StackPanel Grid.Column="3" Grid.Row="3">
-            <Button Margin="30" Content="Zuweisen" />
-            <Button Margin="10" Content="Löschen" />
+            <Button Margin="20" Content="Zuweisen" />
+            <Button Margin="20" Content="Löschen" />
         </StackPanel>
 
         <!--Ausrichtestation Buttons-->
         <StackPanel Grid.Column="3" Grid.Row="4">
-            <Button Margin="30" Content="Zuweisen" />
-            <Button Margin="10" Content="Löschen" />
+            <Button Margin="20" Content="Zuweisen" />
+            <Button Margin="20" Content="Löschen" />
         </StackPanel>
 
         <!--Schwingungssensor Buttons-->
         <StackPanel Grid.Column="3" Grid.Row="5">
-            <Button Margin="30" Content="Zuweisen" />
-            <Button Margin="10" Content="Löschen" />
+            <Button Margin="20" Content="Zuweisen" />
+            <Button Margin="20" Content="Löschen" />
         </StackPanel>
 
         <!--Kalender Tag Auswahl-->
-        <StackPanel Margin="5,11" VerticalAlignment="Center" HorizontalAlignment="Right" Orientation="Horizontal" Grid.Row="0" Grid.Column="4" Height="30">
+        <StackPanel Margin="5" VerticalAlignment="Center" HorizontalAlignment="Right" Orientation="Horizontal" Grid.Row="0" Grid.Column="4" >
             <Label Content="Date:" FontSize="20"/>
             <DatePicker FontSize="20" Name="datePicker1" Text="{Binding Plantafel.Prod_date}" SelectedDate="{Binding Prod_date}" Grid.Row="0"  />
         </StackPanel>
+        
         <!--Liste verfügbarer Mitarbeiter-->
-        <StackPanel Grid.Row="1" Grid.Column="4" Orientation="Horizontal">
-            <Label Content="MitarbeiterListe" FontSize="20" FontWeight="Bold"  HorizontalAlignment="Center" VerticalAlignment="Center" Margin="10"/>
+        <Label Content="MitarbeiterListe" Grid.Row="1" Grid.Column="4" FontSize="15" FontWeight="Bold"  HorizontalAlignment="Center" VerticalAlignment="Center" Margin="10"/>
 
-        </StackPanel>
         <ListView Grid.Row="2" Grid.Column="4" Grid.RowSpan="4" Margin="10,20,15,0">
             <ListView.View>
                 <GridView>
