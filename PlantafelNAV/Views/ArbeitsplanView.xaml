@@ -40,7 +40,7 @@
         <!--Kapazitäten anzeigen-->
 
         <TextBlock Text="1" Grid.Row="2" Grid.Column="1" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="15"/>
-        <TextBlock Text="1" Grid.Row="3" Grid.Column="1" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="15"/>
+        <TextBlock Text="2" Grid.Row="3" Grid.Column="1" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="15"/>
         <TextBlock Text="1" Grid.Row="4" Grid.Column="1" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="15"/>
         <TextBlock Text="1" Grid.Row="5" Grid.Column="1" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="15"/>
 

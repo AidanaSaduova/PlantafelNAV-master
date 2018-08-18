@@ -208,7 +208,7 @@ namespace PlantafelNAV.Views
                         if (y.TimeLineNumber == 1) { addTimelineEntry(t1, begin, end, y.Id, 1); }
                         if (y.TimeLineNumber == 2) { addTimelineEntry(t2, begin, end, y.Id, 2); }
                         if (y.TimeLineNumber == 3) { addTimelineEntry(t3, begin, end, y.Id, 3); }
-                        if (y.TimeLineNumber == 4) { addTimelineEntry(t4, begin, end, y.Id, 4);  }
+                        if (y.TimeLineNumber == 4) { addTimelineEntry(t4, begin, end, y.Id, 4); }
                         //addTimelineEntry(t1, 8*60*60, , y.Id );
                     }
                 }
