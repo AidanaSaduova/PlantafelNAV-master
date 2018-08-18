@@ -43,10 +43,10 @@
                 <RowDefinition Height="*"/>
             </Grid.RowDefinitions>
 
-            <DockPanel x:Name="host1" Margin="0,22,0,0" Grid.Column="0" Grid.Row="0"/>
-            <DockPanel x:Name="host2" Margin="0,22,0,0" Grid.Column="0" Grid.Row="1"/>
-            <DockPanel x:Name="host3" Margin="0,22,0,0" Grid.Column="0" Grid.Row="2"/>
-            <DockPanel x:Name="host4" Margin="0,22,0,0" Grid.Column="0" Grid.Row="3"/>
+            <DockPanel x:Name="field1" Margin="0,22,0,0" Grid.Column="0" Grid.Row="0"/>
+            <DockPanel x:Name="field2" Margin="0,22,0,0" Grid.Column="0" Grid.Row="1"/>
+            <DockPanel x:Name="field3" Margin="0,22,0,0" Grid.Column="0" Grid.Row="2"/>
+            <DockPanel x:Name="field4" Margin="0,22,0,0" Grid.Column="0" Grid.Row="3"/>
 
         </Grid>
         <Grid Grid.Row="1" Grid.Column="0">
@@ -129,7 +129,7 @@
 
         </Grid>
 
-        <TextBox x:Name="msgbox" Grid.Column="1" HorizontalAlignment="Center" Height="30" Margin="74,30,0,0" TextWrapping="Wrap" Text="{Binding Plantafel.Instance.MessageBoxEntry}" VerticalAlignment="Top" Width="564" TextChanged="msgbox_TextChanged" FontWeight="Bold" Foreground="Red"/>
+        
 
 
     </Grid>
