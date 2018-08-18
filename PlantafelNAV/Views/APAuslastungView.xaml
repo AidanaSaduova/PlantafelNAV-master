@@ -4,6 +4,8 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:PlantafelNAV.Views"
+             xmlns:DV="clr-namespace:System.Windows.Controls.DataVisualization;assembly=System.Windows.Controls.DataVisualization.Toolkit"
+             xmlns:DVC="clr-namespace:System.Windows.Controls.DataVisualization.Charting;assembly=System.Windows.Controls.DataVisualization.Toolkit"
              mc:Ignorable="d" 
              d:DesignHeight="1000" d:DesignWidth="1000"
              DataContext="{Binding Source={StaticResource Locator}, Path=APAuslastung}">
@@ -29,108 +31,25 @@
             <DatePicker Name="datePicker1" Text="{Binding Prod_date}" SelectedDate="{Binding Prod_date}"  />
         </StackPanel>
 
-        <!--Arbeitsplätze als Datagrid-->
-        <!--<DataGrid Grid.Row="2" Grid.ColumnSpan="2" Margin="2"/>-->
-        <Grid Grid.Row="1" Grid.Column="1">
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition />
-
-            </Grid.ColumnDefinitions>
-            <Grid.RowDefinitions>
-                <RowDefinition Height="*"/>
-                <RowDefinition Height="*"/>
-                <RowDefinition Height="*"/>
-                <RowDefinition Height="*"/>
-            </Grid.RowDefinitions>
-
-            <DockPanel x:Name="field1" Margin="0,22,0,0" Grid.Column="0" Grid.Row="0"/>
-            <DockPanel x:Name="field2" Margin="0,22,0,0" Grid.Column="0" Grid.Row="1"/>
-            <DockPanel x:Name="field3" Margin="0,22,0,0" Grid.Column="0" Grid.Row="2"/>
-            <DockPanel x:Name="field4" Margin="0,22,0,0" Grid.Column="0" Grid.Row="3"/>
-
-        </Grid>
-        <Grid Grid.Row="1" Grid.Column="0">
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition />
-
-            </Grid.ColumnDefinitions>
-            <Grid.RowDefinitions>
-                <RowDefinition Height="*"/>
-                <RowDefinition Height="*"/>
-                <RowDefinition Height="*"/>
-                <RowDefinition Height="*"/>
-            </Grid.RowDefinitions>
-            <TextBox  Grid.Row="0" Height="30"  TextWrapping="Wrap" Text="Schmelzofen" VerticalAlignment="Center" HorizontalAlignment="Center" Width="150" TextAlignment="Center" FontSize="14" FontWeight="Bold"/>
-            <TextBox  Grid.Row="1" Height="30"  TextWrapping="Wrap" Text="CNC Drehmaschine" VerticalAlignment="Center" HorizontalAlignment="Center" Width="150" TextAlignment="Center" FontSize="14" FontWeight="Bold"/>
-            <TextBox  Grid.Row="2" Height="30"  TextWrapping="Wrap" Text="Ausrichtestation" VerticalAlignment="Center" HorizontalAlignment="Center" Width="150" TextAlignment="Center" FontSize="14" FontWeight="Bold"/>
-            <TextBox  Grid.Row="3" Height="30"  TextWrapping="Wrap" Text="Schwingungssensor" VerticalAlignment="Center" HorizontalAlignment="Center" Width="150" TextAlignment="Center" FontSize="14" FontWeight="Bold"/>
-
-
-
-        </Grid>
-
-
-        <Grid Grid.Row="2" Grid.Column="1" DataContext="{Binding Source={StaticResource Locator}}" >
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="267*"/>
-                <ColumnDefinition Width="356*"/>
-                <ColumnDefinition Width="177*"/>
-            </Grid.ColumnDefinitions>
-            <Grid.RowDefinitions>
-                <RowDefinition Height="*"/>
-                <RowDefinition Height="*"/>
-                <RowDefinition Height="*"/>
-                <RowDefinition Height="*"/>
-
-            </Grid.RowDefinitions>
-
-
-            <!--AuftragNr--><!--
-            
-            <StackPanel Orientation="Horizontal" >
-                <Label Content="AuftragsNr." FontWeight="Bold" VerticalAlignment="Center"/>
-                <Label x:Name="auftragnr" Content="" FontWeight="Bold" VerticalAlignment="Center" Foreground="#DDFF0000"/>
-            </StackPanel>
-
-            --><!--AuftragBeginn--><!--
-            <StackPanel Orientation="Horizontal" Grid.Row="1">
-                <Label Content="Auftrag Beginn" FontWeight="Bold" VerticalAlignment="Center"/>
-                <Label x:Name="auftrag_beginn" Content="" FontWeight="Bold" VerticalAlignment="Center"  Foreground="#DDFF0000"  />
-            </StackPanel>
-
-
-
-            --><!--Auftrag Dauer--><!--
-            <StackPanel Orientation="Horizontal" Grid.Row="2">
-                <Label Content="Auftrag Dauer" FontWeight="Bold" VerticalAlignment="Center"/>
-                <Label x:Name="auftrag_ende" Content="" FontWeight="Bold" VerticalAlignment="Center" Foreground="#DDFF0000"  />
-            </StackPanel>
-
-            --><!--Mitarbeiter--><!--
-            <StackPanel Orientation="Horizontal" Grid.Row="2" Grid.Column="1" >
-                <Label Content="Mitarbeiter" FontWeight="Bold" VerticalAlignment="Center"/>
-                <TextBlock TextWrapping="Wrap" Text="Kein Mitarbeiter zugewiesen" x:Name="MB_DB"/>
-
-            </StackPanel>
-
-            --><!--Status--><!--
-            <StackPanel Orientation="Horizontal" Grid.Column="1">
-                <Label Content="Status" FontWeight="Bold" VerticalAlignment="Center"/>
-                <Ellipse Width="20" Height="20"/>
-            </StackPanel>
-
-            --><!--Zeit von/bis--><!--
-            <StackPanel Orientation="Horizontal" Grid.Row="1" Grid.Column="1">
-                <Label Content="Zeit von:" FontWeight="Bold" VerticalAlignment="Center"/>
-                <Label x:Name="zeit_von" Content="" FontWeight="Bold" Foreground="#DDFF0000" VerticalAlignment="Center" />
-                <Label Content="Zeit bis:" FontWeight="Bold" VerticalAlignment="Center"/>
-                <Label x:Name="zeit_bis" Content="" FontWeight="Bold" VerticalAlignment="Center" Foreground="#DDFF0000"  />
-            </StackPanel>-->
+        <DVC:Chart 
+            Background="LightSteelBlue" Grid.Row="1" Grid.ColumnSpan="2"
+            Title="Kapazitätsauslastung pro Arbeitsplatz"
+            LegendTitle="Auslastung pro AP">
+            <DVC:Chart.Series>
+                <DVC:BarSeries Title="% Höhe der Auslastung"
+                               IndependentValueBinding="{Binding Path=Key}"
+                               DependentValueBinding="{Binding Path=Value}">
+                    
+                </DVC:BarSeries>
+            </DVC:Chart.Series>
+        </DVC:Chart>
+        
+        
 
         </Grid>
 
         
 
 
-    </Grid>
+
 </UserControl>
