@@ -100,6 +100,9 @@ namespace PlantafelNAV.TimelineNAV
                 btnBack.IsEnabled = false;
             }
             btnNext.CommandParameter = unique + "@n";
+
+            //Auftragsnummer für TM in Textblock zeigen
+           // this.tmelement_auftragnr_textblock.Text = "Auftragsnummer: " + id;
         }
 
         // Creates tooltip from seconds value

@@ -7,9 +7,9 @@
              xmlns:DV="clr-namespace:System.Windows.Controls.DataVisualization;assembly=System.Windows.Controls.DataVisualization.Toolkit"
              xmlns:DVC="clr-namespace:System.Windows.Controls.DataVisualization.Charting;assembly=System.Windows.Controls.DataVisualization.Toolkit"
              mc:Ignorable="d" 
-             d:DesignHeight="1000" d:DesignWidth="1000"
-             DataContext="{Binding Source={StaticResource Locator}, Path=APAuslastung}">
-    <Grid Background="White">
+             d:DesignHeight="1000" d:DesignWidth="1000" DataContext="{Binding APAuslastung, Mode=OneWay, Source={StaticResource Locator}}" 
+             >
+    <Grid Background="White" DataContext="{Binding Source={StaticResource Locator}}">
 
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="*"/>
@@ -28,27 +28,28 @@
         <!--Date Combobox-->
         <StackPanel Margin="5,11" VerticalAlignment="Center" HorizontalAlignment="Right" Orientation="Horizontal" Grid.Row="0" Grid.Column="1" Height="28">
             <Label Content="Date:"/>
-            <DatePicker Name="datePicker1" Text="{Binding Prod_date}" SelectedDate="{Binding Prod_date}"  />
+            <DatePicker Name="datePicker1" Text="{Binding Datum}" SelectedDate="{Binding Datum}" Height="28" VerticalAlignment="Top" DataContext="{Binding Mode=OneWay}"  />
         </StackPanel>
 
-        <DVC:Chart 
+        <DVC:Chart Canvas.Top="80" Canvas.Left="10" Name="mcChart"
             Background="LightSteelBlue" Grid.Row="1" Grid.ColumnSpan="2"
             Title="Kapazitätsauslastung pro Arbeitsplatz"
-            LegendTitle="Auslastung pro AP">
+            LegendTitle="Auslastung pro AP" DataContext="{Binding APAuslastung.APData}">
             <DVC:Chart.Series>
                 <DVC:BarSeries Title="% Höhe der Auslastung"
                                IndependentValueBinding="{Binding Path=Key}"
-                               DependentValueBinding="{Binding Path=Value}">
-                    
+
+            DependentValueBinding="{Binding Path=Value}" >
+
                 </DVC:BarSeries>
             </DVC:Chart.Series>
         </DVC:Chart>
-        
-        
 
-        </Grid>
 
-        
+
+    </Grid>
+
+
 
 
 

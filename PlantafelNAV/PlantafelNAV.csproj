@@ -93,6 +93,7 @@
     <Compile Include="ViewModel\APAuslastungVm.cs" />
     <Compile Include="ViewModel\ArbeitsplanVm.cs" />
     <Compile Include="ViewModel\ArbeitsplatzVm.cs" />
+    <Compile Include="ViewModel\Helpers\AP_Auslastung.cs" />
     <Compile Include="ViewModel\Helpers\Auftrag.cs" />
     <Compile Include="ViewModel\Helpers\Maschine.cs" />
     <Compile Include="ViewModel\Helpers\Mitarbeiter.cs" />
