@@ -36,6 +36,7 @@ namespace PlantafelNAV.ViewModel
         public RelayCommand BtnMitarbeiter { get; set; }
         public RelayCommand BtnArbeitsplatz { get; set; }
         public RelayCommand BtnArbeitsplan { get; set; }
+        public RelayCommand BtnAPAuslastung { get; set; }
 
 
         public MainViewModel()
@@ -45,7 +46,8 @@ namespace PlantafelNAV.ViewModel
             BtnMitarbeiter = new RelayCommand(()=> {CurrentView = SimpleIoc.Default.GetInstance<MitarbeiterVm>(); });
             BtnArbeitsplatz = new RelayCommand(() => { CurrentView = SimpleIoc.Default.GetInstance<ArbeitsplatzVm>(); });
             BtnArbeitsplan = new RelayCommand(()=> { CurrentView = SimpleIoc.Default.GetInstance<ArbeitsplanVm>(); });
-            
+            BtnAPAuslastung = new RelayCommand(() => { CurrentView = SimpleIoc.Default.GetInstance<APAuslastungVm>(); });
+
         }
 
     }

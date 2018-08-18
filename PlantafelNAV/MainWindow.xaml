@@ -8,7 +8,7 @@
         xmlns:viewmodels="clr-namespace:PlantafelNAV.ViewModel"
         xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
         mc:Ignorable="d"
-        Title="MainWindow" Height="1000" Width="1000" 
+        Title="MainWindow" Height="1000" Width="1020" 
         WindowStartupLocation="CenterScreen" WindowState="Maximized"
         DataContext="{Binding Main, Mode=OneWay, Source={StaticResource Locator}}">
     <Grid>
@@ -20,28 +20,34 @@
 
         <!--Buttons for main menu-->
         <StackPanel HorizontalAlignment="Left" Orientation="Horizontal" Margin="5">
-            <Button   Width="230" Margin="5" Foreground="White" Command="{Binding BtnPlantafel}">
+            <Button   Width="190" Margin="5" Foreground="White" Command="{Binding BtnPlantafel}">
                 <Grid Width="110">
                     <materialDesign:PackIcon Kind="ChartTimeline" VerticalAlignment="Center"/>
                     <TextBlock Text="Plantafel" HorizontalAlignment="Center"/>
                 </Grid>
             </Button>
-            <Button   Width="230" Margin="5" Foreground="White" Command="{Binding BtnMitarbeiter}">
+            <Button   Width="190" Margin="5" Foreground="White" Command="{Binding BtnMitarbeiter}">
                 <Grid Width="170">
                     <materialDesign:PackIcon Kind="Contacts" VerticalAlignment="Center"/>
                     <TextBlock Text="Mitarbeiterplannung" HorizontalAlignment="Center"/>
                 </Grid>
             </Button>
-            <Button   Width="230" Margin="5" Foreground="White" Command="{Binding BtnArbeitsplatz}">
+            <Button   Width="190" Margin="5" Foreground="White" Command="{Binding BtnArbeitsplatz}">
                 <Grid Width="170">
                     <materialDesign:PackIcon Kind="Timetable" VerticalAlignment="Center"/>
                     <TextBlock Text="Arbeitsplan" HorizontalAlignment="Center"/>
                 </Grid>
             </Button>
-            <Button   Width="230" Margin="5" Foreground="White" Command="{Binding BtnArbeitsplan}">
+            <Button   Width="190" Margin="5" Foreground="White" Command="{Binding BtnArbeitsplan}">
                 <Grid Width="170">
                     <materialDesign:PackIcon Kind="Worker" VerticalAlignment="Center"/>
                     <TextBlock Text="Arbeitsplätzen" HorizontalAlignment="Center"/>
+                </Grid>
+            </Button>
+            <Button   Width="190" Margin="5" Foreground="White" Command="{Binding BtnAPAuslastung}">
+                <Grid Width="170">
+                    <materialDesign:PackIcon Kind="Scale" VerticalAlignment="Center"/>
+                    <TextBlock Text="AP Auslastung" HorizontalAlignment="Center"/>
                 </Grid>
             </Button>
         </StackPanel>
@@ -64,6 +70,10 @@
                 <DataTemplate DataType="{x:Type viewmodels:ArbeitsplanVm}">
                     <views:ArbeitsplanView>
                     </views:ArbeitsplanView>
+                </DataTemplate>
+                <DataTemplate DataType="{x:Type viewmodels:APAuslastungVm}">
+                    <views:APAuslastungView>
+                    </views:APAuslastungView>
                 </DataTemplate>
             </ContentControl.Resources>
         </ContentControl>

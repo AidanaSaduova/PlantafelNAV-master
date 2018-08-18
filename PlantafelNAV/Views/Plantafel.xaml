@@ -118,7 +118,7 @@
                 <Ellipse Width="20" Height="20"/>
             </StackPanel>
 
-            <!--Mitarbeiter-->
+            <!--Zeit von/bis-->
             <StackPanel Orientation="Horizontal" Grid.Row="1" Grid.Column="1">
                 <Label Content="Zeit von:" FontWeight="Bold" VerticalAlignment="Center"/>
                 <Label x:Name="zeit_von" Content="" FontWeight="Bold" Foreground="#DDFF0000" VerticalAlignment="Center" />

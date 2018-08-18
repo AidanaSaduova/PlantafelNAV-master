@@ -87,6 +87,7 @@
     <Compile Include="TimelineNAV\TimelineMark.xaml.cs">
       <DependentUpon>TimelineMark.xaml</DependentUpon>
     </Compile>
+    <Compile Include="ViewModel\APAuslastungVm.cs" />
     <Compile Include="ViewModel\ArbeitsplanVm.cs" />
     <Compile Include="ViewModel\ArbeitsplatzVm.cs" />
     <Compile Include="ViewModel\Helpers\Auftrag.cs" />
@@ -97,6 +98,9 @@
     <Compile Include="ViewModel\MitarbeiterVm.cs" />
     <Compile Include="ViewModel\PlantafelVm.cs" />
     <Compile Include="ViewModel\ViewModelLocator.cs" />
+    <Compile Include="Views\APAuslastungView.xaml.cs">
+      <DependentUpon>APAuslastungView.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Views\ArbeitsplanView.xaml.cs">
       <DependentUpon>ArbeitsplanView.xaml</DependentUpon>
     </Compile>
@@ -155,6 +159,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="TimelineNAV\TimelineMark.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\APAuslastungView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
