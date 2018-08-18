@@ -34,12 +34,11 @@
         <DVC:Chart Canvas.Top="80" Canvas.Left="10" Name="mcChart"
             Background="LightSteelBlue" Grid.Row="1" Grid.ColumnSpan="2"
             Title="Kapazitätsauslastung pro Arbeitsplatz"
-            LegendTitle="Auslastung pro AP" DataContext="{Binding APAuslastung.APData}">
+            LegendTitle="Auslastung pro AP | Maximal: 8h / 480 Min" DataContext="{Binding APAuslastung.APData}">
             <DVC:Chart.Series>
                 <DVC:BarSeries Title="% Höhe der Auslastung"
                                IndependentValueBinding="{Binding Path=Key}"
-
-            DependentValueBinding="{Binding Path=Value}" >
+                               DependentValueBinding="{Binding Path=Value}" >
 
                 </DVC:BarSeries>
             </DVC:Chart.Series>
