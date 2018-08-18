@@ -20,7 +20,7 @@
         </Grid.RowDefinitions>
 
         <!--Headers-->
-        <Label  Content="Mitarbeiterplannung"  FontSize="15" FontWeight="Bold" VerticalAlignment="Center"/>
+        <Label  Content="Mitarbeiterplannung"  FontSize="20" FontWeight="Bold" VerticalAlignment="Center" HorizontalAlignment="Center"/>
         <!--<Label Grid.Row="1" Content="Dynamics Nav Dev Team" HorizontalAlignment="Left" VerticalAlignment="Center" Height="34" FontSize="15"/>-->
 
         <!--ListView mit Mitarbeiter info-->

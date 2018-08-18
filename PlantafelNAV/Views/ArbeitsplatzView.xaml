@@ -10,17 +10,17 @@
             DataContext="{Binding Source={StaticResource Locator}, Path=Arbeitsplatz}">
     <Grid>
         <Grid.RowDefinitions>
-            <RowDefinition Height="44*"/>
-            <RowDefinition Height="331*"/>
+            <RowDefinition Height="70"/>
+            <RowDefinition Height="*"/>
             <!--<RowDefinition Height="50"/>-->
-            <RowDefinition Height="625*"/>
+            <RowDefinition Height="2*"/>
         </Grid.RowDefinitions>
 
         <!--Label-->
-        <Label Content="Arbeitsplan"  FontSize="15" FontWeight="Bold" VerticalAlignment="Center" Height="30" Margin="0,8,0,6"/>
+        <Label Content="Arbeitsplan"  FontSize="20" FontWeight="Bold" VerticalAlignment="Center" HorizontalAlignment="Center"/>
 
         <!--Arbeitsplaetze List mit info-->
-        <ListView Grid.Row="1" Margin="15,10,12,0" ItemsSource="{Binding Arbeitsplaetze}" SelectedItem="{Binding Selitem}">
+        <ListView Grid.Row="1" Margin="5" ItemsSource="{Binding Arbeitsplaetze}" SelectedItem="{Binding Selitem}">
             <ListView.View>
                 <GridView>
                     <GridViewColumn Header="Nr" Width="150" DisplayMemberBinding="{Binding No}"/>
