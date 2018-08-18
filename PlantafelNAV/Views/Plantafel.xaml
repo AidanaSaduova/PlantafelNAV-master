@@ -87,8 +87,7 @@
             <!--AuftragNr-->
             <StackPanel Orientation="Horizontal" >
                 <Label Content="AuftragsNr." FontWeight="Bold" VerticalAlignment="Center"/>
-                <Label x:Name="auftragnr" Content="" FontWeight="Bold" VerticalAlignment="Center" Foreground="#DDFF0000"  />
-
+                <Label x:Name="auftragnr" Content="" FontWeight="Bold" VerticalAlignment="Center" Foreground="#DDFF0000"/>
             </StackPanel>
 
             <!--AuftragBeginn-->

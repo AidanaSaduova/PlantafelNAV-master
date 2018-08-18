@@ -7,7 +7,130 @@
              mc:Ignorable="d" 
              d:DesignHeight="1000" d:DesignWidth="1000"
              DataContext="{Binding Source={StaticResource Locator}, Path=APAuslastung}">
-    <Grid>
+    <Grid Background="White">
+
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="4*"/>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*" />
+            <RowDefinition Height="8*"/>
+            <RowDefinition Height="3*"/>
+        </Grid.RowDefinitions>
+
+        <!--Headers-->
+        <Label  Content="Kapazitätsauslastung pro AP" FontSize="15" FontWeight="Bold" VerticalAlignment="Center" Height="30" Margin="32,39,726,22" Grid.ColumnSpan="2"/>
+
+        <!--Messagebox (Warnings etc) -->
+        <!--Date Combobox-->
+        <StackPanel Margin="5,11" VerticalAlignment="Center" HorizontalAlignment="Right" Orientation="Horizontal" Grid.Row="0" Grid.Column="1" Height="28">
+            <Label Content="Date:"/>
+            <DatePicker Name="datePicker1" Text="{Binding Prod_date}" SelectedDate="{Binding Prod_date}"  />
+        </StackPanel>
+
+        <!--Arbeitsplätze als Datagrid-->
+        <!--<DataGrid Grid.Row="2" Grid.ColumnSpan="2" Margin="2"/>-->
+        <Grid Grid.Row="1" Grid.Column="1">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition />
+
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="*"/>
+            </Grid.RowDefinitions>
+
+            <DockPanel x:Name="host1" Margin="0,22,0,0" Grid.Column="0" Grid.Row="0"/>
+            <DockPanel x:Name="host2" Margin="0,22,0,0" Grid.Column="0" Grid.Row="1"/>
+            <DockPanel x:Name="host3" Margin="0,22,0,0" Grid.Column="0" Grid.Row="2"/>
+            <DockPanel x:Name="host4" Margin="0,22,0,0" Grid.Column="0" Grid.Row="3"/>
+
+        </Grid>
+        <Grid Grid.Row="1" Grid.Column="0">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition />
+
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="*"/>
+            </Grid.RowDefinitions>
+            <TextBox  Grid.Row="0" Height="30"  TextWrapping="Wrap" Text="Schmelzofen" VerticalAlignment="Center" HorizontalAlignment="Center" Width="150" TextAlignment="Center" FontSize="14" FontWeight="Bold"/>
+            <TextBox  Grid.Row="1" Height="30"  TextWrapping="Wrap" Text="CNC Drehmaschine" VerticalAlignment="Center" HorizontalAlignment="Center" Width="150" TextAlignment="Center" FontSize="14" FontWeight="Bold"/>
+            <TextBox  Grid.Row="2" Height="30"  TextWrapping="Wrap" Text="Ausrichtestation" VerticalAlignment="Center" HorizontalAlignment="Center" Width="150" TextAlignment="Center" FontSize="14" FontWeight="Bold"/>
+            <TextBox  Grid.Row="3" Height="30"  TextWrapping="Wrap" Text="Schwingungssensor" VerticalAlignment="Center" HorizontalAlignment="Center" Width="150" TextAlignment="Center" FontSize="14" FontWeight="Bold"/>
+
+
+
+        </Grid>
+
+
+        <Grid Grid.Row="2" Grid.Column="1" DataContext="{Binding Source={StaticResource Locator}}" >
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="267*"/>
+                <ColumnDefinition Width="356*"/>
+                <ColumnDefinition Width="177*"/>
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="*"/>
+
+            </Grid.RowDefinitions>
+
+
+            <!--AuftragNr--><!--
             
+            <StackPanel Orientation="Horizontal" >
+                <Label Content="AuftragsNr." FontWeight="Bold" VerticalAlignment="Center"/>
+                <Label x:Name="auftragnr" Content="" FontWeight="Bold" VerticalAlignment="Center" Foreground="#DDFF0000"/>
+            </StackPanel>
+
+            --><!--AuftragBeginn--><!--
+            <StackPanel Orientation="Horizontal" Grid.Row="1">
+                <Label Content="Auftrag Beginn" FontWeight="Bold" VerticalAlignment="Center"/>
+                <Label x:Name="auftrag_beginn" Content="" FontWeight="Bold" VerticalAlignment="Center"  Foreground="#DDFF0000"  />
+            </StackPanel>
+
+
+
+            --><!--Auftrag Dauer--><!--
+            <StackPanel Orientation="Horizontal" Grid.Row="2">
+                <Label Content="Auftrag Dauer" FontWeight="Bold" VerticalAlignment="Center"/>
+                <Label x:Name="auftrag_ende" Content="" FontWeight="Bold" VerticalAlignment="Center" Foreground="#DDFF0000"  />
+            </StackPanel>
+
+            --><!--Mitarbeiter--><!--
+            <StackPanel Orientation="Horizontal" Grid.Row="2" Grid.Column="1" >
+                <Label Content="Mitarbeiter" FontWeight="Bold" VerticalAlignment="Center"/>
+                <TextBlock TextWrapping="Wrap" Text="Kein Mitarbeiter zugewiesen" x:Name="MB_DB"/>
+
+            </StackPanel>
+
+            --><!--Status--><!--
+            <StackPanel Orientation="Horizontal" Grid.Column="1">
+                <Label Content="Status" FontWeight="Bold" VerticalAlignment="Center"/>
+                <Ellipse Width="20" Height="20"/>
+            </StackPanel>
+
+            --><!--Zeit von/bis--><!--
+            <StackPanel Orientation="Horizontal" Grid.Row="1" Grid.Column="1">
+                <Label Content="Zeit von:" FontWeight="Bold" VerticalAlignment="Center"/>
+                <Label x:Name="zeit_von" Content="" FontWeight="Bold" Foreground="#DDFF0000" VerticalAlignment="Center" />
+                <Label Content="Zeit bis:" FontWeight="Bold" VerticalAlignment="Center"/>
+                <Label x:Name="zeit_bis" Content="" FontWeight="Bold" VerticalAlignment="Center" Foreground="#DDFF0000"  />
+            </StackPanel>-->
+
+        </Grid>
+
+        <TextBox x:Name="msgbox" Grid.Column="1" HorizontalAlignment="Center" Height="30" Margin="74,30,0,0" TextWrapping="Wrap" Text="{Binding Plantafel.Instance.MessageBoxEntry}" VerticalAlignment="Top" Width="564" TextChanged="msgbox_TextChanged" FontWeight="Bold" Foreground="Red"/>
+
+
     </Grid>
 </UserControl>
