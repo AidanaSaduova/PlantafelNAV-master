@@ -105,15 +105,11 @@ namespace PlantafelNAV.Views
 
             new KeyValuePair<string, int>("Project Manager", ap1Duration),
 
-            new KeyValuePair<string, int>("CEO", 25),
+            new KeyValuePair<string, int>("CNC Drehmaschine", ap2Duration),
 
-            new KeyValuePair<string, int>("Software Engg.", 5),
+            new KeyValuePair<string, int>("Ausrichtestation", ap3Duration),
 
-            new KeyValuePair<string, int>("Team Leader", 6),
-
-            new KeyValuePair<string, int>("Project Leader", 10),
-
-            new KeyValuePair<string, int>("Developer", 4) };
+            new KeyValuePair<string, int>("Schwingungssensor", ap4Duration)};
 
         }
     }
