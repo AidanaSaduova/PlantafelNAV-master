@@ -51,6 +51,7 @@ namespace PlantafelNAV.Views
             InitializeComponent();
 
             ws_arbeitsplan.UseDefaultCredentials = true;
+            DatePicker MonthlyCalendar = new DatePicker();
             Datum = DateTime.Now;
             doUpdate();
             LoadBarChartData();
@@ -111,6 +112,11 @@ namespace PlantafelNAV.Views
 
             new KeyValuePair<string, int>("Schwingungssensor", ap4Duration)};
 
+        }
+
+        private void MonthlyCalendar_SelectedDateChanged(object sender, SelectionChangedEventArgs e)
+        {
+            Datum = (System.DateTime)MonthlyCalendar.SelectedDate;
         }
     }
 }

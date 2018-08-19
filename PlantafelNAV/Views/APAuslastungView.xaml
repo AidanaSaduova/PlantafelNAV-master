@@ -28,7 +28,9 @@
         <!--Date Combobox-->
         <StackPanel Margin="5,11" VerticalAlignment="Center" HorizontalAlignment="Right" Orientation="Horizontal" Grid.Row="0" Grid.Column="1" Height="28">
             <Label Content="Date:"/>
-            <DatePicker Name="datePicker1" Text="{Binding Datum}" SelectedDate="{Binding Datum}" Height="28" VerticalAlignment="Top" DataContext="{Binding Mode=OneWay}"  />
+            <DatePicker Name="MonthlyCalendar" Text="{Binding Datum}" SelectedDate="{Binding Datum}" 
+                        SelectedDateChanged="MonthlyCalendar_SelectedDateChanged"
+                        Height="28" VerticalAlignment="Top" DataContext="{Binding Mode=OneWay}"  />
         </StackPanel>
 
         <DVC:Chart Canvas.Top="80" Canvas.Left="10" Name="mcChart"
