@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -36,15 +37,17 @@ namespace PlantafelNAV.Views
 
         Collection<AP_Auslastung> _itemsAP = new Collection<AP_Auslastung>();
         private int duration;
+        Boolean check = true;
 
-        public DateTime Datum { get { return _datum; } set { _datum = value; doUpdate(); } }
+        public DateTime Datum { get { return _datum; } set { _datum = value; doUpdate();  } }
 
         public short Ap1Duration { get => ap1Duration; set => ap1Duration = value; }
         public short Ap2Duration { get => ap2Duration; set => ap2Duration = value; }
         public short Ap3Duration { get => ap3Duration; set => ap3Duration = value; }
         public short Ap4Duration { get => ap4Duration; set => ap4Duration = value; }
         public Collection<AP_Auslastung> ItemsAP { get => _itemsAP; set => _itemsAP = value; }
-
+        public List<KeyValuePair<string,int>> List1 { get; set; }
+           
         public APAuslastungView()
         {
 
@@ -54,13 +57,17 @@ namespace PlantafelNAV.Views
             DatePicker MonthlyCalendar = new DatePicker();
             Datum = DateTime.Now;
             doUpdate();
-            LoadBarChartData();
+            
+            // LoadBarChartData();
         }
 
         private void doUpdate()
         {
-            readData();
-            showData();
+    
+        
+                readData();
+        
+            //showData();
         }
 
         private void showData()
@@ -79,6 +86,7 @@ namespace PlantafelNAV.Views
 
         private void readData()
         {
+      
             WS_Auf_Arb_Nav[] list = ws_arbeitsplan.ReadMultiple(null, null, 1000);
             foreach (WS_Auf_Arb_Nav item in list)
             {
@@ -89,6 +97,9 @@ namespace PlantafelNAV.Views
             }
 
         }
+    
+
+        
 
         private Int16 generateDuration(string aP1_Startdatum, string aP1_Enddatum)
         {
@@ -99,24 +110,88 @@ namespace PlantafelNAV.Views
 
         private void LoadBarChartData()
         {
+            
+            List1.Add(new KeyValuePair<string, int>("Schmelzofen", ap1Duration));
+            List1.Add(new KeyValuePair<string, int>("CNC Drehmaschine", ap2Duration));
+            List1.Add(new KeyValuePair<string, int>("Ausrichtestation", ap3Duration));
+            List1.Add(new KeyValuePair<string, int>("Schwingungssensor", ap4Duration));
 
-            ((BarSeries)mcChart.Series[0]).ItemsSource =
+            //Prozent für Labels rehcnen und setzten
+            double ap1proc = Math.Round(ap1Duration / 4.8, 2); Schmelzofen.Content = "" + ap1proc + " %";
+            double ap2proc = Math.Round(ap2Duration / 4.8, 2); CncDrehmaschine.Content = "" + ap2proc + " %";
+            double ap3proc = Math.Round(ap3Duration / 4.8, 2); Ausrichtestation.Content = "" + ap3proc + " %";
+            double ap4proc = Math.Round(ap4Duration / 4.8, 2); Schwingungssensor.Content = "" + ap4proc + " %";
 
-                new KeyValuePair<string, int>[]{
+            Debug.WriteLine("Schmelzofen: " + ap1Duration);
+            ((BarSeries)mcChart.Series[0]).ItemsSource = List1;
 
-            new KeyValuePair<string, int>("Project Manager", ap1Duration),
+           
 
-            new KeyValuePair<string, int>("CNC Drehmaschine", ap2Duration),
+            //    new KeyValuePair<string, int>[]{
 
-            new KeyValuePair<string, int>("Ausrichtestation", ap3Duration),
+            //new KeyValuePair<string, int>("Schmelzofen", ap1Duration),
 
-            new KeyValuePair<string, int>("Schwingungssensor", ap4Duration)};
+            //new KeyValuePair<string, int>("CNC Drehmaschine", ap2Duration),
+
+            //new KeyValuePair<string, int>("Ausrichtestation", ap3Duration),
+
+            //new KeyValuePair<string, int>("Schwingungssensor", ap4Duration)};
 
         }
 
         private void MonthlyCalendar_SelectedDateChanged(object sender, SelectionChangedEventArgs e)
         {
-            Datum = (System.DateTime)MonthlyCalendar.SelectedDate;
+            if (List1 != null && List1.Count != 0)
+            {
+                ClearBarChartData();
+            }
+            Datum = MonthlyCalendar.SelectedDate.Value;
+            List1 = new List<KeyValuePair<string, int>>();
+            doUpdate();
+            
+            LoadBarChartData();
+           /* if (List.Count!=0)
+            {
+                ClearBarChartData();
+            }
+            else
+            {
+                LoadBarChartData();
+            }*/
+
+          
+        }
+
+        private void ClearBarChartData()
+        {
+
+            //List<KeyValuePair<string, int>> list = new List<KeyValuePair<string, int>>();
+            //((BarSeries)mcChart.Series[0]).ItemsSource = list;
+
+            List1.Clear();
+            ((BarSeries)mcChart.Series[0]).ItemsSource = List1;
+
+            //delete chart
+            foreach (var series in mcChart.Series)
+            {
+                series.LegendItems.Clear();
+            }
+
+            Ap1Duration = 0;
+            Ap2Duration = 0;
+            Ap3Duration = 0;
+            Ap4Duration = 0;
+
+            //List.Add(new KeyValuePair<string, int>("Schmelzofen", 0));
+            //List.Add(new KeyValuePair<string, int>("CNC Drehmaschine", 0));
+            //List.Add(new KeyValuePair<string, int>("Ausrichtestation", 0));
+            //List.Add(new KeyValuePair<string, int>("Schwingungssensor", 0));
+
+
+            //list.Remove(new KeyValuePair<string, int>("Schmelzofen", ap1Duration));
+
+
+
         }
     }
 }

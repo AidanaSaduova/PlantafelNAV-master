@@ -28,25 +28,49 @@
         <!--Date Combobox-->
         <StackPanel Margin="5,11" VerticalAlignment="Center" HorizontalAlignment="Right" Orientation="Horizontal" Grid.Row="0" Grid.Column="1" Height="28">
             <Label Content="Date:"/>
-            <DatePicker Name="MonthlyCalendar" Text="{Binding Datum}" SelectedDate="{Binding Datum}" 
+            <DatePicker Name="MonthlyCalendar" SelectedDate="{Binding Path=Datum}" Text="{Binding Path=Datum}"
                         SelectedDateChanged="MonthlyCalendar_SelectedDateChanged"
                         Height="28" VerticalAlignment="Top" DataContext="{Binding Mode=OneWay}"  />
         </StackPanel>
 
         <DVC:Chart Canvas.Top="80" Canvas.Left="10" Name="mcChart"
             Background="LightSteelBlue" Grid.Row="1" Grid.ColumnSpan="2"
-            Title="Kapazitätsauslastung pro Arbeitsplatz"
+            Title="Kapazitätsauslastung pro Arbeitsplatz in Minuten"
             LegendTitle="Auslastung pro AP | Maximal: 8h / 480 Min" DataContext="{Binding APAuslastung.APData}">
             <DVC:Chart.Series>
-                <DVC:BarSeries Title="% Höhe der Auslastung"
+                <DVC:BarSeries Name="Barchart"
+                               Title="% Höhe der Auslastung"
                                IndependentValueBinding="{Binding Path=Key}"
-                               DependentValueBinding="{Binding Path=Value}" >
+                               DependentValueBinding="{Binding Path=Value}">
 
                 </DVC:BarSeries>
             </DVC:Chart.Series>
         </DVC:Chart>
 
-
+        <Grid Grid.Row="2" Grid.Column="1">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="2*"/>
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="*" />
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="*"/>
+            </Grid.RowDefinitions>
+            <Label Content="Auslastung in %" HorizontalAlignment="Left" Grid.Column="0" Grid.Row="0" VerticalAlignment="Center" Height="30" Width="184" FontWeight="Bold"/>
+            <Label Content="Schmelzofen" HorizontalAlignment="Left" Grid.Column="0" Grid.Row="1" VerticalAlignment="Center" Height="30" Width="184" FontWeight="Bold"/>
+            <Label Content="CNC Drehmaschine" HorizontalAlignment="Left" Grid.Column="0" Grid.Row="2" VerticalAlignment="Center" Height="30" Width="184" FontWeight="Bold"/>
+            <Label Content="Ausrichtestation" HorizontalAlignment="Left" Grid.Column="0" Grid.Row="3" VerticalAlignment="Center" Height="30" Width="184" FontWeight="Bold"/>
+            <Label Content="Schwingungssensor" HorizontalAlignment="Left" Grid.Column="0" Grid.Row="4" VerticalAlignment="Center" Height="30" Width="184" FontWeight="Bold"/>
+            <Label Content="%" x:Name="Schmelzofen" HorizontalAlignment="Left" Grid.Column="1" Grid.Row="1" VerticalAlignment="Center" Height="30" Width="184" FontWeight="Bold"/>
+            <Label Content="%" x:Name="CncDrehmaschine" HorizontalAlignment="Left" Grid.Column="1" Grid.Row="2" VerticalAlignment="Center" Height="30" Width="184" FontWeight="Bold"/>
+            <Label Content="%" x:Name="Ausrichtestation" HorizontalAlignment="Left" Grid.Column="1" Grid.Row="3" VerticalAlignment="Center" Height="30" Width="184" FontWeight="Bold"/>
+            <Label Content="%"  x:Name="Schwingungssensor" HorizontalAlignment="Left" Grid.Column="1" Grid.Row="4" VerticalAlignment="Center" Height="30" Width="184" FontWeight="Bold"/>
+            
+            <Label Content="Auslastung in %" HorizontalAlignment="Left" VerticalAlignment="Center" Height="30" Width="184" FontWeight="Bold"/>
+        </Grid>
 
     </Grid>
 

@@ -98,12 +98,6 @@ namespace PlantafelNAV.ViewModel
             }
         }
 
-        public void createTimeLine()
-        {
-
-
-
-        }
 
         //Auftragsdetailbox aktualisieren
         public void createDetails(string auftragNr)
